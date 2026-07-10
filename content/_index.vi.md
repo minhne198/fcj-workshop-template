@@ -6,35 +6,45 @@ chapter: false
 ---
 
 # Báo cáo thực tập
-### Thông tin sinh viên:
-&emsp; **Họ và tên:** Nguyễn Văn A
 
-&emsp; **Số điện thoại:** 0989888999
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
 
-&emsp; **Email:** Anguyenvan@gmail.com
+<div style="flex: 1; min-width: 300px;">
 
-&emsp; **Trường:** Đại học Sư phạm Kỹ thuật TP.HCM
+### Thông tin sinh viên
 
-&emsp; **Ngành:** Công nghệ thông tin
+| Thuộc tính | Thông tin chi tiết |
+| :--- | :--- |
+| **Họ và tên** | Lê Thị Thùy Trang |
+| **Số điện thoại** | 0367052710 |
+| **Email** | lethuytrang200404@gmail.com |
+| **Trường** | Đại học Công nghệ TP.HCM (HUTECH) |
+| **Ngành** | Công nghệ thông tin |
+| **Lớp** | 22DTHH2 |
+| **Công ty thực tập** | Công ty TNHH Amazon Web Services Vietnam |
+| **Vị trí thực tập** | FCJ Cloud Intern |
+| **Thời gian thực tập** | Từ ngày 17/04/2026 đến ngày 12/07/2026 |
 
-&emsp; **Lớp:** AWS082025
+</div>
 
-&emsp; **Công ty thực tập:** Công ty TNHH Amazon Web Services Vietnam
+<div style="flex: 0 0 180px; text-align: center; margin-top: 50px;">
+    <img src="/images/thuytrang.jpg" alt="Ảnh đại diện Lê Thị Thùy Trang" style="width: 180px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+  </div>
 
-&emsp; **Vị trí thực tập:** FCJ Cloud Intern
+</div>
 
-&emsp; **Thời gian thực tập:** Từ ngày 12/08/2025 đến ngày 12/11/2025
+</div>
 
-![Ảnh đại diện của bạn](/images/avatar.png)
+---
 
+## Nội dung báo cáo
 
-
-### Nội dung báo cáo
-
-1.  [Worklog](1-Worklog/)
-2.  [Proposal](2-Proposal/)
-3.  [Các bài blogs đã dịch](3-BlogsTranslated/)
-4.  [Các events đã tham gia](4-EventParticipated/)
-5.  [Workshop](5-Workshop/)
-6.  [Tự đánh giá](6-Self-evaluation/)
-7.  [Chia sẻ, đóng góp ý kiến](7-Feedback/)
+| STT | Phân mục báo cáo | Đường dẫn chi tiết |
+| :---: | :--- | :--- |
+| 01 | **Nhật ký công việc** | [Xem chi tiết Worklog](1-Worklog/) |
+| 02 | **Bản đề xuất dự án** | [Xem chi tiết Proposal](2-Proposal/) |
+| 03 | **Các bài dịch thuật** | [Xem danh sách Blogs đã dịch](3-BlogsTranslated/) |
+| 04 | **Sự kiện đã tham gia** | [Xem danh sách Events](4-EventParticipated/) |
+| 05 | **Chuyên đề thực hành** | [Xem nội dung Workshop](5-Workshop/) |
+| 06 | **Kết quả tự đánh giá** | [Xem phần Tự đánh giá](6-Self-evaluation/) |
+| 07 | **Ý kiến và đóng góp** | [Xem phần Chia sẻ, đóng góp ý kiến](7-Feedback/) |

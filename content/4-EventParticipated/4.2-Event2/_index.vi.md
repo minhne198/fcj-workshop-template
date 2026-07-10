@@ -116,3 +116,7 @@ Các nội dung nổi bật:
 * Thêm hình ảnh chụp tại sự kiện vào đây.
 
 > Tổng thể, AWS Vietnam Community Day không chỉ mang lại kiến thức chuyên môn về Cloud Computing và AI mà còn giúp tôi mở rộng tư duy công nghệ, hiểu rõ hơn xu hướng phát triển của ngành và có thêm động lực học tập để phát triển sự nghiệp trong tương lai.
+#### Một số hình ảnh khi tham gia sự kiện
+* Thêm các hình ảnh của các bạn tại đây
+  ![alt text](image.png)
+  ![alt text](image-1.png)
