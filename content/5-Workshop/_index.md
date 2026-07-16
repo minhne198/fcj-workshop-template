@@ -1,31 +1,43 @@
----
+﻿---
 title: "Workshop"
 date: 2024-01-01
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Secure Hybrid Access to S3 using VPC Endpoints
+# Triển khai hệ thống AWS OmniStay trên AWS
 
-#### Overview
+Phần Workshop ghi lại quá trình triển khai website đặt phòng khách sạn **AWS_OmniStay** lên Amazon Web Services theo từng bước thực hiện. Nội dung tập trung vào cách xây dựng hạ tầng, triển khai backend, triển khai frontend, cấu hình bảo mật, kiểm thử hệ thống và thu thập ảnh chụp màn hình làm bằng chứng.
 
-**AWS PrivateLink** provides private connectivity to AWS services from VPCs and your on-premises networks, without exposing your traffic to the Public Internet.
+Hệ thống được triển khai theo mô hình nhiều tầng:
 
-In this lab, you will learn how to create, configure, and test VPC endpoints that enable your workloads to reach AWS services without traversing the Public Internet.
+- Frontend tĩnh được lưu trong Amazon S3 private bucket và phân phối qua Amazon CloudFront.
+- Backend ASP.NET Core Web API chạy trên Amazon EC2 trong private subnet.
+- Application Load Balancer nhận request từ CloudFront và chuyển tiếp đến backend.
+- Auto Scaling Group quản lý số lượng EC2 backend.
+- Amazon RDS MySQL lưu dữ liệu nghiệp vụ.
+- Amazon ElastiCache Redis/Valkey làm cache cho luồng tìm kiếm khách sạn.
+- AWS WAF, IAM, Security Group, Secrets Manager, Parameter Store và CloudWatch hỗ trợ bảo mật, cấu hình và vận hành.
 
-You will create two types of endpoints to access Amazon S3: a Gateway VPC endpoint, and an Interface VPC endpoint. These two types of VPC endpoints offer different benefits depending on if you are accessing Amazon S3 from the cloud or your on-premises location
-+ **Gateway** - Create a gateway endpoint to send traffic to Amazon S3 or DynamoDB using private IP addresses.You route traffic from your VPC to the gateway endpoint using route tables.
-+ **Interface** - Create an interface endpoint to send traffic to endpoint services that use a Network Load Balancer to distribute traffic. Traffic destined for the endpoint service is resolved using DNS.
+> **Ảnh cần dán:** Sơ đồ kiến trúc tổng thể của hệ thống AWS_OmniStay. Nếu chưa có ảnh chính thức, có thể dán lại sơ đồ đã dùng ở phần 5.1.
 
-#### Content
+## Nội dung
 
-1. [Workshop overview](5.1-Workshop-overview)
-2. [Prerequiste](5.2-Prerequiste/)
-3. [Access S3 from VPC](5.3-S3-vpc/)
-4. [Access S3 from On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (Bonus)](5.5-Policy/)
-6. [Clean up](5.6-Cleanup/)
+1. [Giới thiệu](5.1-Workshop-overview/)
+2. [Chuẩn bị trước khi triển khai](5.2-Prerequiste/)
+3. [Xây dựng hạ tầng mạng trên AWS](5.3-S3-vpc/)
+4. [Cấu hình bảo mật mạng và quyền truy cập](5.4-S3-onprem/)
+5. [Tạo tầng dữ liệu và cấu hình hệ thống](5.5-Policy/)
+6. [Triển khai Backend API lên AWS](5.6-Cleanup/)
+7. [Triển khai Frontend lên S3 và CloudFront](5.7-frontend-cloudfront/)
+8. [Cấu hình WAF, giám sát và cảnh báo](5.8-waf-monitoring/)
+9. [Kiểm thử hệ thống sau triển khai](5.9-system-testing/)
+
+## Quy ước ghi chú ảnh
+
+Trong từng bước triển khai, các vị trí cần bổ sung ảnh chụp màn hình sẽ được đánh dấu bằng dòng:
+
+> **Ảnh cần dán:** Mô tả màn hình cần chụp.
+
+Khi hoàn thiện báo cáo, thay các ghi chú này bằng ảnh chụp thực tế từ AWS Console, trình duyệt hoặc terminal.

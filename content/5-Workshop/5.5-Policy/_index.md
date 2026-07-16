@@ -1,99 +1,183 @@
----
-title : "VPC Endpoint Policies"
+﻿---
+title : "Tạo tầng dữ liệu và cấu hình hệ thống"
 date : 2024-01-01
 weight : 5
 chapter : false
 pre : " <b> 5.5. </b> "
 ---
 
-When you create an interface or gateway endpoint, you can attach an endpoint policy to it that controls access to the service to which you are connecting. A VPC endpoint policy is an IAM resource policy that you attach to an endpoint. If you do not attach a policy when you create an endpoint, AWS attaches a default policy for you that allows full access to the service through the endpoint.
+## Mục tiêu
 
-You can create a policy that restricts access to specific S3 buckets only. This is useful if you only want certain S3 Buckets to be accessible through the endpoint.
+Bước này tạo các dịch vụ dữ liệu và cấu hình runtime cho AWS_OmniStay, gồm Amazon RDS MySQL, Amazon ElastiCache Redis/Valkey, Secrets Manager, Parameter Store và các S3 bucket phục vụ deploy. Đây là nền tảng để backend có thể kết nối database, dùng cache và đọc cấu hình production.
 
-In this section you will create a VPC endpoint policy that restricts access to the S3 bucket specified in the VPC endpoint policy.
+## 1. Tạo DB Subnet Group cho RDS
 
-![endpoint diagram](/images/5-Workshop/5.5-Policy/s3-bucket-policy.png)
+Vào **RDS** -> **Subnet groups** -> **Create DB subnet group**.
 
-#### Connect to an EC2 instance and verify connectivity to S3
+Cấu hình:
 
-1. Start a new AWS Session Manager session on the instance named Test-Gateway-Endpoint. From the session, verify that you can list the contents of the bucket you created in Part 1: Access S3 from VPC:
+| Trường | Giá trị |
+| --- | --- |
+| Name | `omnistay-db-subnet-group` |
+| Description | `Private data subnets for OmniStay RDS` |
+| VPC | `omnistay-vpc` |
+| Subnets | `omnistay-data-a`, `omnistay-data-b` |
 
+DB subnet group giúp RDS chạy trong private data subnets thay vì public subnet.
+
+> **Ảnh cần dán:** DB Subnet Group có 2 subnet `omnistay-data-a` và `omnistay-data-b`.
+
+## 2. Tạo RDS MySQL
+
+Vào **RDS** -> **Databases** -> **Create database**.
+
+Cấu hình chính:
+
+| Trường | Giá trị |
+| --- | --- |
+| Creation method | Standard create |
+| Engine | MySQL |
+| Template | Free tier nếu có, nếu không chọn Dev/Test |
+| DB instance identifier | `omnistay-mysql` |
+| Master username | `admin` |
+| Master password | Tạo mật khẩu mạnh và lưu riêng |
+| Storage | `20 GiB` |
+| VPC | `omnistay-vpc` |
+| DB subnet group | `omnistay-db-subnet-group` |
+| Public access | No |
+| Security group | `SG-RDS` |
+| Initial database name | `hotel_booking` |
+| Backup retention | 1-7 ngày |
+
+Sau khi database chuyển sang trạng thái `Available`, ghi lại endpoint và port `3306` để cấu hình backend.
+
+> **Ảnh cần dán:** RDS database `omnistay-mysql` có status `Available`.
+>
+> **Ảnh cần dán:** Tab Connectivity & security hiển thị endpoint, port, VPC, subnet group và security group.
+>
+> **Ảnh cần dán:** Tab Configuration hiển thị engine MySQL, instance class và storage.
+
+## 3. Tạo Cache Subnet Group cho Redis/Valkey
+
+Vào **ElastiCache** -> **Subnet groups** -> **Create subnet group**.
+
+Cấu hình:
+
+| Trường | Giá trị |
+| --- | --- |
+| Name | `omnistay-cache-subnet-group` |
+| VPC | `omnistay-vpc` |
+| Subnets | `omnistay-data-a`, `omnistay-data-b` |
+
+> **Ảnh cần dán:** Cache subnet group gắn với 2 private data subnets.
+
+## 4. Tạo ElastiCache Redis/Valkey
+
+Vào **ElastiCache** -> **Create cluster**.
+
+Cấu hình:
+
+| Trường | Giá trị |
+| --- | --- |
+| Engine | Valkey hoặc Redis OSS |
+| Name | `omnistay-cache` |
+| Cluster mode | Disabled |
+| Node type | Loại nhỏ nhất phù hợp ngân sách |
+| Replicas | 0 cho demo tiết kiệm |
+| Port | 6379 |
+| VPC | `omnistay-vpc` |
+| Subnet group | `omnistay-cache-subnet-group` |
+| Security group | `SG-Redis` |
+
+Khi cluster ở trạng thái `Available`, ghi lại endpoint. Nếu bật transit encryption, connection string cần có `ssl=True`.
+
+Ví dụ placeholder:
+
+```text
+<redis-endpoint>:6379,ssl=True,abortConnect=false
 ```
-aws s3 ls s3://\<your-bucket-name\>
-```
-![test](/images/5-Workshop/5.5-Policy/test1.png)
 
-The bucket contents include the two 1 GB files uploaded in earlier.
+> **Ảnh cần dán:** ElastiCache cluster `omnistay-cache` có status `Available`.
+>
+> **Ảnh cần dán:** Endpoint, port, subnet group và security group của Redis/Valkey.
 
-2. Create a new S3 bucket; follow the naming pattern you used in Part 1, but add a '-2' to the name. Leave other fields as default and click create
+## 5. Tạo Secrets Manager cho thông tin database
 
-![create bucket](/images/5-Workshop/5.5-Policy/create-bucket.png)
+Vào **Secrets Manager** -> **Store a new secret**.
 
-Successfully create bucket
+Cấu hình:
 
-![Success](/images/5-Workshop/5.5-Policy/create-bucket-success.png)
+| Trường | Giá trị |
+| --- | --- |
+| Secret type | Other type of secret |
+| Secret name | `omnistay/prod/hotelbookingdb` |
 
-3. Navigate to: Services > VPC > Endpoints, then select the Gateway VPC endpoint you created earlier. Click the Policy tab. Click Edit policy.
+Key/value gợi ý:
 
-![policy](/images/5-Workshop/5.5-Policy/policy1.png)
+| Key | Value |
+| --- | --- |
+| `username` | `admin` |
+| `password` | `<database-password>` |
+| `host` | `<rds-endpoint>` |
+| `port` | `3306` |
+| `database` | `hotel_booking` |
 
-The default policy allows access to all S3 Buckets through the VPC endpoint.
+Khi chụp ảnh, chỉ chụp metadata của secret, không mở phần secret value.
 
-4. In Edit Policy console, copy & Paste the following policy, then replace yourbucketname-2 with your 2nd bucket name. This policy will allow access through the VPC endpoint to your new bucket, but not any other bucket in Amazon S3. Click Save to apply the policy.
+> **Ảnh cần dán:** Secret name và metadata trong Secrets Manager, không để lộ giá trị password.
 
-```
-{
-  "Id": "Policy1631305502445",
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "Stmt1631305501021",
-      "Action": "s3:*",
-      "Effect": "Allow",
-      "Resource": [
-      				"arn:aws:s3:::yourbucketname-2",
-       				"arn:aws:s3:::yourbucketname-2/*"
-       ],
-      "Principal": "*"
-    }
-  ]
-}
-```
+## 6. Tạo Parameter Store cho cấu hình runtime
 
-![custom policy](/images/5-Workshop/5.5-Policy/policy2.png)
+Vào **Systems Manager** -> **Parameter Store** -> **Create parameter**.
 
-Successfully customize policy
+Các parameter cần tạo:
 
-![success](/static/images/5-Workshop/5.5-Policy/success.png)
+| Name | Type | Value |
+| --- | --- | --- |
+| `/omnistay/prod/Database__Provider` | String | `MySql` |
+| `/omnistay/prod/AWS__Region` | String | `ap-southeast-1` |
+| `/omnistay/prod/Cache__SearchTtlSeconds` | String | `120` |
+| `/omnistay/prod/AWS__S3FrontendBucket` | String | `<frontend-bucket-name>` |
+| `/omnistay/prod/AWS__CloudFrontDomain` | String | `<cloudfront-domain>` |
+| `/omnistay/prod/Jwt__Secret` | SecureString | `<jwt-secret>` |
+| `/omnistay/prod/Admin__SeedPassword` | SecureString | `<admin-password>` |
 
-5. From your session on the Test-Gateway-Endpoint instance, test access to the S3 bucket you created in Part 1: Access S3 from VPC
-```
-aws s3 ls s3://<yourbucketname>
-```
+Nếu CloudFront chưa tạo ở bước này, có thể để trống hoặc cập nhật lại parameter `/omnistay/prod/AWS__CloudFrontDomain` sau khi có domain.
 
-This command will return an error because access to this bucket is not permitted by your new VPC endpoint policy:
+> **Ảnh cần dán:** Danh sách parameter có prefix `/omnistay/prod`.
+>
+> **Ảnh cần dán:** Chi tiết một parameter không nhạy cảm, ví dụ `Database__Provider`.
 
-![error](/static/images/5-Workshop/5.5-Policy/error.png)
+## 7. Tạo S3 buckets cho frontend và artifact
 
-6. Return to your home directory on your EC2 instance ` cd~ `
+Vào **S3** -> **Create bucket**.
 
-+ Create a file ```fallocate -l 1G test-bucket2.xyz ```
-+ Copy file to 2nd bucket ```aws s3 cp test-bucket2.xyz s3://<your-2nd-bucket-name>```
+Tạo frontend bucket:
 
-![success](/static/images/5-Workshop/5.5-Policy/test2.png)
+| Trường | Giá trị |
+| --- | --- |
+| Bucket name | `omnistay-frontend-<account-id>` |
+| Region | `ap-southeast-1` |
+| Object ownership | Bucket owner enforced |
+| Block Public Access | On tất cả |
+| Encryption | SSE-S3 |
 
-This operation succeeds because it is permitted by the VPC endpoint policy.
+Tạo artifact bucket:
 
-![success](/static/images/5-Workshop/5.5-Policy/test2-success.png)
+| Trường | Giá trị |
+| --- | --- |
+| Bucket name | `omnistay-artifacts-<account-id>` |
+| Region | `ap-southeast-1` |
+| Object ownership | Bucket owner enforced |
+| Block Public Access | On tất cả |
+| Encryption | SSE-S3 |
 
-+ Then we test access to the first bucket by copy the file to 1st bucket `aws s3 cp test-bucket2.xyz s3://<your-1st-bucket-name>`
+Frontend bucket dùng để lưu static files. Artifact bucket dùng để lưu file backend publish `.zip` để EC2 tải về khi khởi động.
 
-![fail](/static/images/5-Workshop/5.5-Policy/test2-fail.png)
+> **Ảnh cần dán:** Danh sách S3 buckets có frontend bucket và artifact bucket.
+>
+> **Ảnh cần dán:** Tab Permissions của bucket thể hiện Block Public Access đang bật.
 
-This command will return an error because access to this bucket is not permitted by your new VPC endpoint policy.
+## Kết quả cần đạt
 
-#### Part 3 Summary:
-
-In this section, you created a VPC endpoint policy for Amazon S3, and used the AWS CLI to test the policy. AWS CLI actions targeted to your original S3 bucket failed because you applied a policy that only allowed access to the second bucket you created. AWS CLI actions targeted for your second bucket succeeded because the policy allowed them. These policies can be useful in situations where you need to control access to resources through VPC endpoints.
-
-
+Sau bước này, hệ thống có database MySQL, Redis/Valkey cache, nơi lưu secret/cấu hình runtime và 2 S3 bucket phục vụ triển khai ứng dụng. Backend ở bước sau sẽ dùng các giá trị này để kết nối RDS, Redis và tải artifact từ S3.

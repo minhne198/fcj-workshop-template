@@ -1,242 +1,129 @@
----
-title : "Prerequiste"
-date : 2024-01-01 
-weight : 2 
+﻿---
+title : "Chuẩn bị trước khi triển khai"
+date : 2024-01-01
+weight : 2
 chapter : false
 pre : " <b> 5.2. </b> "
 ---
 
-#### IAM permissions
-Add the following IAM permission policy to your user account to deploy and cleanup this workshop.
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": [
-                "cloudformation:*",
-                "cloudwatch:*",
-                "ec2:AcceptTransitGatewayPeeringAttachment",
-                "ec2:AcceptTransitGatewayVpcAttachment",
-                "ec2:AllocateAddress",
-                "ec2:AssociateAddress",
-                "ec2:AssociateIamInstanceProfile",
-                "ec2:AssociateRouteTable",
-                "ec2:AssociateSubnetCidrBlock",
-                "ec2:AssociateTransitGatewayRouteTable",
-                "ec2:AssociateVpcCidrBlock",
-                "ec2:AttachInternetGateway",
-                "ec2:AttachNetworkInterface",
-                "ec2:AttachVolume",
-                "ec2:AttachVpnGateway",
-                "ec2:AuthorizeSecurityGroupEgress",
-                "ec2:AuthorizeSecurityGroupIngress",
-                "ec2:CreateClientVpnEndpoint",
-                "ec2:CreateClientVpnRoute",
-                "ec2:CreateCustomerGateway",
-                "ec2:CreateDhcpOptions",
-                "ec2:CreateFlowLogs",
-                "ec2:CreateInternetGateway",
-                "ec2:CreateLaunchTemplate",
-                "ec2:CreateNetworkAcl",
-                "ec2:CreateNetworkInterface",
-                "ec2:CreateNetworkInterfacePermission",
-                "ec2:CreateRoute",
-                "ec2:CreateRouteTable",
-                "ec2:CreateSecurityGroup",
-                "ec2:CreateSubnet",
-                "ec2:CreateSubnetCidrReservation",
-                "ec2:CreateTags",
-                "ec2:CreateTransitGateway",
-                "ec2:CreateTransitGatewayPeeringAttachment",
-                "ec2:CreateTransitGatewayPrefixListReference",
-                "ec2:CreateTransitGatewayRoute",
-                "ec2:CreateTransitGatewayRouteTable",
-                "ec2:CreateTransitGatewayVpcAttachment",
-                "ec2:CreateVpc",
-                "ec2:CreateVpcEndpoint",
-                "ec2:CreateVpcEndpointConnectionNotification",
-                "ec2:CreateVpcEndpointServiceConfiguration",
-                "ec2:CreateVpnConnection",
-                "ec2:CreateVpnConnectionRoute",
-                "ec2:CreateVpnGateway",
-                "ec2:DeleteCustomerGateway",
-                "ec2:DeleteFlowLogs",
-                "ec2:DeleteInternetGateway",
-                "ec2:DeleteNetworkInterface",
-                "ec2:DeleteNetworkInterfacePermission",
-                "ec2:DeleteRoute",
-                "ec2:DeleteRouteTable",
-                "ec2:DeleteSecurityGroup",
-                "ec2:DeleteSubnet",
-                "ec2:DeleteSubnetCidrReservation",
-                "ec2:DeleteTags",
-                "ec2:DeleteTransitGateway",
-                "ec2:DeleteTransitGatewayPeeringAttachment",
-                "ec2:DeleteTransitGatewayPrefixListReference",
-                "ec2:DeleteTransitGatewayRoute",
-                "ec2:DeleteTransitGatewayRouteTable",
-                "ec2:DeleteTransitGatewayVpcAttachment",
-                "ec2:DeleteVpc",
-                "ec2:DeleteVpcEndpoints",
-                "ec2:DeleteVpcEndpointServiceConfigurations",
-                "ec2:DeleteVpnConnection",
-                "ec2:DeleteVpnConnectionRoute",
-                "ec2:Describe*",
-                "ec2:DetachInternetGateway",
-                "ec2:DisassociateAddress",
-                "ec2:DisassociateRouteTable",
-                "ec2:GetLaunchTemplateData",
-                "ec2:GetTransitGatewayAttachmentPropagations",
-                "ec2:ModifyInstanceAttribute",
-                "ec2:ModifySecurityGroupRules",
-                "ec2:ModifyTransitGatewayVpcAttachment",
-                "ec2:ModifyVpcAttribute",
-                "ec2:ModifyVpcEndpoint",
-                "ec2:ReleaseAddress",
-                "ec2:ReplaceRoute",
-                "ec2:RevokeSecurityGroupEgress",
-                "ec2:RevokeSecurityGroupIngress",
-                "ec2:RunInstances",
-                "ec2:StartInstances",
-                "ec2:StopInstances",
-                "ec2:UpdateSecurityGroupRuleDescriptionsEgress",
-                "ec2:UpdateSecurityGroupRuleDescriptionsIngress",
-                "iam:AddRoleToInstanceProfile",
-                "iam:AttachRolePolicy",
-                "iam:CreateInstanceProfile",
-                "iam:CreatePolicy",
-                "iam:CreateRole",
-                "iam:DeleteInstanceProfile",
-                "iam:DeletePolicy",
-                "iam:DeleteRole",
-                "iam:DeleteRolePolicy",
-                "iam:DetachRolePolicy",
-                "iam:GetInstanceProfile",
-                "iam:GetPolicy",
-                "iam:GetRole",
-                "iam:GetRolePolicy",
-                "iam:ListPolicyVersions",
-                "iam:ListRoles",
-                "iam:PassRole",
-                "iam:PutRolePolicy",
-                "iam:RemoveRoleFromInstanceProfile",
-                "lambda:CreateFunction",
-                "lambda:DeleteFunction",
-                "lambda:DeleteLayerVersion",
-                "lambda:GetFunction",
-                "lambda:GetLayerVersion",
-                "lambda:InvokeFunction",
-                "lambda:PublishLayerVersion",
-                "logs:CreateLogGroup",
-                "logs:DeleteLogGroup",
-                "logs:DescribeLogGroups",
-                "logs:PutRetentionPolicy",
-                "route53:ChangeTagsForResource",
-                "route53:CreateHealthCheck",
-                "route53:CreateHostedZone",
-                "route53:CreateTrafficPolicy",
-                "route53:DeleteHostedZone",
-                "route53:DisassociateVPCFromHostedZone",
-                "route53:GetHostedZone",
-                "route53:ListHostedZones",
-                "route53domains:ListDomains",
-                "route53domains:ListOperations",
-                "route53domains:ListTagsForDomain",
-                "route53resolver:AssociateResolverEndpointIpAddress",
-                "route53resolver:AssociateResolverRule",
-                "route53resolver:CreateResolverEndpoint",
-                "route53resolver:CreateResolverRule",
-                "route53resolver:DeleteResolverEndpoint",
-                "route53resolver:DeleteResolverRule",
-                "route53resolver:DisassociateResolverEndpointIpAddress",
-                "route53resolver:DisassociateResolverRule",
-                "route53resolver:GetResolverEndpoint",
-                "route53resolver:GetResolverRule",
-                "route53resolver:ListResolverEndpointIpAddresses",
-                "route53resolver:ListResolverEndpoints",
-                "route53resolver:ListResolverRuleAssociations",
-                "route53resolver:ListResolverRules",
-                "route53resolver:ListTagsForResource",
-                "route53resolver:UpdateResolverEndpoint",
-                "route53resolver:UpdateResolverRule",
-                "s3:AbortMultipartUpload",
-                "s3:CreateBucket",
-                "s3:DeleteBucket",
-                "s3:DeleteObject",
-                "s3:GetAccountPublicAccessBlock",
-                "s3:GetBucketAcl",
-                "s3:GetBucketOwnershipControls",
-                "s3:GetBucketPolicy",
-                "s3:GetBucketPolicyStatus",
-                "s3:GetBucketPublicAccessBlock",
-                "s3:GetObject",
-                "s3:GetObjectVersion",
-                "s3:GetBucketVersioning",
-                "s3:ListAccessPoints",
-                "s3:ListAccessPointsForObjectLambda",
-                "s3:ListAllMyBuckets",
-                "s3:ListBucket",
-                "s3:ListBucketMultipartUploads",
-                "s3:ListBucketVersions",
-                "s3:ListJobs",
-                "s3:ListMultipartUploadParts",
-                "s3:ListMultiRegionAccessPoints",
-                "s3:ListStorageLensConfigurations",
-                "s3:PutAccountPublicAccessBlock",
-                "s3:PutBucketAcl",
-                "s3:PutBucketPolicy",
-                "s3:PutBucketPublicAccessBlock",
-                "s3:PutObject",
-                "secretsmanager:CreateSecret",
-                "secretsmanager:DeleteSecret",
-                "secretsmanager:DescribeSecret",
-                "secretsmanager:GetSecretValue",
-                "secretsmanager:ListSecrets",
-                "secretsmanager:ListSecretVersionIds",
-                "secretsmanager:PutResourcePolicy",
-                "secretsmanager:TagResource",
-                "secretsmanager:UpdateSecret",
-                "sns:ListTopics",
-                "ssm:DescribeInstanceProperties",
-                "ssm:DescribeSessions",
-                "ssm:GetConnectionStatus",
-                "ssm:GetParameters",
-                "ssm:ListAssociations",
-                "ssm:ResumeSession",
-                "ssm:StartSession",
-                "ssm:TerminateSession"
-            ],
-            "Resource": "*"
-        }
-    ]
-}
+## Mục tiêu
 
+Trước khi tạo tài nguyên AWS, cần chuẩn bị môi trường làm việc, quy ước đặt tên, ngân sách, source code và danh sách thông tin sẽ dùng xuyên suốt quá trình triển khai. Bước chuẩn bị giúp hạn chế sai sót khi cấu hình nhiều dịch vụ có liên kết với nhau như VPC, EC2, RDS, Redis, S3, CloudFront và CloudWatch.
+
+## Phạm vi chuẩn bị
+
+Các nội dung cần hoàn thành trong bước này gồm:
+
+- Xác định region triển khai và quy ước đặt tên tài nguyên.
+- Kiểm tra source code AWS_OmniStay ở local.
+- Chuẩn bị các công cụ phục vụ build, deploy và kiểm thử.
+- Tạo AWS Budget để kiểm soát chi phí trong quá trình làm workshop.
+- Xác định nguyên tắc bảo mật khi ghi lại tài liệu, đặc biệt là không đưa password, secret key hoặc token vào báo cáo.
+
+> **Ảnh cần dán:** Cấu trúc thư mục source AWS_OmniStay trên máy local hoặc trong VS Code.
+
+## 1. Xác định region và quy ước đặt tên
+
+Workshop sử dụng region `ap-southeast-1` để triển khai các tài nguyên chính. Các tài nguyên được đặt tên theo tiền tố `omnistay` để dễ nhận diện và dễ lọc khi kiểm tra chi phí.
+
+| Nhóm tài nguyên | Tên sử dụng trong workshop |
+| --- | --- |
+| VPC | `omnistay-vpc` |
+| Public subnet | `omnistay-public-a`, `omnistay-public-b` |
+| Private app subnet | `omnistay-app-a`, `omnistay-app-b` |
+| Private data subnet | `omnistay-data-a`, `omnistay-data-b` |
+| Application Load Balancer | `omnistay-alb` |
+| Target Group | `omnistay-api-tg` |
+| Auto Scaling Group | `omnistay-api-asg` |
+| RDS MySQL | `omnistay-mysql` |
+| ElastiCache Redis/Valkey | `omnistay-cache` |
+| Frontend bucket | `omnistay-frontend-<account-id>` |
+| Artifact bucket | `omnistay-artifacts-<account-id>` |
+
+Các tag nên dùng cho tài nguyên:
+
+| Key | Value |
+| --- | --- |
+| `Project` | `AWS_OmniStay` |
+| `Environment` | `demo` |
+| `Owner` | Tên hoặc mã sinh viên thực hiện |
+
+> **Ảnh cần dán:** Màn hình AWS Console đang chọn region `ap-southeast-1` và ví dụ tag của một tài nguyên đã tạo.
+
+## 2. Tạo AWS Budget để kiểm soát chi phí
+
+Một số dịch vụ như NAT Gateway, ALB, RDS, ElastiCache, WAF và public IPv4 có thể phát sinh chi phí theo giờ. Vì vậy cần tạo budget trước khi triển khai.
+
+Thực hiện:
+
+1. Vào **Billing and Cost Management**.
+2. Chọn **Budgets**.
+3. Chọn **Create budget**.
+4. Chọn loại **Monthly cost budget**.
+5. Đặt tên budget là `omnistay-monthly-budget`.
+6. Đặt ngân sách demo là `10 USD`.
+7. Cấu hình cảnh báo ở các ngưỡng 50%, 80% và 100%.
+8. Nhập email nhận cảnh báo và tạo budget.
+
+> **Ảnh cần dán:** Trang Budget summary sau khi tạo xong.
+>
+> **Ảnh cần dán:** Phần alert thresholds và email recipient.
+
+## 3. Chuẩn bị công cụ triển khai
+
+Các công cụ cần có trên máy local:
+
+| Công cụ | Mục đích |
+| --- | --- |
+| .NET SDK | Build và publish ASP.NET Core Web API |
+| Git | Quản lý source code |
+| AWS CLI | Upload artifact, kiểm tra tài nguyên và hỗ trợ deploy |
+| Visual Studio Code | Chỉnh sửa source và tài liệu |
+| DBeaver hoặc MySQL client | Kiểm tra dữ liệu trong RDS MySQL |
+| Trình duyệt | Kiểm thử website public qua CloudFront |
+
+Kiểm tra source code chính:
+
+```text
+backend/src/HotelBooking.Api
+frontend/public
+frontend/src
 ```
 
-#### Provision resources using CloudFormation
+Backend là ASP.NET Core Web API. Frontend là static web gồm HTML, CSS và JavaScript. Khi triển khai production, frontend đọc cấu hình API từ `frontend/public/config.js`.
 
-In this lab, we will use **N.Virginia region (us-east-1)**.
+> **Ảnh cần dán:** Màn hình terminal hoặc VS Code hiển thị các thư mục `backend`, `frontend`, `docs` của dự án.
 
-To prepare the workshop environment, deploy this **CloudFormation Template** (click link): [PrivateLinkWorkshop ](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.us-east-1.amazonaws.com/reinvent-endpoints-builders-session/Nested.yaml&stackName=PLCloudSetup). Accept all of the defaults when deploying the template. 
+## 4. Nguyên tắc bảo mật khi ghi tài liệu
 
-![create stack](/images/5-Workshop/5.2-Prerequisite/create-stack1.png)
+Trong quá trình triển khai, không ghi trực tiếp các thông tin sau vào báo cáo:
 
-+ Tick 2 acknowledgement boxes
-+ Choose **Create stack**
+- AWS access key hoặc secret access key.
+- RDS password.
+- JWT secret.
+- Admin password production.
+- Token thanh toán hoặc webhook secret.
+- Nội dung secret value trong Secrets Manager.
 
-![create stack](/images/5-Workshop/5.2-Prerequisite/create-stack2.png)
+Các giá trị nhạy cảm chỉ nên lưu ở ghi chú riêng ngoài repo hoặc trong Secrets Manager/Parameter Store. Trong báo cáo, sử dụng placeholder như `<database-password>`, `<jwt-secret>`, `<cloudfront-domain>`.
 
-The **ClouddFormation** deployment requires about 15 minutes to complete.
+## 5. Danh sách giá trị cần ghi lại
 
-![complete](/images/5-Workshop/5.2-Prerequisite/complete.png)
+Trong quá trình triển khai, cần ghi lại các giá trị sau để dùng ở các bước sau:
 
-+ **2 VPCs** have been created
+| Giá trị | Mục đích sử dụng |
+| --- | --- |
+| `ARTIFACT_BUCKET` | Nơi upload file backend publish `.zip` |
+| `FRONTEND_BUCKET` | Nơi upload frontend static files |
+| `RDS_ENDPOINT` | Kết nối backend đến MySQL |
+| `REDIS_ENDPOINT` | Kết nối backend đến Redis/Valkey |
+| `ALB_DNS` | Test backend qua Load Balancer |
+| `CLOUDFRONT_DOMAIN` | Truy cập website public |
+| `TARGET_GROUP_NAME` | Kiểm tra health check backend |
+| `ASG_NAME` | Quản lý số lượng EC2 backend |
 
-![vpcs](/images/5-Workshop/5.2-Prerequisite/vpcs.png)
+> **Ảnh cần dán:** Bảng ghi chú các giá trị triển khai, đã che hoặc thay thế toàn bộ thông tin nhạy cảm.
 
-+ **3 EC2s** have been created
+## Kết quả cần đạt
 
-![EC2](/images/5-Workshop/5.2-Prerequisite/ec2.png)
+Sau bước chuẩn bị, người thực hiện có đủ công cụ local, biết region triển khai, có budget kiểm soát chi phí và có quy ước đặt tên rõ ràng. Các bước tiếp theo sẽ bắt đầu từ việc xây dựng hạ tầng mạng nền tảng cho hệ thống.
