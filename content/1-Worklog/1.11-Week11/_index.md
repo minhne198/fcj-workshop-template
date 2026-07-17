@@ -1,57 +1,49 @@
 ---
 title: "Week 11 Worklog"
-date: 2024-01-01
-weight: 2
+date: 2026-06-22
+weight: 11
 chapter: false
 pre: " <b> 1.11. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 11 Objectives:
-
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Launch the capstone project: **High-Availability Hotel Booking System on AWS**.
+* Design a complete system architecture guaranteeing 3 key properties: **High Availability**, **Auto Scaling**, and **Caching**.
+* Build the foundational network infrastructure (Phase 1): VPC, Subnets, Security Groups, IAM Role, NAT Gateway.
+* Initialize the database and cache layers (Phase 2): **Amazon RDS MySQL** and **Amazon ElastiCache Redis**.
+* Begin Backend API development with **ASP.NET Core 8** and design the database schema.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | ---- | ---------- | --------------- | ------------------ |
+| Mon | - Analyze project requirements and design the overall system architecture on **Draw.io**.<br>- Identify all required AWS services: VPC, EC2, ALB, ASG, RDS, ElastiCache, S3, CloudFront, WAF, CloudWatch, SNS. | 22/06/2026 | 22/06/2026 | Project Document |
+| Tue | - **Phase 1 - Network Infrastructure:** Create VPC (`10.0.0.0/16`), divide into 6 Subnets (2 Public + 4 Private), attach Internet Gateway.<br>- Configure NAT Gateways for 2 AZs, set up Route Tables for Public and Private Subnets. | 23/06/2026 | 23/06/2026 | AWS Console |
+| Wed | - Create 4 Security Groups (SG-ALB, SG-EC2, SG-RDS, SG-Redis) following the principle of minimal attack surface.<br>- Create **IAM Role** `EC2-HotelAPI-Role` with necessary policies: S3 Read, CloudWatch Agent, Secrets Manager. | 24/06/2026 | 24/06/2026 | AWS Console |
+| Thu | - **Phase 2 - Database Initialization:** Create **Amazon RDS MySQL 8.0** (`db.t3.micro`) in Private Subnet with KMS encryption enabled.<br>- Store DB password securely in **AWS Secrets Manager**. | 25/06/2026 | 25/06/2026 | AWS Console |
+| Fri | - Create **Amazon ElastiCache Redis 7.x** (`cache.t3.micro`) in the Private DB Subnet.<br>- Design **Database Schema**: Tables for Users, Hotels, RoomTypes, Bookings, Reviews with proper foreign key relationships. Run SQL creation scripts via DBeaver. | 26/06/2026 | 26/06/2026 | AWS Console |
+| Sat | - **Phase 3 - Backend API Start:** Initialize ASP.NET Core 8 Web API project, configure Entity Framework Core + Pomelo MySQL driver.<br>- Write `AuthController.cs` (Register/Login + JWT Token) and `SearchService.cs` (with Redis Cache integration for search results). | 27/06/2026 | 27/06/2026 | Visual Studio 2022 |
 
 ### Week 11 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* **System Architecture Design:**
+    * Completed the full system architecture diagram on **Draw.io** covering all AWS components: CloudFront → WAF → ALB → ASG (EC2) → RDS + Redis, S3 static hosting, CloudWatch monitoring.
+    * Clearly defined the 3 properties to demonstrate: HA (terminate 1 EC2 → still running), Auto Scaling (500 users → EC2 auto scales), Caching (cache hit < 5ms vs. 100-200ms without cache).
 
-* Successfully created and configured an AWS Free Tier account.
+* **Network Infrastructure (Phase 1 Complete):**
+    * Created a complete VPC with 6 purposefully divided Subnets: Public (ALB, NAT GW) and Private (App EC2, DB RDS/Redis).
+    * Set up Security Groups following a layered security model: only ALB can reach EC2, only EC2 can reach RDS and Redis.
+    * EC2 IAM Role configured without Access Keys — correctly applying modern security best practices.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* **Database & Cache (Phase 2 Complete):**
+    * Successfully initialized **Amazon RDS MySQL** with KMS encryption and password managed via Secrets Manager.
+    * **ElastiCache Redis** is ready to serve as an in-memory cache for popular search results.
+    * Database Schema clearly designed with proper foreign key relationships between all tables.
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* **Backend API (Phase 3 Started):**
+    * ASP.NET Core 8 project runs successfully in the local environment and connects to RDS and Redis.
+    * Authentication API is functional: account registration and login returning valid JWT Tokens.
 
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+{{% notice success %}}
+**Summary:** Week 11 completed the entire AWS infrastructure foundation for the capstone project. The system architecture is designed professionally following the 3-tier model (Presentation - Application - Data) with full HA features and security aligned with industry standards.
+{{% /notice %}}

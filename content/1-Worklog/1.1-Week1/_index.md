@@ -1,57 +1,41 @@
 ---
 title: "Week 1 Worklog"
-date: 2024-01-01
+date: 2026-04-17
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
-
 ### Week 1 Objectives:
-
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Connect, get acquainted, and interact with members and mentors in the First Cloud Journey (FCJ) community.
+* Gain a deep understanding of basic AWS services, how to interact via the web interface (AWS Management Console) & the command-line tool (AWS CLI).
+* Master foundational knowledge of AWS cloud computing, including the global infrastructure, Availability Zones (AZs), and AWS's flexible operational philosophy.
+* Equip and master necessary supplementary skills for developers/system engineers: Install and use **Visual Studio Code**, write professional documentation and reports using **Markdown** formatting.
+* Become proficient with the **Draw.io** software to model and draw accurate, visual system architecture diagrams according to international standards.
+* Design and build a personal development roadmap to guide the journey of becoming a professional Cloud Engineer.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | ---- | ---------- | --------------- | ------------------ |
+| Mon | - Learn an overview of AWS: Global infrastructure architecture, concepts of Regions, Availability Zones (AZs), Edge Locations.<br>- Study AWS operational philosophy and draw a learning roadmap to become a Cloud Engineer. | 17/04/2026 | 17/04/2026 | AWS Study Group |
+| Tue | - Install and set up a professional working environment with **Visual Studio Code**, integrating useful extensions.<br>- Learn **Markdown** syntax from basic to advanced to apply in writing content and documentation for the Workshop. | 18/04/2026 | 18/04/2026 | Hugo/Markdown Guide |
+| Wed | - Practice drawing cloud system architecture diagrams using the **Draw.io** tool with standard AWS icons.<br>- Learn Cost Optimization principles during the process of designing systems on AWS. | 19/04/2026 | 19/04/2026 | Draw.io AWS Icons |
+| Thu | - Create an AWS Free Tier account and practice security operations, managing basic services.<br>- Apply optimal system design standards (AWS Well-Architected Framework) in practical labs. | 20/04/2026 | 20/04/2026 | AWS Workshop |
+| Fri | - Deploy and complete the first personal project.<br>- Write a summary report and publish it on the personal documentation website using the Hugo framework. | 24/04/2026 | 24/04/2026 | Personal |
 
 ### Week 1 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* **Regarding AWS Knowledge:**
+    * Grasped and clearly understood the operation of the AWS global infrastructure network, as well as the functions of core service groups (Compute, Storage, Network, Database).
+    * Understood effective methods for managing and monitoring services and tips for cost optimization when deploying in a real Cloud environment.
+* **Regarding Tools & Execution Skills:**
+    * Proficiently used the **Markdown** markup language to organize and present reports and technical documentation visually and professionally on the Hugo platform.
+    * Gained the ability to conceptualize and design system architecture diagrams on **Draw.io** meeting AWS technical standards.
+    * Confidently deployed small personal projects, taking the first steps to effectively apply AWS cloud computing technology in real-world environments.
+* **Regarding Practiced Labs:**
+    * Designed and completed standard system architecture diagrams on **Draw.io**.
+    * Successfully completed the first 5 labs, achieving certification and an award worth $200,000 USD (simulated/symbolic in the course).
+  
+{{% notice success %}}
+**Summary:** Week 1 is an important stepping stone that helps transform purely theoretical knowledge into in-depth execution skills, creating a solid foundation and clear direction to become a professional Cloud Engineer in the future.
+{{% /notice %}}

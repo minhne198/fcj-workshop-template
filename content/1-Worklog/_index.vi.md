@@ -41,3 +41,4 @@ pre: " <b> 1. </b> "
 **Tuần 11:** [Phân tích dữ liệu với AWS Glue, Amazon Athena và Amazon QuickSight](1.11-week11/)
 
 **Tuần 12:** [Data Preparation với AWS Glue DataBrew và Data Warehouse với Amazon Redshift](1.12-week12/)
+

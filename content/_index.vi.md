@@ -15,20 +15,20 @@ chapter: false
 
 | Thuộc tính | Thông tin chi tiết |
 | :--- | :--- |
-| **Họ và tên** | Lê Thị Thùy Trang |
-| **Số điện thoại** | 0367052710 |
-| **Email** | lethuytrang200404@gmail.com |
+| **Họ và tên** | Lại Vũ Hoàng Minh |
+| **Số điện thoại** | 0399044811 |
+| **Email** | Minhvip1982004@gmail.com |
 | **Trường** | Đại học Công nghệ TP.HCM (HUTECH) |
 | **Ngành** | Công nghệ thông tin |
 | **Lớp** | 22DTHH2 |
 | **Công ty thực tập** | Công ty TNHH Amazon Web Services Vietnam |
 | **Vị trí thực tập** | FCJ Cloud Intern |
-| **Thời gian thực tập** | Từ ngày 17/04/2026 đến ngày 12/07/2026 |
+| **Thời gian thực tập** | Từ ngày 17/04/2026 đến ngày 30/07/2026 |
 
 </div>
 
 <div style="flex: 0 0 180px; text-align: center; margin-top: 50px;">
-    <img src="/images/thuytrang.jpg" alt="Ảnh đại diện Lê Thị Thùy Trang" style="width: 180px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <img src="/images/minhne.jpg" alt="Ảnh đại diện Lại Vũ Hoàng Minh" style="width: 180px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
   </div>
 
 </div>

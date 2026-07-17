@@ -6,16 +6,13 @@ chapter: false
 pre: " <b> 6. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
+This recent internship was an incredibly valuable experience, helping me bridge the gap between academic theory and the real-world working environment. By directly participating in the "High-Availability Hotel Booking System on AWS" project, I took on two crucial dual roles: Business Analyst (BA) and QA/QC Engineer.
 
-During my internship at **[Company/Organization Name]** from **[start date]** to **[end date]**, I had the opportunity to learn, practice, and apply the knowledge acquired in school to a real-world working environment.  
-I participated in **[briefly describe the main project or task]**, through which I improved my skills in **[list skills: programming, analysis, reporting, communication, etc.]**.  
+In the first half of the project, from a BA's perspective, I was responsible for diving deep into business processes, gathering and analyzing requirements, and ultimately creating a complete System Requirements Specification (SRS) document. I also personally drew the architectural diagrams, detailing the flow of data through each AWS service. In the latter half of the project, shifting to the QA/QC role, I focused on ensuring system quality. I manually built test case scenarios, used Postman to verify API accuracy, and notably wrote scripts using Locust to generate hundreds of simulated concurrent users. This process helped me successfully validate critical cloud capabilities such as Auto Scaling and High Availability. These tasks significantly matured my analytical thinking, system design abilities, and practical performance testing skills.
 
-In terms of work ethic, I always strived to complete tasks well, complied with workplace regulations, and actively engaged with colleagues to improve work efficiency.
+Beyond technical expertise, I always prioritized a professional work attitude, strictly adhered to company discipline, and maintained an open, proactive approach to collaborating with team members to ensure the project ran smoothly.
 
-To objectively reflect on my internship period, I would like to evaluate myself based on the following criteria:
+Below is a table reflecting my self-assessment of my capabilities throughout this internship journey:
 
 | No. | Criteria                            | Description                                                                                      | Good | Fair | Average |
 | --- | ----------------------------------- | ------------------------------------------------------------------------------------------------ | ---- | ---- | ------- |
@@ -32,8 +29,10 @@ To objectively reflect on my internship period, I would like to evaluate myself 
 | 11  | **Contribution to project/team**    | Work effectiveness, innovative ideas, recognition from the team                                  | ✅    | ☐    | ☐       |
 | 12  | **Overall**                         | General evaluation of the entire internship period                                               | ✅    | ☐    | ☐       |
 
-### Needs Improvement
+### Future Goals and Improvement Areas
 
-* Strengthen discipline and strictly comply with the rules and regulations of the company or any organization  
-* Improve problem-solving thinking  
-* Enhance communication skills in both daily interactions and professional contexts, including handling situations effectively
+Although I achieved positive results, I recognize that I still have significant room for improvement as I strive to become a professional and well-rounded Cloud Engineer:
+
+* **Cultivate Industrial Discipline:** Continue to reinforce personal discipline, maintain the highest sense of responsibility toward deadlines, and strictly adhere to standard corporate workflows.
+* **Upgrade Technical Thinking and Troubleshooting:** Dedicate more time to deeply studying advanced AWS services, Microservices architecture, and DevOps tools. The goal is to acutely identify the root causes of system errors and provide optimal, comprehensive solutions.
+* **Enhance Soft Skills:** Actively learn how to present and report complex technical issues simply and understandably. Simultaneously, improve cross-functional collaboration skills to work more seamlessly with other departments.
