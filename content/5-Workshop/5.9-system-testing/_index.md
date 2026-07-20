@@ -1,25 +1,25 @@
-﻿---
-title : "Kiểm thử hệ thống sau triển khai"
+---
+title : "Post-deployment system testing"
 date : 2024-01-01
 weight : 9
 chapter : false
 pre : " <b> 5.9. </b> "
 ---
 
-## Mục tiêu
+## Objective
 
-Bước này kiểm tra AWS_OmniStay sau khi đã triển khai backend, frontend, CloudFront, WAF và giám sát. Mục tiêu là chứng minh website truy cập được từ public internet, API hoạt động qua CloudFront, backend kết nối được RDS và Redis, đồng thời các thành phần vận hành như ALB, Target Group và CloudWatch có dữ liệu đúng.
+This step verifies AWS_OmniStay after backend, frontend, CloudFront, WAF, and monitoring have been deployed. The goal is to prove that the website is accessible from the public internet, APIs work through CloudFront, the backend connects to RDS and Redis, and operational components such as ALB, Target Group, and CloudWatch have the expected data.
 
-## 1. Kiểm tra health qua CloudFront
+## 1. Check health through CloudFront
 
-Mở trình duyệt hoặc dùng công cụ gọi HTTP:
+Open a browser or use an HTTP client:
 
 ```text
 https://<cloudfront-domain>/health
 https://<cloudfront-domain>/health/aws
 ```
 
-Kết quả mong đợi từ `/health/aws`:
+Expected result from `/health/aws`:
 
 ```text
 environment = Production
@@ -29,99 +29,87 @@ redisConnected = true
 apiBasePath = /api
 ```
 
-Nếu bị `403`, kiểm tra behavior `/health*` đã trỏ về ALB chưa. Nếu bị `502` hoặc `504`, kiểm tra Target Group, ALB origin DNS và Security Group của ALB.
+If the response is `403`, check whether behavior `/health*` points to ALB. If the response is `502` or `504`, check Target Group, ALB origin DNS, and the ALB Security Group.
 
-> **Ảnh cần dán:** Trình duyệt hiển thị `/health/aws` qua CloudFront thành công.
+![VPC details](/images/591.jpg)
+<p align="center"><em>Figure 5.9.1: Browser shows `/health/aws` through CloudFront successfully.</em></p>
 
-## 2. Kiểm tra API search qua CloudFront
+## 2. Check hotel search API through CloudFront
 
-Gọi API tìm kiếm khách sạn:
+Call the hotel search API:
 
 ```text
 https://<cloudfront-domain>/api/hotels/search?city=Da%20Nang&checkIn=2026-12-10&checkOut=2026-12-12&guests=2
 ```
 
-Kết quả mong đợi:
+Expected result:
 
-- API trả HTTP 200.
-- Response là JSON array.
-- Có dữ liệu khách sạn nếu seed data đã được nạp.
-- Không gặp lỗi `403`, `502`, `503` hoặc `504`.
+- API returns HTTP 200.
+- Response is a JSON array.
+- Hotel data exists if seed data has been loaded.
+- No `403`, `502`, `503`, or `504` errors occur.
 
-Nếu API lỗi, kiểm tra CloudFront behavior `/api/*`, allowed methods, query strings forwarding và cache policy `CachingDisabled`.
+If the API fails, check CloudFront behavior `/api/*`, allowed methods, query string forwarding, and `CachingDisabled` cache policy.
 
-> **Ảnh cần dán:** Response JSON của API search qua CloudFront.
+## 3. Check public website UI
 
-## 3. Kiểm tra giao diện website public
-
-Mở trang frontend:
+Open the frontend page:
 
 ```text
 https://<cloudfront-domain>/public/index.html
 ```
 
-Luồng kiểm thử đề xuất:
+Suggested testing flow:
 
-1. Mở trang login hoặc trang chủ.
-2. Đăng nhập admin bằng tài khoản demo, không ghi password vào báo cáo.
-3. Vào trang Admin để kiểm tra users, hotels và bookings load được.
-4. Đăng xuất.
-5. Đăng ký tài khoản customer mới.
-6. Tìm kiếm khách sạn ở `Da Nang`.
-7. Chọn một khách sạn trong kết quả tìm kiếm.
-8. Đặt phòng.
-9. Thực hiện bước thanh toán/mock payment theo chức năng hiện có.
-10. Vào trang lịch sử đặt phòng để kiểm tra booking đã được ghi nhận.
+1. Open the login page or home page.
+2. Log in as admin using a demo account, without writing the password in the report.
+3. Open the Admin page and verify that users, hotels, and bookings load successfully.
+4. Log out.
+5. Register a new customer account.
+6. Search hotels in `Da Nang`.
+7. Select a hotel from the search result.
+8. Book a room.
+9. Complete the payment/mock payment flow according to the existing feature.
+10. Open booking history and verify that the booking was recorded.
 
-> **Ảnh cần dán:** Trang login hoặc trang chủ public.
->
-> **Ảnh cần dán:** Admin dashboard load được dữ liệu.
->
-> **Ảnh cần dán:** Kết quả tìm kiếm khách sạn.
->
-> **Ảnh cần dán:** Trang chi tiết khách sạn.
->
-> **Ảnh cần dán:** Booking confirmation.
->
-> **Ảnh cần dán:** Trang lịch sử đặt phòng có booking vừa tạo.
+![VPC details](/images/592.jpg)
+<p align="center"><em>Figure 5.9.2: Public login or home page.</em></p>
 
-## 4. Kiểm tra Redis cache evidence
+## 4. Check Redis cache evidence
 
-Gọi cùng một URL search 2 lần:
+Call the same search URL twice:
 
 ```text
 https://<cloudfront-domain>/api/hotels/search?city=Da%20Nang&checkIn=2026-12-10&checkOut=2026-12-12&guests=2
 ```
 
-Sau đó kiểm tra log backend trên EC2:
+Then check backend logs on EC2:
 
 ```bash
 sudo journalctl -u omnistay-api -n 300 --no-pager
 ```
 
-Kết quả mong đợi:
+Expected result:
 
 ```text
 Hotel search cache MISS
 Hotel search cache HIT
 ```
 
-Lần đầu tiên thường là cache MISS vì dữ liệu chưa có trong Redis. Lần thứ hai là cache HIT nếu Redis hoạt động đúng và TTL chưa hết hạn.
+The first request is usually a cache MISS because the data is not yet in Redis. The second request should be a cache HIT if Redis works correctly and the TTL has not expired.
 
-> **Ảnh cần dán:** Log backend hiển thị cache MISS và cache HIT.
+## 5. Check RDS evidence
 
-## 5. Kiểm tra RDS evidence
+Go to **RDS** -> **Databases** -> `omnistay-mysql`.
 
-Vào **RDS** -> **Databases** -> `omnistay-mysql`.
+Verify:
 
-Cần kiểm tra:
+- Database status is `Available`.
+- Endpoint and port match the backend configuration.
+- Security Group is `SG-RDS`.
+- Metrics show CPU and database connection data.
 
-- Database status là `Available`.
-- Endpoint và port đúng với cấu hình backend.
-- Security Group là `SG-RDS`.
-- Metrics có dữ liệu CPU và database connections.
-
-Nếu có công cụ query database, kiểm tra các bảng nghiệp vụ chính:
+If a database query tool is available, check the main business tables:
 
 ```text
 Users
@@ -130,17 +118,11 @@ RoomTypes
 Bookings
 ```
 
-> **Ảnh cần dán:** RDS endpoint, security group và status `Available`.
->
-> **Ảnh cần dán:** RDS CPU metric hoặc Database connections metric.
->
-> **Ảnh cần dán:** Danh sách bảng hoặc dữ liệu booking nếu có kết nối database client.
+## 6. Check ALB and Target Group evidence
 
-## 6. Kiểm tra ALB và Target Group evidence
+Go to **EC2** -> **Target Groups** -> `omnistay-api-tg`.
 
-Vào **EC2** -> **Target Groups** -> `omnistay-api-tg`.
-
-Cần thấy:
+Expected:
 
 ```text
 Target health: Healthy
@@ -148,24 +130,20 @@ Health check path: /health
 Port: 8080
 ```
 
-Vào **EC2** -> **Load Balancers** -> `omnistay-alb`.
+Go to **EC2** -> **Load Balancers** -> `omnistay-alb`.
 
-Cần thấy:
+Expected:
 
-- ALB state `Active`.
-- Scheme `Internet-facing`.
-- Listener HTTP 80 forward về `omnistay-api-tg`.
-- DNS name của ALB.
+- ALB state is `Active`.
+- Scheme is `Internet-facing`.
+- HTTP 80 listener forwards to `omnistay-api-tg`.
+- ALB DNS name is available.
 
-> **Ảnh cần dán:** Target group có target healthy.
->
-> **Ảnh cần dán:** ALB listener HTTP 80 và ALB DNS.
+## 7. Check CloudWatch Dashboard
 
-## 7. Kiểm tra CloudWatch Dashboard
+Go to **CloudWatch** -> **Dashboards** -> `OmniStay-Demo`.
 
-Vào **CloudWatch** -> **Dashboards** -> `OmniStay-Demo`.
-
-Sau khi tạo traffic bằng cách truy cập frontend và gọi API, dashboard nên có dữ liệu cho:
+After generating traffic by opening the frontend and calling APIs, the dashboard should show data for:
 
 - ALB request count.
 - ALB 5XX count.
@@ -174,23 +152,21 @@ Sau khi tạo traffic bằng cách truy cập frontend và gọi API, dashboard 
 - RDS connections.
 - Redis connections.
 
-> **Ảnh cần dán:** CloudWatch dashboard có dữ liệu sau khi test website.
+## 8. Post-deployment acceptance checklist
 
-## 8. Checklist nghiệm thu sau triển khai
-
-| Hạng mục | Kết quả mong đợi |
+| Item | Expected result |
 | --- | --- |
-| CloudFront frontend | Truy cập được website public |
-| CloudFront `/api/*` | Forward đúng về ALB |
-| CloudFront `/health*` | Trả health check từ backend |
-| ALB | Active, listener HTTP 80 hoạt động |
-| Target Group | EC2 target healthy |
-| Backend service | `omnistay-api` active trên EC2 |
-| RDS | Backend kết nối MySQL thành công |
-| Redis | Search có cache HIT/MISS |
-| WAF | Gắn với CloudFront và không block luồng hợp lệ |
-| CloudWatch | Dashboard và alarms đã tạo |
+| CloudFront frontend | Public website is accessible |
+| CloudFront `/api/*` | Requests are forwarded correctly to ALB |
+| CloudFront `/health*` | Health check is returned from backend |
+| ALB | Active and HTTP 80 listener works |
+| Target Group | EC2 target is healthy |
+| Backend service | `omnistay-api` is active on EC2 |
+| RDS | Backend connects to MySQL successfully |
+| Redis | Search flow shows cache HIT/MISS |
+| WAF | Attached to CloudFront and does not block valid flows |
+| CloudWatch | Dashboard and alarms are created |
 
-## Kết quả cần đạt
+## Expected Result
 
-Sau bước kiểm thử, hệ thống AWS_OmniStay có bằng chứng đầy đủ về luồng frontend, API, backend, database, cache, load balancing và monitoring. Các ảnh chụp trong phần này là phần quan trọng để chứng minh quá trình triển khai website và hệ thống đã hoàn thành theo từng bước.
+After the testing step, AWS_OmniStay has complete evidence for the frontend, API, backend, database, cache, load balancing, and monitoring flows. The screenshots in this section are important proof that the website and system deployment have been completed step by step.

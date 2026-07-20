@@ -1,81 +1,83 @@
-﻿---
-title : "Xây dựng hạ tầng mạng trên AWS"
+---
+title : "Build AWS network infrastructure"
 date : 2024-01-01
 weight : 3
 chapter : false
 pre : " <b> 5.3. </b> "
 ---
 
-## Mục tiêu
+## Objective
 
-Bước này tạo lớp mạng nền tảng cho AWS_OmniStay. Hệ thống cần public subnet để nhận traffic từ internet qua ALB và NAT Gateway, đồng thời cần private subnet để chạy backend EC2, RDS MySQL và ElastiCache Redis an toàn hơn.
+This step creates the network foundation for AWS_OmniStay. The system needs public subnets to receive traffic from the internet through ALB and NAT Gateway, and private subnets to run backend EC2, RDS MySQL, and ElastiCache Redis more securely.
 
-Mô hình mạng sử dụng 2 Availability Zones để tăng tính sẵn sàng:
+The network model uses 2 Availability Zones for higher availability:
 
-- 2 public subnets cho ALB và NAT Gateway.
-- 2 private app subnets cho EC2 backend.
-- 2 private data subnets cho RDS và Redis.
+- 2 public subnets for ALB and NAT Gateway.
+- 2 private app subnets for EC2 backend.
+- 2 private data subnets for RDS and Redis.
 
-> **Ảnh cần dán:** Sơ đồ VPC hoặc VPC resource map thể hiện public subnet, private app subnet và private data subnet trên 2 AZ.
+## 1. Create VPC
 
-## 1. Tạo VPC
+Go to **VPC** -> **Your VPCs** -> **Create VPC**.
 
-Vào **VPC** -> **Your VPCs** -> **Create VPC**.
+Configuration:
 
-Cấu hình:
-
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Resource to create | VPC only |
 | Name tag | `omnistay-vpc` |
 | IPv4 CIDR | `10.0.0.0/16` |
 | Tenancy | Default |
 
-Sau khi tạo xong, kiểm tra VPC có CIDR `10.0.0.0/16` và nằm đúng region `ap-southeast-1`.
+After creation, verify that the VPC has CIDR `10.0.0.0/16` and is in the correct region `ap-southeast-1`.
 
-> **Ảnh cần dán:** Trang VPC details có Name `omnistay-vpc` và CIDR `10.0.0.0/16`.
+![VPC details](/images/531.jpg)
+<p align="center"><em>Figure 5.3.1: VPC created successfully.</em></p>
 
-## 2. Tạo 6 subnets
+## 2. Create 6 subnets
 
-Vào **VPC** -> **Subnets** -> **Create subnet**. Tất cả subnet đều thuộc `omnistay-vpc`.
+Go to **VPC** -> **Subnets** -> **Create subnet**. All subnets belong to `omnistay-vpc`.
 
-| Subnet name | AZ | IPv4 CIDR | Vai trò |
+| Subnet name | AZ | IPv4 CIDR | Role |
 | --- | --- | --- | --- |
-| `omnistay-public-a` | `ap-southeast-1a` | `10.0.1.0/24` | Public subnet cho ALB/NAT |
-| `omnistay-public-b` | `ap-southeast-1b` | `10.0.2.0/24` | Public subnet cho ALB/NAT |
-| `omnistay-app-a` | `ap-southeast-1a` | `10.0.10.0/24` | Private app subnet cho EC2 |
-| `omnistay-app-b` | `ap-southeast-1b` | `10.0.11.0/24` | Private app subnet cho EC2 |
-| `omnistay-data-a` | `ap-southeast-1a` | `10.0.20.0/24` | Private data subnet cho RDS/Redis |
-| `omnistay-data-b` | `ap-southeast-1b` | `10.0.21.0/24` | Private data subnet cho RDS/Redis |
+| `omnistay-public-a` | `ap-southeast-1a` | `10.0.1.0/24` | Public subnet for ALB/NAT |
+| `omnistay-public-b` | `ap-southeast-1b` | `10.0.2.0/24` | Public subnet for ALB/NAT |
+| `omnistay-app-a` | `ap-southeast-1a` | `10.0.10.0/24` | Private app subnet for EC2 |
+| `omnistay-app-b` | `ap-southeast-1b` | `10.0.11.0/24` | Private app subnet for EC2 |
+| `omnistay-data-a` | `ap-southeast-1a` | `10.0.20.0/24` | Private data subnet for RDS/Redis |
+| `omnistay-data-b` | `ap-southeast-1b` | `10.0.21.0/24` | Private data subnet for RDS/Redis |
 
-Sau khi tạo 2 public subnet, bật **Auto-assign public IPv4 address** cho `omnistay-public-a` và `omnistay-public-b`.
+After creating the 2 public subnets, enable **Auto-assign public IPv4 address** for `omnistay-public-a` and `omnistay-public-b`.
 
-> **Ảnh cần dán:** Danh sách 6 subnets, hiển thị rõ VPC, AZ và CIDR.
->
-> **Ảnh cần dán:** Cài đặt auto-assign public IPv4 của public subnet.
+![VPC details](/images/532.jpg)
+<p align="center"><em>Figure 5.3.2: Six subnets created.</em></p>
 
-## 3. Tạo Internet Gateway
+## 3. Create Internet Gateway
 
-Vào **VPC** -> **Internet Gateways** -> **Create internet gateway**.
+Go to **VPC** -> **Internet Gateways** -> **Create internet gateway**.
 
-Cấu hình:
+Configuration:
 
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Name tag | `omnistay-igw` |
 | Attach VPC | `omnistay-vpc` |
 
-Sau khi tạo, chọn Internet Gateway vừa tạo, vào **Actions** -> **Attach to VPC** và gắn vào `omnistay-vpc`.
+After creating it, select the Internet Gateway, go to **Actions** -> **Attach to VPC**, and attach it to `omnistay-vpc`.
 
-> **Ảnh cần dán:** Internet Gateway `omnistay-igw` có state `Attached` và gắn với `omnistay-vpc`.
+![VPC details](/images/533.jpg)
+<p align="center"><em>Figure 5.3.3: Internet Gateway.</em></p>
 
-## 4. Tạo public route table
+![VPC details](/images/534.jpg)
+<p align="center"><em>Figure 5.3.4: Attach Internet Gateway to VPC.</em></p>
 
-Vào **VPC** -> **Route tables** -> **Create route table**.
+## 4. Create public route table
 
-Cấu hình:
+Go to **VPC** -> **Route tables** -> **Create route table**.
 
-| Trường | Giá trị |
+Configuration:
+
+| Field | Value |
 | --- | --- |
 | Name | `omnistay-public-rt` |
 | VPC | `omnistay-vpc` |
@@ -92,60 +94,59 @@ Subnet associations:
 - `omnistay-public-a`
 - `omnistay-public-b`
 
-> **Ảnh cần dán:** Public route table có route `0.0.0.0/0 -> igw-...`.
->
-> **Ảnh cần dán:** Subnet associations có `omnistay-public-a` và `omnistay-public-b`.
+![VPC details](/images/535.jpg)
+<p align="center"><em>Figure 5.3.5: Public route table with internet route.</em></p>
 
-## 5. Tạo NAT Gateways
+## 5. Create NAT Gateways
 
-NAT Gateway cho phép EC2 trong private app subnet truy cập outbound internet để tải package, gọi AWS service hoặc gửi log mà không cần public IP.
+NAT Gateway allows EC2 instances in private app subnets to access outbound internet for downloading packages, calling AWS services, or sending logs without using public IP addresses.
 
-Tạo NAT Gateway thứ nhất:
+Create the first NAT Gateway:
 
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Name | `omnistay-nat-a` |
 | Subnet | `omnistay-public-a` |
 | Connectivity type | Public |
 | Elastic IP allocation | Automatic |
 
-Tạo NAT Gateway thứ hai:
+Create the second NAT Gateway:
 
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Name | `omnistay-nat-b` |
 | Subnet | `omnistay-public-b` |
 | Connectivity type | Public |
 | Elastic IP allocation | Automatic |
 
-> **Ảnh cần dán:** Danh sách NAT Gateways có `omnistay-nat-a`, `omnistay-nat-b` và trạng thái `Available`.
+![VPC details](/images/537.jpg)
+<p align="center"><em>Figure 5.3.7: Creating NAT Gateway.</em></p>
 
-## 6. Tạo private route tables cho app subnets
+## 6. Create private route tables for app subnets
 
-Tạo route table cho app subnet ở AZ-a:
+Create a route table for the app subnet in AZ-a:
 
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Name | `omnistay-app-a-rt` |
 | VPC | `omnistay-vpc` |
 | Route | `0.0.0.0/0 -> omnistay-nat-a` |
 | Subnet association | `omnistay-app-a` |
 
-Tạo route table cho app subnet ở AZ-b:
+Create a route table for the app subnet in AZ-b:
 
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Name | `omnistay-app-b-rt` |
 | VPC | `omnistay-vpc` |
 | Route | `0.0.0.0/0 -> omnistay-nat-b` |
 | Subnet association | `omnistay-app-b` |
 
-Private data subnets chứa RDS và Redis không cần route ra internet trong luồng demo cơ bản. Chúng chỉ nhận kết nối nội bộ từ backend EC2 thông qua Security Group.
+Private data subnets containing RDS and Redis do not need an internet route in the basic demo flow. They only receive internal connections from backend EC2 through Security Groups.
 
-> **Ảnh cần dán:** `omnistay-app-a-rt` có route ra NAT-a.
->
-> **Ảnh cần dán:** `omnistay-app-b-rt` có route ra NAT-b.
+![VPC details](/images/536.jpg)
+<p align="center"><em>Figure 5.3.6: Private app route table created.</em></p>
 
-## Kết quả cần đạt
+## Expected Result
 
-Sau bước này, hệ thống có VPC riêng, phân tách public/private subnet, có đường internet cho public subnet, có NAT Gateway cho app subnet và có nền tảng mạng sẵn sàng để triển khai ALB, EC2, RDS và Redis.
+After this step, the system has a dedicated VPC, separated public/private subnets, internet access for public subnets, NAT Gateway access for app subnets, and a ready network foundation for ALB, EC2, RDS, and Redis.

@@ -6,26 +6,24 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
+During my internship and my study of **Amazon Web Services (AWS)**, I researched and summarized several articles related to architecture design, application deployment, and practical experience when working with cloud computing environments. The blogs below were built from my learning process, hands-on practice, and references to official AWS documentation. They helped me strengthen my knowledge, improve my system design mindset, and better understand deployment principles on the Cloud.
 
-This section will list and introduce the blogs you have translated. For example:
+Each blog focuses on a different topic, from system architecture design workflows and security principles to selecting suitable AWS services and avoiding common mistakes when deploying applications. These topics are valuable for learning AWS in a practical way and applying the knowledge to future projects.
 
-###  [Blog 1 - Getting started with healthcare data lakes: Using microservices](3.1-Blog1/)
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+---
 
-###  [Blog 2 - ...](3.2-Blog2/)
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+### [Blog 1 - From Requirements to Architecture: Designing a Web System on AWS](3.1-Blog1/)
 
-###  [Blog 3 - ...](3.3-Blog3/)
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+This blog presents the architecture design process for a web system on AWS, starting from requirement analysis and service selection to using services such as **Amazon VPC, Amazon EC2, Amazon RDS, Amazon S3, Application Load Balancer**, and **AWS IAM**. It also discusses important design decisions related to **Public/Private Subnet** separation, system security, scalability, high availability, and cost optimization when deploying applications on AWS.
 
-###  [Blog 4 - ...](3.4-Blog4/)
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+---
 
-###  [Blog 5 - ...](3.5-Blog5/)
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+### [Blog 2 - 7 Common Mistakes Beginners Make When Deploying Their First Web Application on AWS](3.2-Blog2/)
 
-###  [Blog 6 - ...](3.6-Blog6/)
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+This blog summarizes common mistakes beginners often make when deploying applications on AWS, such as placing resources in the wrong VPC location, configuring **Security Groups** too broadly, using **Access Keys** instead of **IAM Roles**, storing data incorrectly, misunderstanding **Region**, **Availability Zone**, and **VPC**, and forgetting to monitor the system with **Amazon CloudWatch**. It also provides recommendations and **AWS Best Practices** for building systems that are secure, manageable, and scalable in real-world environments.
+
+---
+
+### [Blog 3 - 7 Ways to Optimize Cost When Deploying Applications on AWS](3.3-Blog3/)
+
+This blog shares practical cost optimization experience when using AWS, including choosing the right services and resource configurations, using **AWS Free Tier**, managing data lifecycle on **Amazon S3**, tracking cost with **AWS Budgets** and **AWS Cost Explorer**, and cleaning up unused resources. It also introduces the **Start Simple, Scale Later** principle and the **Cost Optimization** pillar in the **AWS Well-Architected Framework**, helping readers build systems that meet technical requirements while using the deployment budget effectively.

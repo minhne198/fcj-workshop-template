@@ -1,118 +1,110 @@
-﻿---
-title : "Tạo tầng dữ liệu và cấu hình hệ thống"
+---
+title : "Create data layer and system configuration"
 date : 2024-01-01
 weight : 5
 chapter : false
 pre : " <b> 5.5. </b> "
 ---
 
-## Mục tiêu
+## Objective
 
-Bước này tạo các dịch vụ dữ liệu và cấu hình runtime cho AWS_OmniStay, gồm Amazon RDS MySQL, Amazon ElastiCache Redis/Valkey, Secrets Manager, Parameter Store và các S3 bucket phục vụ deploy. Đây là nền tảng để backend có thể kết nối database, dùng cache và đọc cấu hình production.
+This step creates data services and runtime configuration for AWS_OmniStay, including Amazon RDS MySQL, Amazon ElastiCache Redis/Valkey, Secrets Manager, Parameter Store, and S3 buckets for deployment. These components allow the backend to connect to the database, use cache, and read production configuration.
 
-## 1. Tạo DB Subnet Group cho RDS
+## 1. Create DB Subnet Group for RDS
 
-Vào **RDS** -> **Subnet groups** -> **Create DB subnet group**.
+Go to **RDS** -> **Subnet groups** -> **Create DB subnet group**.
 
-Cấu hình:
+Configuration:
 
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Name | `omnistay-db-subnet-group` |
 | Description | `Private data subnets for OmniStay RDS` |
 | VPC | `omnistay-vpc` |
 | Subnets | `omnistay-data-a`, `omnistay-data-b` |
 
-DB subnet group giúp RDS chạy trong private data subnets thay vì public subnet.
+The DB subnet group allows RDS to run in private data subnets instead of public subnets.
 
-> **Ảnh cần dán:** DB Subnet Group có 2 subnet `omnistay-data-a` và `omnistay-data-b`.
+![VPC details](/images/551.jpg)
+<p align="center"><em>Figure 5.5.1: DB Subnet Group.</em></p>
 
-## 2. Tạo RDS MySQL
+## 2. Create RDS MySQL
 
-Vào **RDS** -> **Databases** -> **Create database**.
+Go to **RDS** -> **Databases** -> **Create database**.
 
-Cấu hình chính:
+Main configuration:
 
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Creation method | Standard create |
 | Engine | MySQL |
-| Template | Free tier nếu có, nếu không chọn Dev/Test |
+| Template | Free tier if available; otherwise choose Dev/Test |
 | DB instance identifier | `omnistay-mysql` |
 | Master username | `admin` |
-| Master password | Tạo mật khẩu mạnh và lưu riêng |
+| Master password | Create a strong password and store it separately |
 | Storage | `20 GiB` |
 | VPC | `omnistay-vpc` |
 | DB subnet group | `omnistay-db-subnet-group` |
 | Public access | No |
 | Security group | `SG-RDS` |
 | Initial database name | `hotel_booking` |
-| Backup retention | 1-7 ngày |
+| Backup retention | 1-7 days |
 
-Sau khi database chuyển sang trạng thái `Available`, ghi lại endpoint và port `3306` để cấu hình backend.
+After the database status becomes `Available`, record the endpoint and port `3306` for backend configuration.
 
-> **Ảnh cần dán:** RDS database `omnistay-mysql` có status `Available`.
->
-> **Ảnh cần dán:** Tab Connectivity & security hiển thị endpoint, port, VPC, subnet group và security group.
->
-> **Ảnh cần dán:** Tab Configuration hiển thị engine MySQL, instance class và storage.
+## 3. Create Cache Subnet Group for Redis/Valkey
 
-## 3. Tạo Cache Subnet Group cho Redis/Valkey
+Go to **ElastiCache** -> **Subnet groups** -> **Create subnet group**.
 
-Vào **ElastiCache** -> **Subnet groups** -> **Create subnet group**.
+Configuration:
 
-Cấu hình:
-
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Name | `omnistay-cache-subnet-group` |
 | VPC | `omnistay-vpc` |
 | Subnets | `omnistay-data-a`, `omnistay-data-b` |
 
-> **Ảnh cần dán:** Cache subnet group gắn với 2 private data subnets.
+## 4. Create ElastiCache Redis/Valkey
 
-## 4. Tạo ElastiCache Redis/Valkey
+Go to **ElastiCache** -> **Create cluster**.
 
-Vào **ElastiCache** -> **Create cluster**.
+Configuration:
 
-Cấu hình:
-
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
-| Engine | Valkey hoặc Redis OSS |
+| Engine | Valkey or Redis OSS |
 | Name | `omnistay-cache` |
 | Cluster mode | Disabled |
-| Node type | Loại nhỏ nhất phù hợp ngân sách |
-| Replicas | 0 cho demo tiết kiệm |
+| Node type | Smallest type that fits the budget |
+| Replicas | 0 for a cost-saving demo |
 | Port | 6379 |
 | VPC | `omnistay-vpc` |
 | Subnet group | `omnistay-cache-subnet-group` |
 | Security group | `SG-Redis` |
 
-Khi cluster ở trạng thái `Available`, ghi lại endpoint. Nếu bật transit encryption, connection string cần có `ssl=True`.
+When the cluster reaches `Available`, record the endpoint. If transit encryption is enabled, the connection string should include `ssl=True`.
 
-Ví dụ placeholder:
+Example placeholder:
 
 ```text
 <redis-endpoint>:6379,ssl=True,abortConnect=false
 ```
 
-> **Ảnh cần dán:** ElastiCache cluster `omnistay-cache` có status `Available`.
->
-> **Ảnh cần dán:** Endpoint, port, subnet group và security group của Redis/Valkey.
+![VPC details](/images/552.png)
+<p align="center"><em>Figure 5.5.2: ElastiCache cluster `omnistay-cache`.</em></p>
 
-## 5. Tạo Secrets Manager cho thông tin database
+## 5. Create Secrets Manager entry for database information
 
-Vào **Secrets Manager** -> **Store a new secret**.
+Go to **Secrets Manager** -> **Store a new secret**.
 
-Cấu hình:
+Configuration:
 
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Secret type | Other type of secret |
 | Secret name | `omnistay/prod/hotelbookingdb` |
 
-Key/value gợi ý:
+Suggested key/value pairs:
 
 | Key | Value |
 | --- | --- |
@@ -122,15 +114,13 @@ Key/value gợi ý:
 | `port` | `3306` |
 | `database` | `hotel_booking` |
 
-Khi chụp ảnh, chỉ chụp metadata của secret, không mở phần secret value.
+When taking screenshots, capture only secret metadata and do not open secret values.
 
-> **Ảnh cần dán:** Secret name và metadata trong Secrets Manager, không để lộ giá trị password.
+## 6. Create Parameter Store values for runtime configuration
 
-## 6. Tạo Parameter Store cho cấu hình runtime
+Go to **Systems Manager** -> **Parameter Store** -> **Create parameter**.
 
-Vào **Systems Manager** -> **Parameter Store** -> **Create parameter**.
-
-Các parameter cần tạo:
+Parameters to create:
 
 | Name | Type | Value |
 | --- | --- | --- |
@@ -142,42 +132,37 @@ Các parameter cần tạo:
 | `/omnistay/prod/Jwt__Secret` | SecureString | `<jwt-secret>` |
 | `/omnistay/prod/Admin__SeedPassword` | SecureString | `<admin-password>` |
 
-Nếu CloudFront chưa tạo ở bước này, có thể để trống hoặc cập nhật lại parameter `/omnistay/prod/AWS__CloudFrontDomain` sau khi có domain.
+If CloudFront is not created at this step, the parameter `/omnistay/prod/AWS__CloudFrontDomain` can be left empty and updated later when the domain is available.
 
-> **Ảnh cần dán:** Danh sách parameter có prefix `/omnistay/prod`.
->
-> **Ảnh cần dán:** Chi tiết một parameter không nhạy cảm, ví dụ `Database__Provider`.
+## 7. Create S3 buckets for frontend and artifacts
 
-## 7. Tạo S3 buckets cho frontend và artifact
+Go to **S3** -> **Create bucket**.
 
-Vào **S3** -> **Create bucket**.
+Create the frontend bucket:
 
-Tạo frontend bucket:
-
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Bucket name | `omnistay-frontend-<account-id>` |
 | Region | `ap-southeast-1` |
 | Object ownership | Bucket owner enforced |
-| Block Public Access | On tất cả |
+| Block Public Access | On for all settings |
 | Encryption | SSE-S3 |
 
-Tạo artifact bucket:
+Create the artifact bucket:
 
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Bucket name | `omnistay-artifacts-<account-id>` |
 | Region | `ap-southeast-1` |
 | Object ownership | Bucket owner enforced |
-| Block Public Access | On tất cả |
+| Block Public Access | On for all settings |
 | Encryption | SSE-S3 |
 
-Frontend bucket dùng để lưu static files. Artifact bucket dùng để lưu file backend publish `.zip` để EC2 tải về khi khởi động.
+The frontend bucket stores static files. The artifact bucket stores the backend publish `.zip` file so EC2 can download it during startup.
 
-> **Ảnh cần dán:** Danh sách S3 buckets có frontend bucket và artifact bucket.
->
-> **Ảnh cần dán:** Tab Permissions của bucket thể hiện Block Public Access đang bật.
+![VPC details](/images/553.png)
+<p align="center"><em>Figure 5.5.3: S3 buckets for frontend and artifacts.</em></p>
 
-## Kết quả cần đạt
+## Expected Result
 
-Sau bước này, hệ thống có database MySQL, Redis/Valkey cache, nơi lưu secret/cấu hình runtime và 2 S3 bucket phục vụ triển khai ứng dụng. Backend ở bước sau sẽ dùng các giá trị này để kết nối RDS, Redis và tải artifact từ S3.
+After this step, the system has a MySQL database, Redis/Valkey cache, secret/runtime configuration storage, and two S3 buckets for application deployment. The backend in the next step will use these values to connect to RDS, connect to Redis, and download the artifact from S3.

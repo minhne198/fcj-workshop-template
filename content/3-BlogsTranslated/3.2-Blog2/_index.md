@@ -5,122 +5,110 @@ weight: 1
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
+# 7 Common Mistakes Beginners Make When Deploying Their First Web Application on AWS
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
+While learning and deploying a web application on AWS, I realized that successfully creating Amazon EC2 or Amazon RDS is only the beginning. What matters more is understanding how services work together, how to build a secure architecture, and how to choose the right solution for each problem.
 
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+At first, I thought that making the application run was enough. However, after reading AWS documentation and practicing deployment, I realized that many seemingly small mistakes can directly affect system security, scalability, and operating cost.
 
----
-
-## Architecture Guidance
-
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
-
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
-
-**The solution architecture is now as follows:**
-
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
+Below are common mistakes that I personally encountered or often see among beginners learning AWS. I hope these experiences help others avoid similar issues when deploying systems.
 
 ---
 
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
+### 1. Placing all resources in Public Subnets
 
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+When I first learned Amazon VPC, I thought placing Amazon EC2 and Amazon RDS in public subnets would be more convenient because I could access them directly from the Internet for testing and configuration.
 
----
+![alt text](image.png)
+> **Figure 1. Comparison between an unsafe deployment architecture and a recommended Public/Private Subnet architecture on AWS.**
 
-## Technology Choices and Communication Scope
+In reality, this is a major security risk. Public subnets should only contain components that need to communicate directly with the Internet, such as Application Load Balancer or NAT Gateway. Important resources such as Amazon EC2 and Amazon RDS should be deployed in private subnets to limit direct external access.
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+> **Best Practice:** Design the network using a Public/Private Subnet model. Only services that need to receive or route Internet traffic should be placed in public subnets.
 
 ---
 
-## The Pub/Sub Hub
+### 2. Opening Security Groups too broadly
 
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
+A common mistake is configuring Security Groups with source `0.0.0.0/0` for many service ports just to make the system work faster.
 
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
+![alt text](image-1.png)
+> **Figure 2. Comparison between an unsafe Security Group configuration and a Least Privilege configuration.**
 
----
+This configuration makes testing easier, but it significantly increases the risk of unauthorized access. Instead, each service should allow only the required connection source. For example, Application Load Balancer receives Internet traffic, Amazon EC2 only accepts connections from the Load Balancer Security Group, and Amazon RDS only accepts connections from the EC2 Security Group.
 
-## Core Microservice
-
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
-
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
+> **Best Practice:** Apply the **Least Privilege** principle by granting only the minimum required access to each system component.
 
 ---
 
-## Front Door Microservice
+### 3. Using Access Keys instead of IAM Roles
 
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
+At first, I thought storing Access Key and Secret Access Key in a configuration file was the simplest way for an application to access Amazon S3.
 
----
+![alt text](image-2.png)
+> **Figure 3. Comparison between storing Access Keys in source code and using IAM Role for Amazon EC2.**
 
-## Staging ER7 Microservice
+However, if the source code is accidentally made public or shared, those access keys can be exposed and the AWS account may be used without permission. For services running on AWS such as Amazon EC2, a better solution is to use IAM Role. IAM Role automatically provides temporary credentials for the application to access AWS services without storing fixed access keys in source code.
 
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
+> **Best Practice:** Do not store Access Keys in source code. For EC2, Lambda, or ECS, use IAM Role to manage access permissions.
 
 ---
 
-## New Features in the Solution
+### 4. Storing images and files directly on EC2
 
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+When developing a web application, I used to store all images and uploaded files directly on the EC2 server, similar to running an application locally.
+
+However, cloud architecture is designed toward a **Stateless** model. If an EC2 instance fails or is replaced by Auto Scaling, data stored on the server may no longer be available. Instead of storing files directly on EC2, Amazon S3 is a better choice because it provides durable storage, flexible scalability, and easy integration with other AWS services.
+
+> **Best Practice:** Use Amazon S3 to store images, documents, and static files instead of storing them directly on the EC2 disk.
+
+---
+
+### 5. Confusing Region, Availability Zone, and VPC
+
+When I first learned AWS, I often confused Region, Availability Zone (AZ), and VPC. This caused inaccurate architecture diagrams and incorrect placement of some services.
+
+After studying further, I realized that a Region is a geographic area where services are deployed, an Availability Zone is an independent data center inside a Region, and a VPC is a virtual private network created in one Region and can span multiple AZs. Meanwhile, services such as Amazon S3 operate at the Region level, while AWS IAM is a Global service. Understanding the scope of each service helps design architecture correctly and avoid many deployment mistakes.
+
+> **Best Practice:** Before designing a system, clearly identify whether each service operates at the Global, Region, or VPC level so the architecture can be arranged properly.
+
+---
+
+### 6. Not monitoring the system after deployment
+
+Another mistake is focusing only on application deployment and forgetting to monitor system health.
+
+When the application has errors or slow responses, not having logs and monitoring metrics makes root cause analysis much harder. Amazon CloudWatch helps collect logs, monitor CPU, network traffic, disk usage, and configure alerts when the system shows abnormal behavior. Monitoring from the beginning helps detect issues early and significantly reduces troubleshooting time.
+
+> **Best Practice:** Configure Amazon CloudWatch from the beginning of deployment to track logs, performance, and alerts when needed.
+
+---
+
+### 7. Using too many AWS services before they are needed
+
+When I first learned AWS, I thought a professional architecture had to include CloudFront, WAF, Auto Scaling, ElastiCache, and many other services.
+
+However, every service increases cost, complexity, and management effort. For learning projects or small systems, using too many services is unnecessary. In my view, a good architecture is not the one with the most services, but the one that meets current requirements and can still scale flexibly in the future.
+
+> **Best Practice:** Start with a simple architecture, then add more services when the system actually needs them.
+
+---
+
+# Lessons Learned
+
+After learning and deploying applications on AWS, I realized that understanding individual services is not enough. The more important skill is combining them into an architecture that fits the system requirements.
+
+Three principles I always keep in mind:
+
+- **Design security from the beginning:** Separate public and private subnets, use Security Groups properly, and use IAM Roles correctly.
+- **Design for scalability:** Separate application processing, database, and static data storage so the system can be upgraded more easily.
+- **Choose suitable services:** Avoid deploying too many services if the application does not truly need them, in order to reduce cost and simplify management.
+
+These principles help the architecture stay secure, easy to operate, and ready to scale when the system grows.
+
+# Conclusion
+
+Making mistakes while learning AWS is normal. What matters more is understanding the cause of each issue and gradually improving the architecture according to AWS recommendations.
+
+Through deployment practice and documentation study, I realized that a good system must not only run stably but also ensure security, scalability, and cost optimization. I hope the experience shared in this blog helps beginners avoid common mistakes and become more confident when deploying their first application on AWS.

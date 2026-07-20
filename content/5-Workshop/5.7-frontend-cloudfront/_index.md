@@ -1,16 +1,16 @@
-﻿---
-title : "Triển khai Frontend lên S3 và CloudFront"
-date : 2024-01-01
-weight : 7
-chapter : false
-pre : " <b> 5.7. </b> "
+---
+title: "Deploy Frontend to S3 and CloudFront"
+date: 2024-01-01
+weight: 7
+chapter: false
+pre: " <b> 5.7. </b> "
 ---
 
-## Mục tiêu
+## Objective
 
-Bước này triển khai giao diện tĩnh của AWS_OmniStay lên Amazon S3 và phân phối ra internet thông qua Amazon CloudFront. S3 bucket vẫn bật Block Public Access; người dùng không truy cập trực tiếp vào S3 mà truy cập qua CloudFront Origin Access Control (OAC). CloudFront cũng được cấu hình thêm origin ALB để forward các request API về backend.
+This step deploys the static frontend of AWS_OmniStay to Amazon S3 and distributes it to the internet through Amazon CloudFront. The S3 bucket keeps Block Public Access enabled; users do not access S3 directly, but access it through CloudFront Origin Access Control (OAC). CloudFront is also configured with an ALB origin to forward API requests to the backend.
 
-Luồng truy cập sau khi hoàn thành:
+Access flow after completion:
 
 ```text
 User Browser -> CloudFront
@@ -19,25 +19,25 @@ User Browser -> CloudFront
   -> Health requests /health*: Application Load Balancer -> EC2 backend
 ```
 
-## 1. Chuẩn bị frontend production trên máy local
+## 1. Prepare production frontend locally
 
-Tạo bản frontend dùng cho production. File `config.js` cần cấu hình API theo đường dẫn tương đối `/api` để browser gọi cùng domain CloudFront.
+Create a frontend build/configuration for production. The `config.js` file should configure the API as a relative path `/api` so the browser calls the same CloudFront domain.
 
-Ví dụ nội dung `frontend/public/config.js`:
+Example `frontend/public/config.js`:
 
 ```js
 window.__APP_CONFIG__ = {
-  API_BASE: '/api'
+  API_BASE: "/api",
 };
 ```
 
-Nếu đã có file mẫu `frontend/public/config.aws.example.js`, có thể copy thành `config.js` trước khi upload.
+If the sample file `frontend/public/config.aws.example.js` already exists, copy it to `config.js` before uploading.
 
 ```powershell
 Copy-Item frontend\public\config.aws.example.js frontend\public\config.js -Force
 ```
 
-Các file/thư mục chính cần có khi upload:
+Main files/folders to upload:
 
 ```text
 public/index.html
@@ -50,20 +50,20 @@ src/admin.js
 assets/
 ```
 
-> **Ảnh cần dán:** Nội dung `config.js` thể hiện `API_BASE: '/api'`.
->
-> **Ảnh cần dán:** Cấu trúc thư mục frontend trước khi upload.
+![VPC details](/images/571.jpg)
 
-## 2. Upload frontend lên S3 bucket
+<p align="center"><em>Figure 5.7.1: Frontend folder structure before upload.</em></p>
 
-Vào **S3** -> frontend bucket `omnistay-frontend-<account-id>`.
+## 2. Upload frontend to S3 bucket
 
-Thực hiện:
+Go to **S3** -> frontend bucket `omnistay-frontend-<account-id>`.
 
-1. Chọn **Upload**.
-2. Chọn **Add folder** hoặc kéo thả các folder/file frontend.
-3. Upload nội dung bên trong thư mục frontend, không upload cả thư mục bọc ngoài.
-4. Đảm bảo trên S3 có các path:
+Steps:
+
+1. Select **Upload**.
+2. Select **Add folder** or drag and drop frontend folders/files.
+3. Upload the contents inside the frontend directory, not the wrapper directory itself.
+4. Ensure S3 contains these paths:
 
 ```text
 public/index.html
@@ -76,23 +76,23 @@ src/admin.js
 assets/
 ```
 
-Không upload thành dạng sai như:
+Do not upload in an incorrect nested form such as:
 
 ```text
 omnistay-frontend/public/index.html
 ```
 
-> **Ảnh cần dán:** Object list trong frontend bucket có `public/`, `src/`, `assets/`.
->
-> **Ảnh cần dán:** Tab Permissions của bucket vẫn bật Block Public Access.
+![VPC details](/images/572.jpg)
 
-## 3. Tạo CloudFront Distribution với S3 Origin
+<p align="center"><em>Figure 5.7.2: Frontend bucket object list includes `public/`, `src/`, and `assets/`.</em></p>
 
-Vào **CloudFront** -> **Distributions** -> **Create distribution**.
+## 3. Create CloudFront Distribution with S3 Origin
 
-Cấu hình S3 origin:
+Go to **CloudFront** -> **Distributions** -> **Create distribution**.
 
-| Trường | Giá trị |
+S3 origin configuration:
+
+| Field | Value |
 | --- | --- |
 | Origin domain | S3 frontend bucket |
 | Origin name | `omnistay-frontend-s3` |
@@ -104,44 +104,38 @@ Cấu hình S3 origin:
 | Cache policy | CachingOptimized |
 | Default root object | `public/index.html` |
 
-Sau khi tạo distribution, CloudFront sẽ gợi ý bucket policy cho S3. Copy policy này và gắn vào frontend bucket.
+After the distribution is created, CloudFront suggests a bucket policy for S3. Copy that policy and attach it to the frontend bucket.
 
-> **Ảnh cần dán:** CloudFront distribution domain name.
->
-> **Ảnh cần dán:** Origin S3 `omnistay-frontend-s3` sử dụng OAC.
->
-> **Ảnh cần dán:** Default root object là `public/index.html`.
+## 4. Attach bucket policy to S3 frontend bucket
 
-## 4. Gắn bucket policy cho S3 frontend bucket
+Go to **S3** -> frontend bucket -> **Permissions** -> **Bucket policy**.
 
-Vào **S3** -> frontend bucket -> **Permissions** -> **Bucket policy**.
+Paste the bucket policy suggested by CloudFront. The goal is to allow only the CloudFront distribution to read objects in the bucket without making the bucket public.
 
-Dán bucket policy do CloudFront gợi ý. Mục tiêu là chỉ cho CloudFront distribution được đọc object trong bucket, không mở bucket public.
+## 5. Add ALB Origin for backend API
 
-> **Ảnh cần dán:** Bucket policy cho phép CloudFront OAC truy cập frontend bucket.
+In the CloudFront distribution, go to **Origins** -> **Create origin**.
 
-## 5. Thêm ALB Origin cho backend API
+Configuration:
 
-Trong CloudFront distribution, vào **Origins** -> **Create origin**.
-
-Cấu hình:
-
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
-| Origin domain | DNS name của `omnistay-alb` |
+| Origin domain | DNS name of `omnistay-alb` |
 | Origin name | `omnistay-api-alb` |
 | Protocol | HTTP only |
 | HTTP port | 80 |
 
-ALB vẫn nhận HTTP nội bộ từ CloudFront, còn người dùng truy cập CloudFront bằng HTTPS.
+The ALB still receives HTTP internally from CloudFront, while users access CloudFront through HTTPS.
 
-> **Ảnh cần dán:** CloudFront origins có cả S3 frontend origin và ALB backend origin.
+![VPC details](/images/573.jpg)
 
-## 6. Cấu hình behavior cho API và health check
+<p align="center"><em>Figure 5.7.3: CloudFront origins include both the S3 frontend origin and ALB backend origin.</em></p>
 
-Thêm behavior `/api/*`:
+## 6. Configure behaviors for API and health check
 
-| Trường | Giá trị |
+Add behavior `/api/*`:
+
+| Field | Value |
 | --- | --- |
 | Path pattern | `/api/*` |
 | Origin | `omnistay-api-alb` |
@@ -150,9 +144,9 @@ Thêm behavior `/api/*`:
 | Cache policy | CachingDisabled |
 | Query strings | Forward |
 
-Thêm behavior `/health*`:
+Add behavior `/health*`:
 
-| Trường | Giá trị |
+| Field | Value |
 | --- | --- |
 | Path pattern | `/health*` |
 | Origin | `omnistay-api-alb` |
@@ -160,31 +154,27 @@ Thêm behavior `/health*`:
 | Allowed methods | GET, HEAD, OPTIONS |
 | Cache policy | CachingDisabled |
 
-Behavior mặc định `*` vẫn trỏ về S3 frontend origin.
+The default behavior `*` still points to the S3 frontend origin.
 
-> **Ảnh cần dán:** CloudFront behavior list có `Default (*) -> S3`, `/api/* -> ALB`, `/health* -> ALB`.
+## 7. Update CloudFront domain in Parameter Store
 
-## 7. Cập nhật CloudFront domain vào Parameter Store
-
-Sau khi CloudFront deploy xong, ghi lại domain dạng:
+After CloudFront deployment is complete, record the domain in this format:
 
 ```text
 dxxxxxxxxxxxxx.cloudfront.net
 ```
 
-Vào **Systems Manager** -> **Parameter Store** và tạo hoặc cập nhật:
+Go to **Systems Manager** -> **Parameter Store** and create or update:
 
 ```text
 /omnistay/prod/AWS__CloudFrontDomain = dxxxxxxxxxxxxx.cloudfront.net
 ```
 
-Nếu backend cần dùng CloudFront domain thật trong runtime, tạo Launch Template version mới để cập nhật biến môi trường rồi cho ASG dùng version mới.
-
-> **Ảnh cần dán:** Parameter `/omnistay/prod/AWS__CloudFrontDomain` đã được cập nhật, không chứa thông tin nhạy cảm.
+If the backend needs the actual CloudFront domain at runtime, create a new Launch Template version to update the environment variable and then configure the ASG to use the new version.
 
 ## 8. Invalidate CloudFront cache
 
-Sau khi upload hoặc cập nhật frontend, vào **CloudFront** -> Distribution -> **Invalidations** -> **Create invalidation**.
+After uploading or updating the frontend, go to **CloudFront** -> Distribution -> **Invalidations** -> **Create invalidation**.
 
 Object paths:
 
@@ -192,10 +182,12 @@ Object paths:
 /*
 ```
 
-Đợi status chuyển sang `Completed`.
+Wait until status becomes `Completed`.
 
-> **Ảnh cần dán:** CloudFront invalidation có status `Completed`.
+![VPC details](/images/574.jpg)
 
-## Kết quả cần đạt
+<p align="center"><em>Figure 5.7.4: CloudFront invalidation status is `Completed`.</em></p>
 
-Sau bước này, người dùng có thể truy cập website thông qua CloudFront. Static files được lấy từ S3 private bucket qua OAC, còn các request `/api/*` và `/health*` được CloudFront forward về ALB backend.
+## Expected Result
+
+After this step, users can access the website through CloudFront. Static files are served from the private S3 bucket through OAC, while `/api/*` and `/health*` requests are forwarded by CloudFront to the ALB backend.

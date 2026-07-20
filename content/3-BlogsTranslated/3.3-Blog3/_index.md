@@ -5,122 +5,125 @@ weight: 1
 chapter: false
 pre: " <b> 3.3. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
+# 7 Ways to Optimize Cost When Deploying Applications on AWS
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
+One of the biggest lessons I learned while studying and deploying applications on AWS is that **cost must be considered from the system design stage**. At first, I only focused on making the application run stably. But when I started using more services, I realized that poor resource management can cause costs to become higher than expected.
 
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+According to the **AWS Well-Architected Framework**, **Cost Optimization** is one of the key pillars alongside security, reliability, performance efficiency, operational excellence, and sustainability. This shows that cost optimization is not about blindly cutting resources; it is about using the right service, the right configuration, and the right timing.
 
----
-
-## Architecture Guidance
-
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
-
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
-
-**The solution architecture is now as follows:**
-
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
+In this blog, I share 7 practical experiences for optimizing cost when deploying applications on AWS, especially for students and beginners learning cloud computing.
 
 ---
 
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
+## 1. Only use services when they are truly needed
 
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+When I first learned AWS, I was overwhelmed by the number of services the platform provides. Because I wanted the architecture to look more "professional", I thought the system needed CloudFront, AWS WAF, Auto Scaling, NAT Gateway, and Amazon ElastiCache from the beginning.
 
----
+However, for small applications or student projects, using too many services does not bring much value. It increases cost and makes the system harder to manage.
 
-## Technology Choices and Communication Scope
+![alt text](image.png)
+> **Figure 1. Comparison between an architecture using too many services and a minimal architecture following the "Start Simple, Scale Later" principle.**
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+> **Best Practice:** Deploy only services that meet current system requirements. When user traffic increases or new needs appear, expand the architecture gradually.
 
 ---
 
-## The Pub/Sub Hub
+## 2. Take advantage of AWS Free Tier
 
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
+AWS Free Tier provides many services for free within certain limits, such as Amazon EC2, Amazon S3, Amazon RDS, and AWS Lambda. This is very suitable for learning, practicing, and building small projects.
 
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
+During usage, I always check whether the selected service and configuration are still within Free Tier limits before creating resources.
 
----
-
-## Core Microservice
-
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
-
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
+> **Best Practice:** Always check AWS Free Tier policies before creating resources to reduce unexpected charges.
 
 ---
 
-## Front Door Microservice
+## 3. Stop or delete resources when they are no longer used
 
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
+After finishing a lab or test deployment, many people forget to clean up AWS resources.
 
----
+Examples:
 
-## Staging ER7 Microservice
+- Amazon EC2 can still generate Amazon EBS storage cost even when stopped.
+- Elastic IP not attached to a running EC2 instance can still be charged.
+- Unused Snapshots or EBS Volumes continue to generate storage cost.
 
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
+Regularly checking and cleaning up resources can significantly reduce operating cost.
+
+> **Best Practice:** After each practice session or test deployment, check and delete resources that are no longer needed.
 
 ---
 
-## New Features in the Solution
+## 4. Track cost with AWS Budgets and AWS Cost Explorer
 
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+Cost control should be done regularly instead of waiting until the end of the month to check the bill.
+
+AWS Budgets allows users to set budgets and send email alerts when cost exceeds configured thresholds. AWS Cost Explorer provides visual charts for tracking cost by service, account, or time period.
+
+With these two tools, I can quickly identify which service is consuming the most cost and adjust it in time.
+
+![alt text](image-1.png)
+> **Figure 2. Cost tracking and management process using AWS Budgets and AWS Cost Explorer.**
+
+> **Best Practice:** Set up AWS Budgets from the start of the project and monitor cost regularly with AWS Cost Explorer.
+
+---
+
+## 5. Choose the right resource size
+
+In cloud computing, the strongest configuration is not always the best choice. What matters is selecting a configuration that matches the actual workload.
+
+For learning environments or small websites, Amazon EC2 instance types such as `t2.micro` or `t3.micro` are often enough. Similarly, many applications only need Amazon RDS MySQL instead of Aurora.
+
+Choosing the right configuration helps use resources efficiently and significantly reduce operating cost.
+
+> **Best Practice:** Start with a small configuration, monitor performance, and upgrade only when the system truly needs it.
+
+---
+
+## 6. Manage data lifecycle and optimize storage
+
+Storage growth over time is also a common reason for increasing cost.
+
+For Amazon S3, I often configure **Lifecycle Rules** to automatically move infrequently accessed data to lower-cost storage classes such as **S3 Glacier Flexible Archive** or **S3 Glacier Deep Archive**. I also regularly check and delete unused Snapshots or EBS Volumes.
+
+> **Best Practice:** Use Lifecycle Rules for Amazon S3 and periodically clean up storage resources that are no longer needed.
+
+---
+
+## 7. Choose a suitable Region and keep the design simple before scaling
+
+The cost of the same AWS service can vary between Regions. Therefore, choosing a suitable Region not only reduces latency but also helps optimize cost.
+
+I also realized that a simple architecture using Amazon EC2, Amazon RDS, Amazon S3, and Application Load Balancer is already enough for most small applications. Auto Scaling, CloudFront, or AWS WAF should only be added when the system grows and has more users.
+
+![alt text](image-2.png)
+> **Figure 3. Resource and cost optimization process throughout the AWS system deployment lifecycle.**
+
+> **Best Practice:** Apply the **Start Simple, Scale Later** principle and expand the system only when there is real demand.
+
+---
+
+# Lessons Learned
+
+Through AWS study and practice, I realized that cost optimization is not simply reducing budget. It is about using resources reasonably and efficiently.
+
+Key lessons I learned:
+
+- Deploy only the services that are truly necessary.
+- Make the most of AWS Free Tier during learning.
+- Regularly clean up unused resources.
+- Track cost with AWS Budgets and AWS Cost Explorer.
+- Choose the right resource size and Region.
+- Design a simple architecture first, then expand when the system grows.
+
+These principles are also the foundation of the **Cost Optimization** pillar in the AWS Well-Architected Framework.
+
+---
+
+# Conclusion
+
+Cost optimization is an important skill when deploying systems on AWS. A good architecture must not only ensure performance, security, and scalability, but also use resources reasonably to avoid unnecessary cost.
+
+For me, building the habit of tracking cost, choosing the right services, and managing resources from the beginning made my AWS learning and deployment process much more effective. I hope the experiences shared in this blog give beginners a practical perspective for designing systems that meet technical requirements while optimizing deployment budget.

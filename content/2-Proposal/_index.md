@@ -5,111 +5,108 @@ weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-In this section, you need to summarize the contents of the workshop that you **plan** to conduct.
-
-# IoT Weather Platform for Lab Research
-## A Unified AWS Serverless Solution for Real-Time Weather Monitoring
+# High-Availability Hotel Booking System on AWS
+## High-Traffic Online Hotel Booking System on AWS
 
 ### 1. Executive Summary
-The IoT Weather Platform is designed for the ITea Lab team in Ho Chi Minh City to enhance weather data collection and analysis. It supports up to 5 weather stations, with potential scalability to 10-15, utilizing Raspberry Pi edge devices with ESP32 sensors to transmit data via MQTT. The platform leverages AWS Serverless services to deliver real-time monitoring, predictive analytics, and cost efficiency, with access restricted to 5 lab members via Amazon Cognito.
+
+The High-Availability Online Hotel Booking System on AWS is an e-commerce web application for the travel and accommodation domain. The core goal of this project is to build a modern infrastructure solution that keeps the system highly available, scales resources automatically based on real traffic, and optimizes response performance through caching.
+
+By combining a high-performance **ASP.NET Core 8 (.NET 8 LTS)** backend with the cloud ecosystem of **Amazon Web Services (AWS)**, the project demonstrates how to solve high-traffic and fault-tolerance challenges that modern digital businesses often face.
 
 ### 2. Problem Statement
-### What’s the Problem?
-Current weather stations require manual data collection, becoming unmanageable with multiple units. There is no centralized system for real-time data or analytics, and third-party platforms are costly and overly complex.
 
-### The Solution
-The platform uses AWS IoT Core to ingest MQTT data, AWS Lambda and API Gateway for processing, Amazon S3 for storage (including a data lake), and AWS Glue Crawlers and ETL jobs to extract, transform, and load data from the S3 data lake to another S3 bucket for analysis. AWS Amplify with Next.js provides the web interface, and Amazon Cognito ensures secure access. Similar to Thingsboard and CoreIoT, users can register new devices and manage connections, though this platform operates on a smaller scale and is designed for private use. Key features include real-time dashboards, trend analysis, and low operational costs.
+*Current problems:* Traditional websites deployed on physical servers or a single-server model often face serious limitations in real production environments:
 
-### Benefits and Return on Investment
-The solution establishes a foundational resource for lab members to develop a larger IoT platform, serving as a study resource, and provides a data foundation for AI enthusiasts for model training or analysis. It reduces manual reporting for each station via a centralized platform, simplifying management and maintenance, and improves data reliability. Monthly costs are $0.66 USD per the AWS Pricing Calculator, with a 12-month total of $7.92 USD. All IoT equipment costs are covered by the existing weather station setup, eliminating additional development expenses. The break-even period of 6-12 months is achieved through significant time savings from reduced manual work.
+* **Peak-season bottlenecks:** During holidays or travel seasons, traffic can spike sharply and overload server resources, causing slow responses, interruptions, or website downtime. Provisioning a large server from the beginning also wastes cost during low-traffic periods.
+* **Single Point of Failure:** The whole application depends on one server. If the server hardware fails or loses network connectivity, the website becomes unavailable, causing revenue loss and poor user experience.
+* **Database overload:** When thousands of users repeatedly search for the same rooms, the relational database must handle a heavy volume of direct queries, which can slow responses or crash the database.
+* **Overbooking risk:** Without strong concurrency control, two customers may book and pay for the same room at the same time.
+
+*Proposed solution:* The application platform is migrated to a Cloud-Native model on AWS to address these issues:
+
+* **Load balancing and failover:** Use **Application Load Balancer (ALB)** together with **Auto Scaling Group (ASG)** to distribute traffic across **EC2** instances in multiple Availability Zones. If one zone has an infrastructure issue, the system can route traffic to the remaining zone smoothly within about 30 seconds.
+* **Demand-based auto scaling:** ASG monitors CPU Utilization, increases the number of servers when traffic is high, and reduces instances when load decreases to optimize resource cost.
+* **Performance optimization with Redis Cache:** Integrate **Amazon ElastiCache Redis** to cache popular search query results. This reduces response time from about 150 ms to under 5 ms and removes repeated direct query pressure from Amazon RDS MySQL.
+* **Strict overbooking prevention:** Apply **Row-Level Locking (SELECT FOR UPDATE)** with high-integrity EF Core database transactions using the Serializable isolation level to lock room data during payment processing.
+
+*Benefits and ROI:*
+
+* **Research and practical value:** The project acts as a complete High Availability blueprint for enterprise web systems. Cloud infrastructure is defined with **AWS CDK (TypeScript)**, making it easier to manage, reproduce, and reuse for future work.
+* **Operational cost optimization:** By combining auto scaling with **AWS Free Tier** benefits for EC2, RDS, and Redis, the estimated infrastructure cost for the project is very low, **under 10 USD (about 250,000 VND)** for the full graduation project lifecycle.
+* **Reduced operations effort:** Monitoring and alerting are automated through CloudWatch and Amazon SNS email alerts, reducing the need for manual 24/7 system supervision.
 
 ### 3. Solution Architecture
-The platform employs a serverless AWS architecture to manage data from 5 Raspberry Pi-based stations, scalable to 15. Data is ingested via AWS IoT Core, stored in an S3 data lake, and processed by AWS Glue Crawlers and ETL jobs to transform and load it into another S3 bucket for analysis. Lambda and API Gateway handle additional processing, while Amplify with Next.js hosts the dashboard, secured by Cognito. The architecture is detailed below:
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+The system uses a secure multi-tier architecture deployed inside an isolated **Amazon VPC**, clearly separating public subnets and private subnets to improve data security.
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+*AWS services used:*
 
-### AWS Services Used
-- **AWS IoT Core**: Ingests MQTT data from 5 stations, scalable to 15.
-- **AWS Lambda**: Processes data and triggers Glue jobs (two functions).
-- **Amazon API Gateway**: Facilitates web app communication.
-- **Amazon S3**: Stores raw data in a data lake and processed outputs (two buckets).
-- **AWS Glue**: Crawlers catalog data, and ETL jobs transform and load it.
-- **AWS Amplify**: Hosts the Next.js web interface.
-- **Amazon Cognito**: Secures access for lab users.
-
-### Component Design
-- **Edge Devices**: Raspberry Pi collects and filters sensor data, sending it to IoT Core.
-- **Data Ingestion**: AWS IoT Core receives MQTT messages from the edge devices.
-- **Data Storage**: Raw data is stored in an S3 data lake; processed data is stored in another S3 bucket.
-- **Data Processing**: AWS Glue Crawlers catalog the data, and ETL jobs transform it for analysis.
-- **Web Interface**: AWS Amplify hosts a Next.js app for real-time dashboards and analytics.
-- **User Management**: Amazon Cognito manages user access, allowing up to 5 active accounts.
+* **Amazon VPC:** Creates an isolated network environment with 2 public subnets and 4 private subnets across 2 Availability Zones.
+* **Application Load Balancer (ALB):** Receives HTTP/HTTPS traffic and distributes it to EC2 instances in private subnets.
+* **Amazon EC2 & Auto Scaling Group:** Uses `t3.micro` instances running Amazon Linux 2023 as API servers, with auto scaling from 1 to a maximum of 4 servers.
+* **Amazon RDS MySQL:** Stores core business data such as hotels, rooms, and invoices, with Multi-AZ support for data replication and failover.
+* **Amazon ElastiCache (Redis):** Provides shared distributed caching for all EC2 instances in the ASG to accelerate queries.
+* **Amazon S3 & CloudFront:** S3 stores frontend static assets and system images; CloudFront acts as a global CDN and securely accesses S3 through Origin Access Control (OAC).
+* **Monitoring and security:** Integrates AWS WAF, KMS, Secrets Manager, CloudWatch, and SNS for request filtering, encryption, secure configuration, monitoring, and automated incident alerts.
 
 ### 4. Technical Implementation
-**Implementation Phases**
-This project has two parts—setting up weather edge stations and building the weather platform—each following 4 phases:
-- Build Theory and Draw Architecture: Research Raspberry Pi setup with ESP32 sensors and design the AWS serverless architecture (1 month pre-internship)
-- Calculate Price and Check Practicality: Use AWS Pricing Calculator to estimate costs and adjust if needed (Month 1).
-- Fix Architecture for Cost or Solution Fit: Tweak the design (e.g., optimize Lambda with Next.js) to stay cost-effective and usable (Month 2).
-- Develop, Test, and Deploy: Code the Raspberry Pi setup, AWS services with CDK/SDK, and Next.js app, then test and release to production (Months 2-3).
 
-**Technical Requirements**
-- Weather Edge Station: Sensors (temperature, humidity, rainfall, wind speed), a microcontroller (ESP32), and a Raspberry Pi as the edge device. Raspberry Pi runs Raspbian, handles Docker for filtering, and sends 1 MB/day per station via MQTT over Wi-Fi.
-- Weather Platform: Practical knowledge of AWS Amplify (hosting Next.js), Lambda (minimal use due to Next.js), AWS Glue (ETL), S3 (two buckets), IoT Core (gateway and rules), and Cognito (5 users). Use AWS CDK/SDK to code interactions (e.g., IoT Core rules to S3). Next.js reduces Lambda workload for the fullstack web app.
+*Implementation phases:*
 
-### 5. Timeline & Milestones
-**Project Timeline**
-- Pre-Internship (Month 0): 1 month for planning and old station review.
-- Internship (Months 1-3): 3 months.
-    - Month 1: Study AWS and upgrade hardware.
-    - Month 2: Design and adjust architecture.
-    - Month 3: Implement, test, and launch.
-- Post-Launch: Up to 1 year for research.
+1. **Phase 1: Network and security setup (Week 1):** Plan the VPC, divide subnets, configure route tables, NAT Gateways, and strict Security Groups.
+2. **Phase 2: Cloud data layer initialization (Week 2):** Create RDS MySQL and ElastiCache Redis on AWS, connect the database, initialize schema, and seed sample data.
+3. **Phase 3: Backend API development and logic optimization (Week 3):** Build business controllers with ASP.NET Core 8, integrate Redis caching, and implement transaction logic to prevent duplicate bookings.
+4. **Phase 4: Frontend development (Week 4):** Build a responsive web UI using HTML5, Bootstrap, and Vanilla JavaScript, then deploy it to Amazon S3 and CloudFront.
+5. **Phase 5: ASG configuration and load testing (Weeks 5-6):** Create the Launch Template, build the ALB, configure Auto Scaling rules, and use **Locust** to simulate 300 concurrent users for scaling and failover testing.
+6. **Phase 6: Infrastructure as Code and automated monitoring (Weeks 7-8):** Convert manual infrastructure configuration into **AWS CDK** source code, build CloudWatch dashboards, and enable SNS alerts.
 
-### 6. Budget Estimation
-You can find the budget estimation on the [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01).  
-Or you can download the [Budget Estimation File](../attachments/budget_estimation.pdf).
+*Technical requirements:*
 
-### Infrastructure Costs
-- AWS Services:
-    - AWS Lambda: $0.00/month (1,000 requests, 512 MB storage).
-    - S3 Standard: $0.15/month (6 GB, 2,100 requests, 1 GB scanned).
-    - Data Transfer: $0.02/month (1 GB inbound, 1 GB outbound).
-    - AWS Amplify: $0.35/month (256 MB, 500 ms requests).
-    - Amazon API Gateway: $0.01/month (2,000 requests).
-    - AWS Glue ETL Jobs: $0.02/month (2 DPUs).
-    - AWS Glue Crawlers: $0.07/month (1 crawler).
-    - MQTT (IoT Core): $0.08/month (5 devices, 45,000 messages).
+* **Environment:** Visual Studio 2022 or VS Code, .NET 8 SDK, Node.js for AWS CDK, and AWS CLI.
+* **Professional skills:** Entity Framework Core, LINQ, Async/Await, thread-safe programming, database transactions, cloud routing, and secure IAM Roles/Policies.
 
-Total: $0.7/month, $8.40/12 months
+### 5. Timeline and Milestones
 
-- Hardware: $265 one-time (Raspberry Pi 5 and sensors).
+The project timeline is planned for **9 weeks**:
+
+* **Week 1:** Project kickoff, VPC network setup, and local environment configuration.
+* **Week 2:** Deploy and configure RDS database and Redis cache on AWS.
+* **Week 3:** Complete the backend API source code for Auth, Search, Booking, and Admin, with Swagger integration.
+* **Week 4:** Complete frontend UI components and deploy them to S3/CloudFront.
+* **Week 5:** Deploy the API to EC2 through Launch Template and configure ALB Target Group health checks.
+* **Week 6:** Run load testing with Locust and tune Target CPU Tracking settings.
+* **Weeks 7-8:** Package the AWS CDK source code, configure CloudWatch dashboards, and automate alerts.
+* **Week 9:** Rehearse the application demo, prepare presentation slides, and defend the project.
+
+### 6. Budget Estimate
+
+The system follows a strict cost optimization strategy, with most resources staying within **AWS Free Tier** where possible.
+
+*Estimated infrastructure cost table:*
+
+* **Amazon EC2 (`t3.micro`):** 0.00 USD, within 750 free hours per month.
+* **Amazon RDS MySQL (`db.t3.micro`):** 0.00 USD, within 750 free hours per month.
+* **Amazon ElastiCache Redis (`cache.t3.micro`):** 0.00 USD, using the Free Tier benefit.
+* **Application Load Balancer:** About 0.025 USD/hour. It is enabled only during load testing and demos, estimated at about 1.50 USD.
+* **NAT Gateway:** About 0.059 USD/hour. A start/stop script is used to optimize usage, estimated at about 3.00 USD.
+* **Amazon S3 & CloudFront:** About 0.20 USD for static file storage and low-volume bandwidth.
+
+**Expected total cost:** **< 10 USD (about 250,000 VND)** for the full graduation project by shutting down paid resources or reducing Desired Capacity to 0 when they are not needed overnight.
 
 ### 7. Risk Assessment
-#### Risk Matrix
-- Network Outages: Medium impact, medium probability.
-- Sensor Failures: High impact, low probability.
-- Cost Overruns: Medium impact, low probability.
 
-#### Mitigation Strategies
-- Network: Local storage on Raspberry Pi with Docker.
-- Sensors: Regular checks and spares.
-- Cost: AWS budget alerts and optimization.
+*Risk matrix and mitigation strategy:*
 
-#### Contingency Plans
-- Revert to manual methods if AWS fails.
-- Use CloudFormation for cost-related rollbacks.
+* **Credential leakage risk:** Access keys may be exposed when code is pushed to a public GitHub repository. *Mitigation:* Never hard-code passwords or secret keys in source code. Use `.env` files listed in `.gitignore` and rely on **IAM Role** attached directly to the EC2 Instance Profile.
+* **Budget overrun risk:** Paid resources may be left running after work sessions. *Mitigation:* Configure **AWS Budgets** with a **10 USD** alert threshold and send immediate email alerts when cost exceeds the expected limit.
+* **API database connection failure during demo:** Cloud resources may have cold-start delay. *Mitigation:* Prepare a `warmup.sh` health-check script to start and verify RDS, EC2, and Redis 30 minutes before the official demo.
 
 ### 8. Expected Outcomes
-#### Technical Improvements: 
-Real-time data and analytics replace manual processes.  
-Scalable to 10-15 stations.
-#### Long-term Value
-1-year data foundation for AI research.  
-Reusable for future projects.
+
+* **Functional outcome:** A complete travel e-commerce application covering registration/login, smart hotel search filters, real-time booking, and an admin dashboard.
+* **Cloud technical outcomes:**
+  * Demonstrate **High Availability (HA):** Terminate one active server in the AWS Console during the demo while the system continues to operate without response failures.
+  * Demonstrate **Auto Scaling:** CloudWatch charts show CPU reaching the high-load threshold and automatically increasing the number of servers to handle Locust traffic.
+  * Demonstrate **Caching optimization:** API response time is reduced from about 150 ms to about 4 ms through distributed cache.

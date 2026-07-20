@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Workshop"
 date: 2024-01-01
 weight: 5
@@ -6,38 +6,32 @@ chapter: false
 pre: " <b> 5. </b> "
 ---
 
-# Triển khai hệ thống AWS OmniStay trên AWS
+# Deploying AWS OmniStay on AWS
 
-Phần Workshop ghi lại quá trình triển khai website đặt phòng khách sạn **AWS_OmniStay** lên Amazon Web Services theo từng bước thực hiện. Nội dung tập trung vào cách xây dựng hạ tầng, triển khai backend, triển khai frontend, cấu hình bảo mật, kiểm thử hệ thống và thu thập ảnh chụp màn hình làm bằng chứng.
+This Workshop section documents the process of deploying the **AWS_OmniStay** hotel booking website to Amazon Web Services step by step. The content focuses on infrastructure setup, backend deployment, frontend deployment, security configuration, system testing, and collecting screenshots as implementation evidence.
 
-Hệ thống được triển khai theo mô hình nhiều tầng:
+The system is deployed using a multi-tier architecture:
 
-- Frontend tĩnh được lưu trong Amazon S3 private bucket và phân phối qua Amazon CloudFront.
-- Backend ASP.NET Core Web API chạy trên Amazon EC2 trong private subnet.
-- Application Load Balancer nhận request từ CloudFront và chuyển tiếp đến backend.
-- Auto Scaling Group quản lý số lượng EC2 backend.
-- Amazon RDS MySQL lưu dữ liệu nghiệp vụ.
-- Amazon ElastiCache Redis/Valkey làm cache cho luồng tìm kiếm khách sạn.
-- AWS WAF, IAM, Security Group, Secrets Manager, Parameter Store và CloudWatch hỗ trợ bảo mật, cấu hình và vận hành.
+- The static frontend is stored in a private Amazon S3 bucket and distributed through Amazon CloudFront.
+- The ASP.NET Core Web API backend runs on Amazon EC2 instances in private subnets.
+- Application Load Balancer receives requests from CloudFront and forwards them to the backend.
+- Auto Scaling Group manages the number of backend EC2 instances.
+- Amazon RDS MySQL stores business data.
+- Amazon ElastiCache Redis/Valkey provides caching for hotel search flows.
+- AWS WAF, IAM, Security Groups, Secrets Manager, Parameter Store, and CloudWatch support security, configuration, and operations.
 
-> **Ảnh cần dán:** Sơ đồ kiến trúc tổng thể của hệ thống AWS_OmniStay. Nếu chưa có ảnh chính thức, có thể dán lại sơ đồ đã dùng ở phần 5.1.
+## Contents
 
-## Nội dung
+1. [Introduction](5.1-Workshop-overview/)
+2. [Prerequisites before deployment](5.2-Prerequiste/)
+3. [Build AWS network infrastructure](5.3-S3-vpc/)
+4. [Configure network security and access permissions](5.4-S3-onprem/)
+5. [Create data layer and system configuration](5.5-Policy/)
+6. [Deploy Backend API to AWS](5.6-Cleanup/)
+7. [Deploy Frontend to S3 and CloudFront](5.7-frontend-cloudfront/)
+8. [Configure WAF, monitoring, and alerts](5.8-waf-monitoring/)
+9. [Post-deployment system testing](5.9-system-testing/)
 
-1. [Giới thiệu](5.1-Workshop-overview/)
-2. [Chuẩn bị trước khi triển khai](5.2-Prerequiste/)
-3. [Xây dựng hạ tầng mạng trên AWS](5.3-S3-vpc/)
-4. [Cấu hình bảo mật mạng và quyền truy cập](5.4-S3-onprem/)
-5. [Tạo tầng dữ liệu và cấu hình hệ thống](5.5-Policy/)
-6. [Triển khai Backend API lên AWS](5.6-Cleanup/)
-7. [Triển khai Frontend lên S3 và CloudFront](5.7-frontend-cloudfront/)
-8. [Cấu hình WAF, giám sát và cảnh báo](5.8-waf-monitoring/)
-9. [Kiểm thử hệ thống sau triển khai](5.9-system-testing/)
+## Screenshot Note Convention
 
-## Quy ước ghi chú ảnh
-
-Trong từng bước triển khai, các vị trí cần bổ sung ảnh chụp màn hình sẽ được đánh dấu bằng dòng:
-
-> **Ảnh cần dán:** Mô tả màn hình cần chụp.
-
-Khi hoàn thiện báo cáo, thay các ghi chú này bằng ảnh chụp thực tế từ AWS Console, trình duyệt hoặc terminal.
+During the deployment steps, screenshot evidence is inserted directly below the related instruction. These screenshots are collected from the AWS Console, browser, and terminal to prove each implementation result.

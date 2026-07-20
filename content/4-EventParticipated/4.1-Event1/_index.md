@@ -6,121 +6,86 @@ chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
+## Reflection Report: "Automated Prompt Engineering: Enhancing LLM Output Quality"
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+### Event Purpose
 
-### Event Objectives
-
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+* Share effective communication techniques with Artificial Intelligence (AI).
+* Explain the importance of Prompt Engineering in cost and performance optimization.
+* Introduce the core components of a high-quality prompt.
+* Present advanced prompting techniques and workflow automation tools.
 
 ### Speakers
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+* **Nguyen Tuan Thinh** - DevOps/Cloud Engineer at First Cloud AI Journey.
 
-### Key Highlights
+### Highlighted Content
 
-#### Identifying the drawbacks of legacy application architecture
+#### The importance of Prompt Engineering
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+Using prompts that are too generic can lead to several issues:
 
-#### Transitioning to modern application architecture – Microservices
+* **Token waste:** Increases AI usage cost unnecessarily.
+* **Inconsistent output:** Vague instructions cause low-quality responses.
+* **Reduced productivity:** Users spend time adjusting prompts repeatedly instead of getting useful results quickly.
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+#### Key components of a great prompt
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+For AI to work accurately, a prompt should include 7 elements:
 
-#### Domain-Driven Design (DDD)
+1. **Role:** Set the model's role, such as "You are a career consultant."
+2. **Instruction:** Clearly state the task to perform.
+3. **Context:** Provide relevant background information.
+4. **Input Data:** Include the specific data that must be processed.
+5. **Output Format:** Define the output structure, such as JSON or Markdown.
+6. **Examples:** Provide sample outputs or few-shot examples.
+7. **Constraints:** Specify limits such as length, language, or rules to follow.
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
+#### Token Economics
 
-#### Event-Driven Architecture
+* Understand how AI pricing is calculated based on tokens, which are smaller units than words.
+* Distinguish between input token cost and output token cost to optimize budget.
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
+#### Advanced prompting techniques
 
-#### Compute Evolution
+* **Chain-of-Thought (CoT):** Guide AI to reason step by step for more logical results.
+* **Self-Consistency:** Run multiple reasoning paths and select the most common result.
+* **Tree-of-Thoughts (ToT):** Allow AI to explore multiple problem-solving directions.
+* **RAG (Retrieval-Augmented Generation):** Combine external data sources so AI can answer more accurately.
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
+#### Proptimizer tool
 
-#### Amazon Q Developer
+* Introduced a browser extension that helps optimize prompts on the web.
+* The system architecture is based on AWS services such as **Amazon Bedrock**, **AWS Lambda**, and **Amazon DynamoDB**.
 
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+### Lessons Learned
 
-### Key Takeaways
+#### Technical mindset
 
-#### Design Mindset
+* **Be Clear & Specific:** Always prioritize specific wording and direct instructions.
+* **Describe DOs, not DON'Ts:** Focus on what the AI should do instead of only listing restrictions.
+* **Separate data clearly:** Use delimiters to separate instructions, context, and input data.
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
+#### Optimization strategy
 
-#### Technical Architecture
+* Break complex requirements into smaller parts so AI can process them more effectively.
+* Accept "I don't know" answers from AI when needed to reduce hallucination.
 
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
+### Application to Study and Work
 
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
-
-### Applying to Work
-
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
+* Optimize prompts for writing test cases and analyzing business requirements.
+* Use CoT techniques to ask AI to solve complex programming logic in Java and Flutter.
+* Experiment with Proptimizer to work faster with documents in the browser.
 
 ### Event Experience
 
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
+* I gained deeper knowledge about how large language models operate.
+* I understood the AWS infrastructure behind modern AI applications through Solution Architecture diagrams.
+* The workshop provided many practical examples, from writing social media posts to improving self-introduction content for fresh graduates.
 
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
+#### Some photos from the event
 
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
+![Event photo 1](/images/ev1.jpg)
+![Event photo 2](/images/ev11.jpg)
 
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
-
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
-
-#### Some event photos
-*Add your event photos here*  
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+Overall, the event not only provided technical knowledge but also helped me change the way I think about application design, system modernization, and effective collaboration between teams.
