@@ -13,6 +13,12 @@ Dự án **AWS_OmniStay** là một ứng dụng web đặt phòng khách sạn 
 
 Bài workshop này sẽ hướng dẫn từng bước xây dựng, cấu hình và vận hành một hạ tầng phân tầng (N-tier Architecture) hoàn chỉnh nhằm chứng minh 3 tính chất nền tảng của Cloud Computing[cite: 11]:
 
+### Liên kết dự án
+
+- **Source code:** [AWS_OmniStay GitHub Repository](https://github.com/minhne198/AWS_OmniStay.git)
+- **Video demo:** [AWS_OmniStay Demo Video Folder](https://drive.google.com/drive/folders/1UG2iVwxWX2OBc7nDoLslqoLCqRZxY5_L?usp=sharing)
+- **Link sản phẩm:** [AWS_OmniStay Production Website](https://d1gm8xt8e0mar4.cloudfront.net/public/home.html)
+
 ### Workshop Objectives
 
 Workshop này hướng dẫn từng bước triển khai hệ thống **AWS_OmniStay** trên nền tảng Amazon Web Services (AWS), từ khâu chuẩn bị môi trường đến xây dựng hạ tầng, triển khai ứng dụng và đánh giá hiệu năng. Sau khi hoàn thành Workshop, người thực hiện sẽ có thể:

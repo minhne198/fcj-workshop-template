@@ -5,40 +5,46 @@ weight: 1
 chapter: false
 ---
 
-    
 # Internship Report
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
 
-### Student Information:
-&emsp; **Full Name:** Lại Vũ Hoàng Minh
+<div style="flex: 1; min-width: 300px;">
 
-&emsp; **Phone Number:** 0399044811 
+### Student Information
 
-&emsp; **Email:** Minhvip1982004@gmail.com
+| Attribute | Detailed Information |
+| :--- | :--- |
+| **Full Name** | Lại Vũ Hoàng Minh |
+| **Phone Number** | 0399044811 |
+| **Email** | Minhvip1982004@gmail.com |
+| **University** | Ho Chi Minh City University of Technology (HUTECH) |
+| **Major** | Information Technology |
+| **Class** | 22DTHH2 |
+| **Internship Company** | Amazon Web Services Vietnam Co., Ltd. |
+| **Internship Position** | FCJ Cloud Intern |
+| **Internship Duration** | From 17/04/2026 to 30/07/2026 |
 
-&emsp; **University:** Ho Chi Minh City University of Technology (HUTECH)
+</div>
 
-&emsp; **Major:** Information Technology
+<div style="flex: 0 0 180px; text-align: center; margin-top: 50px;">
+    <img src="/images/minhne.jpg" alt="Profile picture of Lại Vũ Hoàng Minh" style="width: 180px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+  </div>
 
-&emsp; **Class:** 22DTHH2
+</div>
 
-&emsp; **Internship Company:** Amazon Web Services Vietnam Co., Ltd.
+</div>
 
-&emsp; **Internship Position:** FCJ Cloud Intern
+---
 
-&emsp; **Internship Duration:** From 17/04/2026 to 30/07/2026
+## Report Content
 
-![Your profile picture](/images/minhne.jpg)
-
-### Report Content
-
-1.  [Worklog](1-Worklog/)
-2.  [Proposal](2-Proposal/)
-3.  [Translated Blogs](3-BlogsTranslated/)
-4.  [Events Participated](4-EventParticipated/)
-5.  [Workshop](5-Workshop/)
-6.  [Self-evaluation](6-Self-evaluation/)
-7.  [Sharing and Feedback](7-Feedback/)
+| No. | Report Section | Detail Link |
+| :---: | :--- | :--- |
+| 01 | **Worklog** | [View Worklog details](1-Worklog/) |
+| 02 | **Proposal** | [View Proposal details](2-Proposal/) |
+| 03 | **Translated Blogs** | [View translated Blogs list](3-BlogsTranslated/) |
+| 04 | **Events Participated** | [View Events list](4-EventParticipated/) |
+| 05 | **Workshop** | [View Workshop content](5-Workshop/) |
+| 06 | **Self-evaluation** | [View Self-evaluation section](6-Self-evaluation/) |
+| 07 | **Sharing and Feedback** | [View Sharing and Feedback section](7-Feedback/) |
