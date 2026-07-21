@@ -22,7 +22,7 @@ Trong bài viết này, mình chia sẻ 7 kinh nghiệm thực tế giúp tối 
 Khi mới học AWS, mình từng khá choáng ngợp trước số lượng dịch vụ mà nền tảng này cung cấp. Vì muốn kiến trúc trông "chuyên nghiệp" hơn, mình từng nghĩ rằng hệ thống phải có CloudFront, AWS WAF, Auto Scaling, NAT Gateway hay Amazon ElastiCache ngay từ đầu.
 
 Tuy nhiên, với các ứng dụng nhỏ hoặc đồ án sinh viên, việc sử dụng quá nhiều dịch vụ không mang lại nhiều giá trị mà còn làm tăng chi phí và khiến việc quản lý hệ thống trở nên phức tạp hơn.
-![alt text](image.png)
+![alt text](../../../3-blogstranslated/3.3-blog3/image.png)
 > **Hình 1. So sánh kiến trúc sử dụng quá nhiều dịch vụ và kiến trúc tối giản theo nguyên tắc "Start Simple, Scale Later".**
 
 > **Best Practice:** Chỉ triển khai các dịch vụ thực sự đáp ứng yêu cầu hiện tại của hệ thống. Khi lượng người dùng tăng hoặc xuất hiện nhu cầu mới, hãy mở rộng kiến trúc theo từng giai đoạn.
@@ -62,7 +62,7 @@ Việc kiểm soát chi phí nên được thực hiện thường xuyên thay v
 AWS Budgets cho phép thiết lập ngân sách và gửi email cảnh báo khi chi phí vượt quá ngưỡng đã đặt. Trong khi đó, AWS Cost Explorer cung cấp biểu đồ trực quan giúp theo dõi chi phí theo từng dịch vụ, từng tài khoản hoặc từng khoảng thời gian.
 
 Nhờ hai công cụ này, mình có thể nhanh chóng phát hiện dịch vụ nào đang tiêu tốn nhiều chi phí để điều chỉnh kịp thời.
-![alt text](image-1.png)
+![alt text](../../../3-blogstranslated/3.3-blog3/image-1.png)
 > **Hình 2. Quy trình theo dõi và quản lý chi phí bằng AWS Budgets và AWS Cost Explorer.**
 
 > **Best Practice:** Thiết lập AWS Budgets ngay từ khi bắt đầu dự án và thường xuyên theo dõi chi phí bằng AWS Cost Explorer.
@@ -96,7 +96,7 @@ Dung lượng lưu trữ tăng dần theo thời gian cũng là nguyên nhân kh
 Chi phí của cùng một dịch vụ AWS có thể khác nhau giữa các Region. Vì vậy, việc lựa chọn Region phù hợp không chỉ giúp giảm độ trễ mà còn góp phần tối ưu chi phí.
 
 Bên cạnh đó, mình nhận ra rằng một kiến trúc đơn giản với Amazon EC2, Amazon RDS, Amazon S3 và Application Load Balancer đã đủ đáp ứng phần lớn các ứng dụng nhỏ. Chỉ khi hệ thống phát triển và có nhiều người dùng hơn mới cần bổ sung Auto Scaling, CloudFront hay AWS WAF.
-![alt text](image-2.png)
+![alt text](../../../3-blogstranslated/3.3-blog3/image-2.png)
 > **Hình 3. Quy trình tối ưu tài nguyên và chi phí trong suốt vòng đời triển khai hệ thống trên AWS.**
 
 > **Best Practice:** Áp dụng nguyên tắc **Start Simple, Scale Later** và chỉ mở rộng hệ thống khi có nhu cầu thực tế.

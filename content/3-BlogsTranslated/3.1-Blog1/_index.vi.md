@@ -92,7 +92,7 @@ Các máy chủ EC2 cũng được triển khai trên cả hai Availability Zone
 Đối với cơ sở dữ liệu, Amazon RDS được triển khai theo mô hình Multi-AZ nhằm tăng tính sẵn sàng và giảm thời gian gián đoạn khi xảy ra sự cố.
 
 ---
-![alt text](image.png)
+![alt text](../../../3-blogstranslated/3.1-blog1/image.png)
 > Hình 2. Luồng xử lý request trong hệ thống.
 ## Đặt máy chủ ứng dụng trong Private Subnet
 
@@ -143,7 +143,7 @@ Trong mô hình này, nhiều lớp bảo vệ được áp dụng để giảm 
 
 Tiếp theo, **Security Group** được sử dụng để kiểm soát kết nối giữa các thành phần. Chỉ Application Load Balancer mới có quyền gửi yêu cầu đến Amazon EC2 và chỉ EC2 mới được phép kết nối đến Amazon RDS. Việc giới hạn kết nối theo Security Group giúp giảm đáng kể nguy cơ truy cập trái phép.
 
-![alt text](image-1.png)
+![alt text](../../../3-blogstranslated/3.1-blog1/image-1.png)
 > Hình 3. Luồng truy cập giữa Internet và các tài nguyên trong VPC.
 
 Ngoài ra, việc sử dụng **IAM Role** thay vì Access Key giúp loại bỏ nguy cơ lộ thông tin xác thực trong mã nguồn hoặc trên máy chủ.

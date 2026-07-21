@@ -21,7 +21,7 @@ Dưới đây là những sai lầm phổ biến mà mình từng gặp hoặc t
 
 Khi mới làm quen với Amazon VPC, mình từng nghĩ rằng đặt Amazon EC2 và Amazon RDS trong Public Subnet sẽ thuận tiện hơn vì có thể truy cập trực tiếp từ Internet để kiểm tra và cấu hình.
 
-![alt text](image.png)
+![alt text](../../../3-blogstranslated/3.2-blog2/image.png)
 > **Hình 1. So sánh kiến trúc triển khai không an toàn và kiến trúc phân tách Public/Private Subnet theo khuyến nghị của AWS.**
 Thực tế, đây là một rủi ro bảo mật lớn. Public Subnet chỉ nên chứa các thành phần cần giao tiếp trực tiếp với Internet như Application Load Balancer hoặc NAT Gateway. Các tài nguyên quan trọng như Amazon EC2 và Amazon RDS nên được triển khai trong Private Subnet để hạn chế truy cập trực tiếp từ bên ngoài.
 
@@ -32,7 +32,7 @@ Thực tế, đây là một rủi ro bảo mật lớn. Public Subnet chỉ nê
 ### 2. Mở Security Group quá rộng
 
 Một lỗi khá phổ biến là cấu hình Security Group với địa chỉ nguồn `0.0.0.0/0` cho nhiều cổng dịch vụ chỉ để hệ thống hoạt động nhanh hơn.
-![alt text](image-1.png)
+![alt text](../../../3-blogstranslated/3.2-blog2/image-1.png)
 > **Hình 2. So sánh cấu hình Security Group không an toàn và cấu hình theo nguyên tắc Least Privilege.**
 Việc cấu hình như vậy giúp việc kiểm tra trở nên thuận tiện nhưng cũng làm tăng đáng kể nguy cơ bị truy cập trái phép. Thay vào đó, mỗi dịch vụ chỉ nên cho phép đúng đối tượng cần thiết kết nối. Ví dụ: Application Load Balancer nhận lưu lượng từ Internet, Amazon EC2 chỉ cho phép kết nối từ Security Group của Load Balancer, và Amazon RDS chỉ cho phép kết nối từ Security Group của EC2.
 
@@ -43,7 +43,7 @@ Việc cấu hình như vậy giúp việc kiểm tra trở nên thuận tiện 
 ### 3. Sử dụng Access Key thay cho IAM Role
 
 Lúc đầu mình từng nghĩ rằng lưu Access Key và Secret Access Key trong file cấu hình là cách đơn giản nhất để ứng dụng truy cập Amazon S3.
-![alt text](image-2.png)
+![alt text](../../../3-blogstranslated/3.2-blog2/image-2.png)
 > **Hình 3. So sánh việc lưu Access Key trong mã nguồn và sử dụng IAM Role cho Amazon EC2.**
 Tuy nhiên, nếu vô tình công khai mã nguồn hoặc chia sẻ dự án, các khóa truy cập này có thể bị lộ và dẫn đến việc tài khoản AWS bị sử dụng trái phép. Đối với các dịch vụ chạy trên AWS như Amazon EC2, giải pháp phù hợp hơn là sử dụng IAM Role. IAM Role sẽ tự động cung cấp thông tin xác thực tạm thời để ứng dụng truy cập các dịch vụ AWS mà không cần lưu khóa truy cập cố định trong mã nguồn.
 
