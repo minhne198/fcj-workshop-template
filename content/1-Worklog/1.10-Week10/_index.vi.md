@@ -17,12 +17,12 @@ pre: " <b> 1.10. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2 | - Tìm hiểu tổng quan về **Data Lake (Lab 000035)**: Kiến trúc lưu trữ tập trung và vai trò của S3 trong hệ thống dữ liệu lớn.<br>- Thực hành tạo **AWS Glue Database** và cấu hình Crawler để tự động lập danh mục dữ liệu. | 15/06/2026 | 15/06/2026 | Lab 000035 |
-| 3 | - Thực hành toàn bộ quy trình **ETL với AWS Glue**: Tạo Glue Job, làm sạch dữ liệu và lưu đầu ra vào S3.<br>- Khám phá Glue Studio để thiết kế ETL pipeline trực quan, không cần code. | 16/06/2026 | 16/06/2026 | Lab 000035 & 000060 |
-| 4 | - Truy vấn dữ liệu trực tiếp trên S3 bằng **Amazon Athena** với SQL chuẩn, không cần cơ sở dữ liệu riêng.<br>- Trực quan hóa kết quả phân tích bằng **Amazon QuickSight**: Tạo Dataset, biểu đồ và Dashboard báo cáo. | 17/06/2026 | 17/06/2026 | Lab 000035 |
-| 5 | - Thực hành **IAM Role & Conditions (Lab 000043)**: Cấu hình điều kiện truy cập theo IP Address và thời gian đăng nhập.<br>- Kiểm thử **Switch Role** và đánh giá hiệu quả mô hình kiểm soát truy cập động trong doanh nghiệp. | 18/06/2026 | 18/06/2026 | Lab 000043 |
-| 6 | - Khám phá tích hợp **Generative AI (Lab 000039)**: Cấu hình **DynamoDB Zero-ETL Integration** để đồng bộ dữ liệu sang OpenSearch.<br>- Tìm hiểu Vector Embedding và Semantic Search bằng **Amazon Bedrock** và tiềm năng ứng dụng AI trong doanh nghiệp. | 19/06/2026 | 19/06/2026 | Lab 000039 |
-| 7 | - Thực hành **AWS Glue DataBrew (Lab 000072)**: Làm sạch dữ liệu, xử lý Missing Values và xây dựng Recipe tự động hóa.<br>- Tìm hiểu kiến trúc **Amazon Redshift** (Data Warehouse): Tạo Cluster, nạp dữ liệu và chạy truy vấn phân tích SQL. | 20/06/2026 | 20/06/2026 | Lab 000072 & 000073 |
+| 2 | - Tìm hiểu Data Lake và vai trò của S3 trong hệ thống dữ liệu lớn<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo AWS Glue Database<br>&nbsp;&nbsp;+ Cấu hình Glue Crawler<br>&nbsp;&nbsp;+ Tự động lập danh mục dữ liệu | 15/06/2026 | 15/06/2026 | Lab 000035 |
+| 3 | - Tìm hiểu quy trình ETL với AWS Glue<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo Glue Job<br>&nbsp;&nbsp;+ Làm sạch dữ liệu<br>&nbsp;&nbsp;+ Lưu dữ liệu đầu ra vào S3<br>&nbsp;&nbsp;+ Thiết kế ETL pipeline bằng Glue Studio | 16/06/2026 | 16/06/2026 | Lab 000035 & 000060 |
+| 4 | - Tìm hiểu Amazon Athena và Amazon QuickSight<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Truy vấn dữ liệu trên S3 bằng Athena<br>&nbsp;&nbsp;+ Tạo QuickSight Dataset<br>&nbsp;&nbsp;+ Tạo biểu đồ phân tích<br>&nbsp;&nbsp;+ Tạo Dashboard báo cáo | 17/06/2026 | 17/06/2026 | Lab 000035 |
+| 5 | - Tìm hiểu IAM Role, IAM Conditions và Switch Role<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Cấu hình điều kiện truy cập theo IP Address<br>&nbsp;&nbsp;+ Cấu hình điều kiện theo thời gian đăng nhập<br>&nbsp;&nbsp;+ Kiểm thử Switch Role<br>&nbsp;&nbsp;+ Đánh giá mô hình kiểm soát truy cập động | 18/06/2026 | 18/06/2026 | Lab 000043 |
+| 6 | - Tìm hiểu Generative AI integration, Vector Embedding và Semantic Search<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Cấu hình DynamoDB Zero-ETL Integration sang OpenSearch<br>&nbsp;&nbsp;+ Tìm hiểu Amazon Bedrock<br>&nbsp;&nbsp;+ Ghi chú tiềm năng ứng dụng AI trong doanh nghiệp | 19/06/2026 | 19/06/2026 | Lab 000039 |
+| 7 | - Tìm hiểu AWS Glue DataBrew và Amazon Redshift<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Làm sạch dữ liệu bằng DataBrew<br>&nbsp;&nbsp;+ Xử lý Missing Values<br>&nbsp;&nbsp;+ Xây dựng Recipe tự động hóa<br>&nbsp;&nbsp;+ Tạo Redshift Cluster<br>&nbsp;&nbsp;+ Nạp dữ liệu và chạy truy vấn phân tích SQL | 20/06/2026 | 20/06/2026 | Lab 000072 & 000073 |
 
 ### Kết quả đạt được tuần 10:
 

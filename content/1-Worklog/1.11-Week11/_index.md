@@ -17,12 +17,12 @@ pre: " <b> 1.11. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| Mon | - Analyze project requirements and design the overall system architecture on **Draw.io**.<br>- Identify all required AWS services: VPC, EC2, ALB, ASG, RDS, ElastiCache, S3, CloudFront, WAF, CloudWatch, SNS. | 22/06/2026 | 22/06/2026 | Project Document |
-| Tue | - **Phase 1 - Network Infrastructure:** Create VPC (`10.0.0.0/16`), divide into 6 Subnets (2 Public + 4 Private), attach Internet Gateway.<br>- Configure NAT Gateways for 2 AZs, set up Route Tables for Public and Private Subnets. | 23/06/2026 | 23/06/2026 | AWS Console |
-| Wed | - Create 4 Security Groups (SG-ALB, SG-EC2, SG-RDS, SG-Redis) following the principle of minimal attack surface.<br>- Create **IAM Role** `EC2-HotelAPI-Role` with necessary policies: S3 Read, CloudWatch Agent, Secrets Manager. | 24/06/2026 | 24/06/2026 | AWS Console |
-| Thu | - **Phase 2 - Database Initialization:** Create **Amazon RDS MySQL 8.0** (`db.t3.micro`) in Private Subnet with KMS encryption enabled.<br>- Store DB password securely in **AWS Secrets Manager**. | 25/06/2026 | 25/06/2026 | AWS Console |
-| Fri | - Create **Amazon ElastiCache Redis 7.x** (`cache.t3.micro`) in the Private DB Subnet.<br>- Design **Database Schema**: Tables for Users, Hotels, RoomTypes, Bookings, Reviews with proper foreign key relationships. Run SQL creation scripts via DBeaver. | 26/06/2026 | 26/06/2026 | AWS Console |
-| Sat | - **Phase 3 - Backend API Start:** Initialize ASP.NET Core 8 Web API project, configure Entity Framework Core + Pomelo MySQL driver.<br>- Write `AuthController.cs` (Register/Login + JWT Token) and `SearchService.cs` (with Redis Cache integration for search results). | 27/06/2026 | 27/06/2026 | Visual Studio 2022 |
+| Mon | - Learn about AWS_OmniStay project requirements and overall architecture<br>- **Practice:**<br>&nbsp;&nbsp;+ Analyze project requirements<br>&nbsp;&nbsp;+ Draw system architecture on Draw.io<br>&nbsp;&nbsp;+ Identify required AWS services: VPC, EC2, ALB, ASG, RDS, ElastiCache, S3, CloudFront, WAF, CloudWatch, SNS | 22/06/2026 | 22/06/2026 | Project Document |
+| Tue | - Phase 1 - Learn about N-tier network infrastructure<br>- **Practice:**<br>&nbsp;&nbsp;+ Create VPC `10.0.0.0/16`<br>&nbsp;&nbsp;+ Divide 6 Subnets: 2 Public and 4 Private<br>&nbsp;&nbsp;+ Attach Internet Gateway<br>&nbsp;&nbsp;+ Configure NAT Gateways for 2 AZs<br>&nbsp;&nbsp;+ Set up Route Tables for Public/Private Subnets | 23/06/2026 | 23/06/2026 | AWS Console |
+| Wed | - Learn about Security Groups and IAM Role for application layer<br>- **Practice:**<br>&nbsp;&nbsp;+ Create SG-ALB<br>&nbsp;&nbsp;+ Create SG-EC2<br>&nbsp;&nbsp;+ Create SG-RDS<br>&nbsp;&nbsp;+ Create SG-Redis<br>&nbsp;&nbsp;+ Create IAM Role `EC2-HotelAPI-Role` with S3 Read, CloudWatch Agent, Secrets Manager permissions | 24/06/2026 | 24/06/2026 | AWS Console |
+| Thu | - Phase 2 - Learn about Database layer with Amazon RDS and Secrets Manager<br>- **Practice:**<br>&nbsp;&nbsp;+ Create Amazon RDS MySQL 8.0 in Private Subnet<br>&nbsp;&nbsp;+ Enable KMS encryption<br>&nbsp;&nbsp;+ Store DB password in AWS Secrets Manager | 25/06/2026 | 25/06/2026 | AWS Console |
+| Fri | - Learn about Cache layer and Database Schema for booking system<br>- **Practice:**<br>&nbsp;&nbsp;+ Create Amazon ElastiCache Redis 7.x in Private DB Subnet<br>&nbsp;&nbsp;+ Design Users, Hotels, RoomTypes, Bookings, Reviews tables<br>&nbsp;&nbsp;+ Run SQL table-creation script with DBeaver | 26/06/2026 | 26/06/2026 | AWS Console |
+| Sat | - Phase 3 - Learn about Backend API with ASP.NET Core 8<br>- **Practice:**<br>&nbsp;&nbsp;+ Initialize ASP.NET Core 8 Web API<br>&nbsp;&nbsp;+ Configure Entity Framework Core and Pomelo MySQL driver<br>&nbsp;&nbsp;+ Write `AuthController.cs` for Register/Login and JWT Token<br>&nbsp;&nbsp;+ Write `SearchService.cs` with Redis Cache integration | 27/06/2026 | 27/06/2026 | Visual Studio 2022 |
 
 ### Week 11 Achievements:
 
@@ -47,3 +47,9 @@ pre: " <b> 1.11. </b> "
 {{% notice success %}}
 **Summary:** Week 11 completed the entire AWS infrastructure foundation for the capstone project. The system architecture is designed professionally following the 3-tier model (Presentation - Application - Data) with full HA features and security aligned with industry standards.
 {{% /notice %}}
+
+### Week 11 practice screenshots:
+
+![AWS OmniStay architecture](/images/aws-omnistay-architecture.png)
+
+![Week 11 practice - 532](/images/532.jpg)

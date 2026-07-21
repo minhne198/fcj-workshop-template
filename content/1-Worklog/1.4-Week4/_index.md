@@ -17,12 +17,12 @@ pre: " <b> 1.4. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| Mon | - Create a **Key Pair** and use a CloudFormation Template to quickly provision a complete network system including VPC, Subnets, and Security Groups.<br>- Configure detailed Security Groups for Windows servers in a Multi-AZ environment. | 04/05/2026 | 04/05/2026 | AWS Study Group |
-| Tue | - Research and configure **Route 53 Resolver Inbound/Outbound Endpoints**.<br>- Create Forwarding Rules to synchronize DNS resolution between the Cloud and On-premises infrastructure. | 05/05/2026 | 05/05/2026 | AWS Networking Guide |
-| Wed | - Initiate a **VPC Peering Connection** between 2 VPCs for inter-network communication without traversing the public internet.<br>- Configure bidirectional route tables to allow traffic to flow through the Peering connection. | 06/05/2026 | 06/05/2026 | AWS Documentation |
-| Thu | - Test cross-network traffic security through NACLs and Security Groups.<br>- Deploy a simulated **Microsoft AD** and set up cross-domain DNS in a Hybrid model. | 07/05/2026 | 07/05/2026 | AWS Documentation |
-| Fri | - Research the **AWS Transit Gateway** architecture: Hub-and-spoke topology and benefits over pure VPC Peering.<br>- Understand how the TGW Route Table manages traffic between multiple Attachments. | 08/05/2026 | 08/05/2026 | AWS Module 02 |
-| Sat | - Consolidate lab screenshots, review all CloudFormation, Route 53, and VPC Peering configurations.<br>- Study EC2 Instance Types and when to choose Graviton chips for cost optimization. | 09/05/2026 | 09/05/2026 | Personal |
+| Mon | - Learn about AWS CloudFormation and Multi-AZ network infrastructure<br>- **Practice:**<br>&nbsp;&nbsp;+ Create Key Pair<br>&nbsp;&nbsp;+ Deploy VPC, Subnets, and Security Groups with CloudFormation Template<br>&nbsp;&nbsp;+ Configure Security Groups for Windows servers | 04/05/2026 | 04/05/2026 | AWS Study Group |
+| Tue | - Learn about Route 53 Resolver and Hybrid DNS<br>- **Practice:**<br>&nbsp;&nbsp;+ Configure Inbound Endpoint<br>&nbsp;&nbsp;+ Configure Outbound Endpoint<br>&nbsp;&nbsp;+ Create Forwarding Rules to synchronize DNS between Cloud and On-premises | 05/05/2026 | 05/05/2026 | AWS Networking Guide |
+| Wed | - Learn about VPC Peering Connection<br>- **Practice:**<br>&nbsp;&nbsp;+ Create VPC Peering Connection between 2 VPCs<br>&nbsp;&nbsp;+ Configure bidirectional Route Tables<br>&nbsp;&nbsp;+ Verify traffic through the Peering Connection | 06/05/2026 | 06/05/2026 | AWS Documentation |
+| Thu | - Learn about cross-network traffic security and Hybrid DNS model<br>- **Practice:**<br>&nbsp;&nbsp;+ Test NACLs and Security Groups between networks<br>&nbsp;&nbsp;+ Deploy a simulated Microsoft AD environment<br>&nbsp;&nbsp;+ Set up cross-domain DNS in the Hybrid model | 07/05/2026 | 07/05/2026 | AWS Documentation |
+| Fri | - Learn about AWS Transit Gateway (TGW)<br>- **Practice:**<br>&nbsp;&nbsp;+ Analyze hub-and-spoke architecture<br>&nbsp;&nbsp;+ Compare TGW with VPC Peering<br>&nbsp;&nbsp;+ Learn how TGW Route Tables control traffic between Attachments | 08/05/2026 | 08/05/2026 | AWS Module 02 |
+| Sat | - Learn about EC2 Instance Types and Graviton chips<br>- **Practice:**<br>&nbsp;&nbsp;+ Review CloudFormation configurations<br>&nbsp;&nbsp;+ Review Route 53 Resolver and VPC Peering<br>&nbsp;&nbsp;+ Consolidate Week 4 lab screenshots | 09/05/2026 | 09/05/2026 | Personal |
 
 ### Week 4 Achievements:
 
@@ -39,3 +39,9 @@ pre: " <b> 1.4. </b> "
 {{% notice info %}}
 **Summary:** Week 4 shifts the mindset from managing individual resources to designing large-scale systems, connecting multiple environments (Cloud + On-premise), and automating infrastructure — core skills for a professional Cloud Engineer.
 {{% /notice %}}
+
+### Week 4 practice screenshots:
+
+![Configure Week 4 VPC infrastructure](/images/worklog/Screenshot%202026-05-20%20152142.jpg)
+
+![Create VPC with CloudFormation](/images/worklog/Tao_VPCs.png.jpg)

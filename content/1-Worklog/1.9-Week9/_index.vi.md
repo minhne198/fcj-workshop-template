@@ -17,12 +17,12 @@ pre: " <b> 1.9. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2 | - Hoàn thiện **AWS KMS (Lab 000033)**: Tạo CMK, cấu hình mã hóa Server-Side Encryption (SSE-KMS) cho S3 Bucket.<br>- Phân quyền truy cập khóa mã hóa thông qua IAM Policy kết hợp với Key Policy. | 08/06/2026 | 08/06/2026 | Lab 000033 |
-| 3 | - Cấu hình **AWS CloudTrail** để ghi nhận toàn bộ hoạt động API của tài khoản vào S3 Bucket.<br>- Thực hiện truy vấn nhật ký bằng **Amazon Athena** và kiểm tra khả năng phát hiện hành vi truy cập bất thường. | 09/06/2026 | 09/06/2026 | Lab 000033 |
-| 4 | - Nghiên cứu nền tảng cơ sở dữ liệu: Primary Key, Foreign Key, Index, sự khác biệt giữa mô hình **SQL (RDBMS)** và **NoSQL**.<br>- Phân tích mô hình xử lý dữ liệu **OLTP** (giao dịch) và **OLAP** (phân tích) trong hệ thống doanh nghiệp. | 10/06/2026 | 10/06/2026 | AWS Database Overview |
-| 5 | - Thực hành với **Amazon RDS**: Tạo DB Instance, cấu hình Multi-AZ Deployment và thực hành Automated Backup.<br>- Khám phá **Amazon Aurora** và lợi thế so với RDS MySQL/PostgreSQL thông thường (hiệu năng, khả năng mở rộng). | 11/06/2026 | 11/06/2026 | AWS RDS & Aurora |
-| 6 | - Thực hành **IAM nâng cao (Lab 000044)**: Tạo User, Group, IAM Role và thiết lập Switch Role để thay đổi quyền linh hoạt.<br>- Triển khai **IAM Role cho EC2 (Lab 000048)** để truy cập S3 mà không cần lưu Access Key trong ứng dụng. | 12/06/2026 | 12/06/2026 | Lab 000044 & 000048 |
-| 7 | - Tìm hiểu kiến trúc **Data Lake trên AWS**: S3 làm nền tảng lưu trữ tập trung cho dữ liệu có cấu trúc và phi cấu trúc.<br>- Nghiên cứu vai trò của từng tầng trong kiến trúc Data Lake: Ingestion → Storage → Catalog → Analytics. | 13/06/2026 | 13/06/2026 | AWS Analytics Docs |
+| 2 | - Tìm hiểu AWS KMS và Server-Side Encryption (SSE-KMS)<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo Customer Managed Key (CMK)<br>&nbsp;&nbsp;+ Cấu hình SSE-KMS cho S3 Bucket<br>&nbsp;&nbsp;+ Phân quyền truy cập bằng IAM Policy và Key Policy | 08/06/2026 | 08/06/2026 | Lab 000033 |
+| 3 | - Tìm hiểu AWS CloudTrail và Amazon Athena<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Cấu hình CloudTrail ghi log API vào S3 Bucket<br>&nbsp;&nbsp;+ Tạo bảng truy vấn log bằng Athena<br>&nbsp;&nbsp;+ Kiểm tra hành vi truy cập bất thường | 09/06/2026 | 09/06/2026 | Lab 000033 |
+| 4 | - Tìm hiểu nền tảng cơ sở dữ liệu<br>&nbsp;&nbsp;+ Primary Key<br>&nbsp;&nbsp;+ Foreign Key<br>&nbsp;&nbsp;+ Index<br>&nbsp;&nbsp;+ SQL (RDBMS) và NoSQL<br>- Tìm hiểu mô hình xử lý dữ liệu OLTP và OLAP | 10/06/2026 | 10/06/2026 | AWS Database Overview |
+| 5 | - Tìm hiểu Amazon RDS và Amazon Aurora<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo RDS DB Instance<br>&nbsp;&nbsp;+ Cấu hình Multi-AZ Deployment<br>&nbsp;&nbsp;+ Kiểm thử Automated Backup<br>&nbsp;&nbsp;+ So sánh Aurora với RDS MySQL/PostgreSQL | 11/06/2026 | 11/06/2026 | AWS RDS & Aurora |
+| 6 | - Tìm hiểu IAM nâng cao và IAM Role cho EC2<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo IAM User<br>&nbsp;&nbsp;+ Tạo IAM Group<br>&nbsp;&nbsp;+ Tạo IAM Role<br>&nbsp;&nbsp;+ Thiết lập Switch Role<br>&nbsp;&nbsp;+ Gắn IAM Role cho EC2 để truy cập S3 không cần Access Key | 12/06/2026 | 12/06/2026 | Lab 000044 & 000048 |
+| 7 | - Tìm hiểu kiến trúc Data Lake trên AWS<br>&nbsp;&nbsp;+ Ingestion<br>&nbsp;&nbsp;+ Storage<br>&nbsp;&nbsp;+ Catalog<br>&nbsp;&nbsp;+ Analytics<br>- Ghi chú vai trò của S3 trong lưu trữ dữ liệu có cấu trúc và phi cấu trúc | 13/06/2026 | 13/06/2026 | AWS Analytics Docs |
 
 ### Kết quả đạt được tuần 9:
 

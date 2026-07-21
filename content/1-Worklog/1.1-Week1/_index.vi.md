@@ -17,11 +17,11 @@ pre: " <b> 1.1. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2 | - Tìm hiểu tổng quan về AWS: Kiến trúc hạ tầng toàn cầu, các khái niệm Region, Availability Zones (AZs), Edge Locations.<br>- Nghiên cứu triết lý vận hành của AWS và vẽ ra lộ trình học tập để trở thành Cloud Engineer. | 17/04/2026 | 17/04/2026 | AWS Study Group |
-| 3 | - Cài đặt và thiết lập môi trường làm việc chuyên nghiệp với **Visual Studio Code**, tích hợp các extensions hữu ích.<br>- Học cú pháp **Markdown** từ cơ bản đến nâng cao để áp dụng vào việc viết nội dung, tài liệu cho Workshop. | 18/04/2026 | 18/04/2026 | Hugo/Markdown Guide |
-| 4 | - Thực hành vẽ sơ đồ kiến trúc hệ thống đám mây sử dụng công cụ **Draw.io** với các icon chuẩn của AWS.<br>- Tìm hiểu các nguyên tắc tối ưu hóa chi phí (Cost Optimization) trong quá trình thiết kế hệ thống trên AWS. | 19/04/2026 | 19/04/2026 | Draw.io AWS Icons |
-| 5 | - Khởi tạo tài khoản AWS Free Tier và thực hành thao tác bảo mật, quản lý các dịch vụ cơ bản.<br>- Áp dụng quy chuẩn thiết kế hệ thống tối ưu (AWS Well-Architected Framework) vào các bài lab thực tế. | 20/04/2026 | 20/04/2026 | AWS Workshop |
-| 6 | - Triển khai và hoàn thiện dự án cá nhân đầu tiên.<br>- Viết báo cáo tổng kết, xuất bản lên trang web tài liệu cá nhân sử dụng framework Hugo. | 24/04/2026 | 24/04/2026 | Cá nhân |
+| 2 | - Làm quen với các thành viên FCAJ<br>- Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập | 17/04/2026 | 17/04/2026 | AWS Study Group |
+| 3 | - Tìm hiểu AWS và các loại dịch vụ<br>&nbsp;&nbsp;+ Compute<br>&nbsp;&nbsp;+ Storage<br>&nbsp;&nbsp;+ Networking<br>&nbsp;&nbsp;+ Database | 18/04/2026 | 18/04/2026 | Hugo/Markdown Guide |
+| 4 | - Tạo AWS Free Tier account<br>- Tìm hiểu AWS Budgets & Support | 19/04/2026 | 19/04/2026 | Draw.io AWS Icons |
+| 5 | - Tìm hiểu AWS Identity and Access Management (IAM)<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo IAM User<br>&nbsp;&nbsp;+ Tạo IAM Group<br>&nbsp;&nbsp;+ Tạo IAM Role | 20/04/2026 | 20/04/2026 | AWS Workshop |
+| 6 | - **Thực hành:**<br>&nbsp;&nbsp;+ Tạo 4 loại Budget:<br>&nbsp;&nbsp;&nbsp;&nbsp;_ Cost Budget<br>&nbsp;&nbsp;&nbsp;&nbsp;_ Usage Budget<br>&nbsp;&nbsp;&nbsp;&nbsp;_ RI Budget<br>&nbsp;&nbsp;&nbsp;&nbsp;_ Savings Plans Budget<br>&nbsp;&nbsp;+ Làm 5 nhiệm vụ nhận 200 credit | 24/04/2026 | 24/04/2026 | Cá nhân |
 
 ### Kết quả đạt được tuần 1:
 
@@ -39,3 +39,11 @@ pre: " <b> 1.1. </b> "
 {{% notice success %}}
 **Tóm tắt:** Tuần 1 là bước đệm quan trọng giúp chuyển hóa những kiến thức từ lý thuyết thuần túy sang các kỹ năng thực thi chuyên sâu, tạo một nền tảng vững chắc và định hướng rõ ràng để trở thành một Cloud Engineer chuyên nghiệp trong tương lai.
 {{% /notice %}}
+
+### Hình ảnh thực hành tuần 1:
+
+![Tạo IAM User, Group và Role](/images/worklog/GroupUser.png)
+
+![Hoàn thành nhiệm vụ nhận credit](/images/worklog/1.jpg)
+
+![Thực hành tuần 1 - 523](/images/523.jpg)

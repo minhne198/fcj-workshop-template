@@ -17,12 +17,12 @@ pre: " <b> 1.5. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| Mon | - Use CloudFormation to provision 4 VPCs and sample servers within each VPC.<br>- Set up **AWS Transit Gateway**, create Attachments, and plan the TGW route tables. | 11/05/2026 | 11/05/2026 | AWS Module 02 |
-| Tue | - Configure routing in each VPC to point traffic towards the TGW.<br>- Use **Reachability Analyzer** to test connectivity and analyze packet flow between Private Subnets. | 12/05/2026 | 12/05/2026 | AWS Module 02 |
-| Wed | - Study EC2 Instance Types, the advantages of **ARM Graviton** chips vs. Intel/AMD, and the **Nitro** virtualization system.<br>- Differentiate between Full vs. Incremental Snapshot mechanisms and their practical applications. | 13/05/2026 | 13/05/2026 | AWS Module 03 |
-| Thu | - Practice configuring **User Data** to automatically install a Web Server (Apache/Nginx) on first EC2 boot.<br>- Experiment with querying **Instance Metadata** via the internal IP address `169.254.169.254`. | 14/05/2026 | 14/05/2026 | AWS Module 03 |
-| Fri | - Explore the **Auto Scaling Group** mechanism: Scale-out/scale-in conditions based on CPU metrics.<br>- Create the first **Amazon S3 Bucket** and practice basic upload/download object operations. | 15/05/2026 | 15/05/2026 | AWS Module 03 |
-| Sat | - Compare performance and durability between **EBS** and **Instance Store**; choose the right type based on workload.<br>- Clean up resources: Delete TGW Attachments → TGW → CloudFormation Stack in the correct order to avoid unwanted charges. | 16/05/2026 | 16/05/2026 | Personal |
+| Mon | - Learn about Hub-and-Spoke networking with AWS Transit Gateway<br>- **Practice:**<br>&nbsp;&nbsp;+ Use CloudFormation to create 4 VPCs<br>&nbsp;&nbsp;+ Create sample servers in each VPC<br>&nbsp;&nbsp;+ Create Transit Gateway Attachments<br>&nbsp;&nbsp;+ Plan TGW route tables | 11/05/2026 | 11/05/2026 | AWS Module 02 |
+| Tue | - Learn about routing through Transit Gateway<br>- **Practice:**<br>&nbsp;&nbsp;+ Configure each VPC Route Table to point to TGW<br>&nbsp;&nbsp;+ Use Reachability Analyzer to test connectivity<br>&nbsp;&nbsp;+ Analyze packet flow between Private Subnets | 12/05/2026 | 12/05/2026 | AWS Module 02 |
+| Wed | - Learn about EC2 Instance Types, Graviton, Nitro, and Snapshots<br>- **Practice:**<br>&nbsp;&nbsp;+ Compare Intel, AMD, and ARM Graviton<br>&nbsp;&nbsp;+ Differentiate Full Snapshot and Incremental Snapshot<br>&nbsp;&nbsp;+ Note when to choose each Instance Type | 13/05/2026 | 13/05/2026 | AWS Module 03 |
+| Thu | - Learn about User Data and Instance Metadata<br>- **Practice:**<br>&nbsp;&nbsp;+ Configure User Data to install Web Server automatically<br>&nbsp;&nbsp;+ Verify Apache/Nginx after EC2 startup<br>&nbsp;&nbsp;+ Query Instance Metadata through `169.254.169.254` | 14/05/2026 | 14/05/2026 | AWS Module 03 |
+| Fri | - Learn about Auto Scaling Group and Amazon S3<br>- **Practice:**<br>&nbsp;&nbsp;+ Analyze scale-out/scale-in conditions based on CPU metrics<br>&nbsp;&nbsp;+ Create Amazon S3 Bucket<br>&nbsp;&nbsp;+ Upload and download basic objects | 15/05/2026 | 15/05/2026 | AWS Module 03 |
+| Sat | - Learn about EBS, Instance Store, and resource cleanup process<br>- **Practice:**<br>&nbsp;&nbsp;+ Compare data durability between EBS and Instance Store<br>&nbsp;&nbsp;+ Delete TGW Attachments<br>&nbsp;&nbsp;+ Delete Transit Gateway<br>&nbsp;&nbsp;+ Delete CloudFormation Stack in the correct order | 16/05/2026 | 16/05/2026 | Personal |
 
 ### Week 5 Achievements:
 
@@ -39,3 +39,9 @@ pre: " <b> 1.5. </b> "
 {{% notice warning %}}
 **Important Note:** Transit Gateway charges per hour for each active Attachment. When deleting, follow the strict order: **TGW Attachments → Transit Gateway → CloudFormation Stack** to ensure no orphaned resources incur unexpected charges.
 {{% /notice %}}
+
+### Week 5 practice screenshots:
+
+![Week 5 practice - 522](/images/522.jpg)
+
+![Week 5 practice - 532](/images/532.jpg)

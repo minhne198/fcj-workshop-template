@@ -17,12 +17,12 @@ pre: " <b> 1.7. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| Mon | - Deploy a complete **Amazon FSx (Lab 000025)**: Set up a Multi-AZ File Server, configure SMB shares, and enable Data Deduplication.<br>- Test read/write performance and manage user sessions on the file server. | 25/05/2026 | 25/05/2026 | Lab 000025 |
-| Tue | - Practice advanced **IAM** administration: Create Users/Groups with granular permissions, apply Least Privilege, and use IAM Roles for role-based access control.<br>- Study the Shared Responsibility Model between AWS and the customer. | 26/05/2026 | 26/05/2026 | AWS IAM Guide |
-| Wed | - Configure **Amazon Cognito**: Set up User Pools and Identity Pools to authenticate users for web/mobile applications.<br>- Understand JWT Tokens and OAuth 2.0 in the context of modern authentication flows. | 27/05/2026 | 27/05/2026 | AWS Security Docs |
-| Thu | - Multi-account governance with **AWS Organizations**: Create Organizational Units (OUs) and set up **Service Control Policies (SCP)** to control the maximum permissions of member accounts.<br>- Understand the difference between SCPs and IAM Policies in the permission model. | 28/05/2026 | 28/05/2026 | AWS Organizations |
-| Fri | - Deploy **AWS Identity Center (SSO)**: Configure an Identity Source and centrally assign access permissions for multiple AWS accounts.<br>- Practice encrypting data with **AWS KMS**: Create a Customer Managed Key and apply it to S3 and EBS. | 29/05/2026 | 29/05/2026 | AWS Study Group |
-| Sat | - Activate **AWS Security Hub (Lab 000018)**: Configure security standards (CIS Benchmark, AWS Best Practices) and analyze the Compliance Score.<br>- Explore an overview of **AWS Lambda** and common Serverless Function use cases. | 30/05/2026 | 30/05/2026 | Lab 000018 & Personal |
+| Mon | - Learn about Amazon FSx for Windows File Server<br>- **Practice:**<br>&nbsp;&nbsp;+ Set up Multi-AZ File Server<br>&nbsp;&nbsp;+ Configure SMB Share<br>&nbsp;&nbsp;+ Enable Data Deduplication<br>&nbsp;&nbsp;+ Test read/write performance and manage sessions | 25/05/2026 | 25/05/2026 | Lab 000025 |
+| Tue | - Learn about AWS Identity and Access Management (IAM)<br>- Learn about Shared Responsibility Model<br>- **Practice:**<br>&nbsp;&nbsp;+ Create IAM User<br>&nbsp;&nbsp;+ Create IAM Group<br>&nbsp;&nbsp;+ Create IAM Role<br>&nbsp;&nbsp;+ Apply Least Privilege policy | 26/05/2026 | 26/05/2026 | AWS IAM Guide |
+| Wed | - Learn about Amazon Cognito, JWT Token, and OAuth 2.0<br>- **Practice:**<br>&nbsp;&nbsp;+ Create User Pool<br>&nbsp;&nbsp;+ Create Identity Pool<br>&nbsp;&nbsp;+ Configure authentication for web/mobile application | 27/05/2026 | 27/05/2026 | AWS Security Docs |
+| Thu | - Learn about AWS Organizations and Service Control Policies (SCP)<br>- **Practice:**<br>&nbsp;&nbsp;+ Create Organizational Unit (OU)<br>&nbsp;&nbsp;+ Set up Service Control Policy<br>&nbsp;&nbsp;+ Compare SCP and IAM Policy | 28/05/2026 | 28/05/2026 | AWS Organizations |
+| Fri | - Learn about AWS Identity Center (SSO) and AWS KMS<br>- **Practice:**<br>&nbsp;&nbsp;+ Configure Identity Source<br>&nbsp;&nbsp;+ Assign centralized access for multiple AWS accounts<br>&nbsp;&nbsp;+ Create Customer Managed Key<br>&nbsp;&nbsp;+ Apply encryption to S3 and EBS | 29/05/2026 | 29/05/2026 | AWS Study Group |
+| Sat | - Learn about AWS Security Hub and AWS Lambda<br>- **Practice:**<br>&nbsp;&nbsp;+ Enable Security Hub<br>&nbsp;&nbsp;+ Configure CIS Benchmark and AWS Best Practices<br>&nbsp;&nbsp;+ Analyze Compliance Score<br>&nbsp;&nbsp;+ Note common Serverless Function use cases | 30/05/2026 | 30/05/2026 | Lab 000018 & Personal |
 
 ### Week 7 Achievements:
 

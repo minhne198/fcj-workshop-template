@@ -17,12 +17,12 @@ pre: " <b> 1.4. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2 | - Tạo **Key Pair** và sử dụng CloudFormation Template để triển khai nhanh hệ thống mạng gồm VPC, Subnet, Security Group.<br>- Cấu hình Security Group chi tiết cho máy chủ Windows trong môi trường Multi-AZ. | 04/05/2026 | 04/05/2026 | AWS Study Group |
-| 3 | - Nghiên cứu và cấu hình **Route 53 Resolver Inbound/Outbound Endpoints**.<br>- Tạo Forwarding Rules để đồng bộ DNS resolution giữa môi trường Cloud và hạ tầng On-premises. | 05/05/2026 | 05/05/2026 | AWS Networking Guide |
-| 4 | - Khởi tạo **VPC Peering Connection** giữa 2 VPC để kết nối không qua internet công cộng.<br>- Cấu hình bảng định tuyến hai chiều để lưu lượng có thể đi qua đường kết nối Peering. | 06/05/2026 | 06/05/2026 | AWS Documentation |
-| 5 | - Kiểm tra bảo mật lưu lượng liên mạng thông qua NACL và Security Group.<br>- Triển khai **Microsoft AD** giả lập và thiết lập DNS cross-domain trong mô hình Hybrid. | 07/05/2026 | 07/05/2026 | AWS Documentation |
-| 6 | - Nghiên cứu tổng quan về **AWS Transit Gateway**: Kiến trúc hub-and-spoke và lợi ích so với VPC Peering thuần túy.<br>- Tìm hiểu cách TGW Route Table điều phối lưu lượng giữa các Attachment. | 08/05/2026 | 08/05/2026 | AWS Module 02 |
-| 7 | - Tổng hợp hình ảnh thực hành, rà soát toàn bộ cấu hình CloudFormation, Route 53, VPC Peering.<br>- Tìm hiểu về các loại EC2 Instance Type và khi nào nên chọn chip Graviton để tối ưu chi phí. | 09/05/2026 | 09/05/2026 | Cá nhân |
+| 2 | - Tìm hiểu AWS CloudFormation và hạ tầng mạng Multi-AZ<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo Key Pair<br>&nbsp;&nbsp;+ Triển khai VPC, Subnet, Security Group bằng CloudFormation Template<br>&nbsp;&nbsp;+ Cấu hình Security Group cho máy chủ Windows | 04/05/2026 | 04/05/2026 | AWS Study Group |
+| 3 | - Tìm hiểu Route 53 Resolver và Hybrid DNS<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Cấu hình Inbound Endpoint<br>&nbsp;&nbsp;+ Cấu hình Outbound Endpoint<br>&nbsp;&nbsp;+ Tạo Forwarding Rules đồng bộ DNS giữa Cloud và On-premises | 05/05/2026 | 05/05/2026 | AWS Networking Guide |
+| 4 | - Tìm hiểu VPC Peering Connection<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo VPC Peering Connection giữa 2 VPC<br>&nbsp;&nbsp;+ Cấu hình Route Table hai chiều<br>&nbsp;&nbsp;+ Kiểm tra lưu lượng đi qua Peering Connection | 06/05/2026 | 06/05/2026 | AWS Documentation |
+| 5 | - Tìm hiểu bảo mật lưu lượng liên mạng và mô hình Hybrid DNS<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Kiểm tra NACL và Security Group giữa các mạng<br>&nbsp;&nbsp;+ Triển khai Microsoft AD giả lập<br>&nbsp;&nbsp;+ Thiết lập DNS cross-domain trong mô hình Hybrid | 07/05/2026 | 07/05/2026 | AWS Documentation |
+| 6 | - Tìm hiểu AWS Transit Gateway (TGW)<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Phân tích kiến trúc hub-and-spoke<br>&nbsp;&nbsp;+ So sánh TGW với VPC Peering<br>&nbsp;&nbsp;+ Tìm hiểu cách TGW Route Table điều phối traffic giữa các Attachment | 08/05/2026 | 08/05/2026 | AWS Module 02 |
+| 7 | - Tìm hiểu EC2 Instance Type và chip Graviton<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Rà soát cấu hình CloudFormation<br>&nbsp;&nbsp;+ Rà soát Route 53 Resolver và VPC Peering<br>&nbsp;&nbsp;+ Tổng hợp hình ảnh thực hành tuần 4 | 09/05/2026 | 09/05/2026 | Cá nhân |
 
 ### Kết quả đạt được tuần 4:
 
@@ -39,3 +39,9 @@ pre: " <b> 1.4. </b> "
 {{% notice info %}}
 **Tóm tắt:** Tuần 4 giúp chuyển tư duy từ quản lý đơn lẻ sang thiết kế hệ thống quy mô, kết nối đa môi trường (Cloud + On-premise) và tự động hóa hạ tầng — những kỹ năng cốt lõi của một Cloud Engineer chuyên nghiệp.
 {{% /notice %}}
+
+### Hình ảnh thực hành tuần 4:
+
+![Cấu hình hạ tầng VPC tuần 4](/images/worklog/Screenshot%202026-05-20%20152142.jpg)
+
+![Tạo VPC bằng CloudFormation](/images/worklog/Tao_VPCs.png.jpg)

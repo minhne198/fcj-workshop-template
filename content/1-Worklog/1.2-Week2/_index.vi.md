@@ -17,12 +17,12 @@ pre: " <b> 1.2. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2 | - Chuẩn bị thông tin cá nhân, giấy tờ và thẻ thanh toán quốc tế cần thiết.<br>- Thực hiện toàn bộ quy trình đăng ký tài khoản AWS Free Tier theo hướng dẫn chính thống. | 20/04/2026 | 20/04/2026 | AWS Documentation |
-| 3 | - Kích hoạt xác thực đa yếu tố (**MFA**) cho cả tài khoản Root lẫn IAM User.<br>- Phân tích các nguy cơ bảo mật phổ biến khi thông tin đăng nhập bị lộ hoặc tài khoản bị xâm phạm. | 21/04/2026 | 21/04/2026 | AWS Security Blog |
-| 4 | - Khởi tạo **Admin Group** và người dùng **IAM User** với quyền hạn tối thiểu cần thiết.<br>- Áp dụng nguyên tắc Least Privilege trong phân quyền, tránh cấp quyền quá mức. | 22/04/2026 | 22/04/2026 | AWS Study Group |
-| 5 | - Khởi tạo và cấu hình **Access Keys** để phục vụ truy cập dịch vụ AWS qua AWS CLI.<br>- Thực hành tạo và quản lý các chính sách bảo mật (IAM Policies) theo mô hình doanh nghiệp. | 23/04/2026 | 23/04/2026 | AWS Workshop |
-| 6 | - Kiểm tra và rà soát lại toàn bộ cấu hình bảo mật IAM đã thiết lập trong tuần.<br>- Bước đầu tìm hiểu tổng quan về **Amazon VPC**: Khái niệm, kiến trúc và lý do cần mạng ảo riêng. | 24/04/2026 | 24/04/2026 | AWS Networking Guide |
-| 7 | - Nghiên cứu chuyên sâu về các gói hỗ trợ của AWS (Support Plans) và thực hành phân chia địa chỉ IP theo dải **CIDR**. | 25/04/2026 | 25/04/2026 | Cá nhân |
+| 2 | - Tìm hiểu quy trình đăng ký AWS Free Tier account<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Chuẩn bị thông tin cá nhân và thẻ thanh toán<br>&nbsp;&nbsp;+ Đăng ký tài khoản AWS Free Tier<br>&nbsp;&nbsp;+ Xác minh danh tính và phương thức thanh toán | 20/04/2026 | 20/04/2026 | AWS Documentation |
+| 3 | - Tìm hiểu cơ chế bảo mật Multi-Factor Authentication (MFA)<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Kích hoạt MFA cho Root Account<br>&nbsp;&nbsp;+ Kích hoạt MFA cho IAM User<br>&nbsp;&nbsp;+ Rà soát rủi ro khi lộ thông tin đăng nhập | 21/04/2026 | 21/04/2026 | AWS Security Blog |
+| 4 | - Tìm hiểu nguyên tắc Least Privilege trong IAM<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo Admin Group<br>&nbsp;&nbsp;+ Tạo IAM User<br>&nbsp;&nbsp;+ Gán quyền tối thiểu cần thiết cho user/group | 22/04/2026 | 22/04/2026 | AWS Study Group |
+| 5 | - Tìm hiểu Access Key và IAM Policy<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo Access Key cho AWS CLI<br>&nbsp;&nbsp;+ Cấu hình AWS CLI để truy cập tài khoản<br>&nbsp;&nbsp;+ Tạo và kiểm tra IAM Policy theo mô hình doanh nghiệp | 23/04/2026 | 23/04/2026 | AWS Workshop |
+| 6 | - Tìm hiểu Amazon Virtual Private Cloud (VPC)<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Rà soát các cấu hình IAM đã thiết lập<br>&nbsp;&nbsp;+ Xác định vai trò của VPC trong kiến trúc cloud<br>&nbsp;&nbsp;+ Tìm hiểu thành phần cơ bản của mạng ảo riêng | 24/04/2026 | 24/04/2026 | AWS Networking Guide |
+| 7 | - Tìm hiểu AWS Support Plans và CIDR<br>- **Thực hành:**<br>&nbsp;&nbsp;+ So sánh Basic, Developer, Business và Enterprise Support<br>&nbsp;&nbsp;+ Chia dải địa chỉ IP theo CIDR<br>&nbsp;&nbsp;+ Ghi chú cách chọn support plan phù hợp | 25/04/2026 | 25/04/2026 | Cá nhân |
 
 ### Kết quả đạt được tuần 2:
 
@@ -53,3 +53,9 @@ pre: " <b> 1.2. </b> "
 {{% notice warning %}}
 **Ghi chú quan trọng:** Luôn bảo quản Access Keys và thông tin MFA ở nơi an toàn. Tuyệt đối không đưa các thông tin này lên kho lưu trữ công khai như GitHub hay Gitlab.
 {{% /notice %}}
+
+### Hình ảnh thực hành tuần 2:
+
+![Kích hoạt MFA cho tài khoản AWS](/images/worklog/MFA.jpg)
+
+![Hoàn thành thực hành tuần 2](/images/worklog/2.jpg)

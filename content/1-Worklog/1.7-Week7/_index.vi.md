@@ -17,12 +17,12 @@ pre: " <b> 1.7. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2 | - Triển khai **Amazon FSx (Lab 000025)** hoàn chỉnh: Thiết lập File Server Multi-AZ, cấu hình SMB share và kích hoạt Data Deduplication.<br>- Kiểm thử hiệu năng đọc/ghi và quản lý session người dùng. | 25/05/2026 | 25/05/2026 | Lab 000025 |
-| 3 | - Thực hành quản trị **IAM** nâng cao: Tạo User/Group với quyền chi tiết, áp dụng chính sách Least Privilege và sử dụng IAM Role để phân quyền theo vai trò.<br>- Nghiên cứu Shared Responsibility Model giữa AWS và khách hàng. | 26/05/2026 | 26/05/2026 | AWS IAM Guide |
-| 4 | - Cấu hình **Amazon Cognito**: Thiết lập User Pool và Identity Pool để xác thực người dùng cho ứng dụng web/mobile.<br>- Tìm hiểu cơ chế JWT Token và OAuth 2.0 trong quy trình xác thực hiện đại. | 27/05/2026 | 27/05/2026 | AWS Security Docs |
-| 5 | - Quản trị đa tài khoản với **AWS Organizations**: Tạo Organizational Unit (OU) và thiết lập **Service Control Policies (SCP)** kiểm soát quyền tối đa của từng tài khoản thành viên.<br>- Hiểu sự khác biệt giữa SCP và IAM Policy trong cơ chế phân quyền. | 28/05/2026 | 28/05/2026 | AWS Organizations |
-| 6 | - Triển khai **AWS Identity Center (SSO)**: Cấu hình Identity Source và gán quyền truy cập tập trung cho nhiều tài khoản AWS.<br>- Thực hành mã hóa dữ liệu với **AWS KMS**: Tạo Customer Managed Key và áp dụng cho S3, EBS. | 29/05/2026 | 29/05/2026 | AWS Study Group |
-| 7 | - Kích hoạt **AWS Security Hub (Lab 000018)**: Cấu hình các tiêu chuẩn bảo mật (CIS Benchmark, AWS Best Practices) và phân tích điểm Compliance Score.<br>- Tìm hiểu tổng quan về **AWS Lambda** và kịch bản sử dụng Serverless Function phổ biến. | 30/05/2026 | 30/05/2026 | Lab 000018 & Cá nhân |
+| 2 | - Tìm hiểu Amazon FSx for Windows File Server<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Thiết lập File Server Multi-AZ<br>&nbsp;&nbsp;+ Cấu hình SMB Share<br>&nbsp;&nbsp;+ Kích hoạt Data Deduplication<br>&nbsp;&nbsp;+ Kiểm thử hiệu năng đọc/ghi và quản lý session | 25/05/2026 | 25/05/2026 | Lab 000025 |
+| 3 | - Tìm hiểu AWS Identity and Access Management (IAM)<br>- Tìm hiểu Shared Responsibility Model<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo IAM User<br>&nbsp;&nbsp;+ Tạo IAM Group<br>&nbsp;&nbsp;+ Tạo IAM Role<br>&nbsp;&nbsp;+ Áp dụng chính sách Least Privilege | 26/05/2026 | 26/05/2026 | AWS IAM Guide |
+| 4 | - Tìm hiểu Amazon Cognito, JWT Token và OAuth 2.0<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo User Pool<br>&nbsp;&nbsp;+ Tạo Identity Pool<br>&nbsp;&nbsp;+ Cấu hình xác thực cho ứng dụng web/mobile | 27/05/2026 | 27/05/2026 | AWS Security Docs |
+| 5 | - Tìm hiểu AWS Organizations và Service Control Policies (SCP)<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo Organizational Unit (OU)<br>&nbsp;&nbsp;+ Thiết lập Service Control Policy<br>&nbsp;&nbsp;+ So sánh SCP và IAM Policy | 28/05/2026 | 28/05/2026 | AWS Organizations |
+| 6 | - Tìm hiểu AWS Identity Center (SSO) và AWS KMS<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Cấu hình Identity Source<br>&nbsp;&nbsp;+ Gán quyền truy cập tập trung cho nhiều tài khoản AWS<br>&nbsp;&nbsp;+ Tạo Customer Managed Key<br>&nbsp;&nbsp;+ Áp dụng mã hóa cho S3 và EBS | 29/05/2026 | 29/05/2026 | AWS Study Group |
+| 7 | - Tìm hiểu AWS Security Hub và AWS Lambda<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Kích hoạt Security Hub<br>&nbsp;&nbsp;+ Cấu hình CIS Benchmark và AWS Best Practices<br>&nbsp;&nbsp;+ Phân tích Compliance Score<br>&nbsp;&nbsp;+ Ghi chú các trường hợp dùng Serverless Function | 30/05/2026 | 30/05/2026 | Lab 000018 & Cá nhân |
 
 ### Kết quả đạt được tuần 7:
 

@@ -17,12 +17,12 @@ pre: " <b> 1.3. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2 | - Tìm hiểu tổng quan về VPC, dải địa chỉ IP (CIDR) và cách phân chia Subnet hợp lý.<br>- Cấu hình Route Table để điều hướng lưu lượng nội bộ giữa các Subnet. | 27/04/2026 | 27/04/2026 | AWS Networking Guide |
-| 3 | - Thiết lập kết nối ra Internet thông qua **Internet Gateway** cho Public Subnet.<br>- Cấu hình **NAT Gateway** để cho phép các tài nguyên trong Private Subnet truy cập Internet mà không bị lộ IP. | 28/04/2026 | 28/04/2026 | AWS Documentation |
-| 4 | - Thực hành bảo mật lớp mạng: Cấu hình **Security Groups** và **Network ACLs**, phân biệt cơ chế Stateful và Stateless.<br>- Kiểm thử các kịch bản allow/deny traffic để hiểu cách hai lớp bảo mật hoạt động song song. | 29/04/2026 | 29/04/2026 | Security Essentials |
-| 5 | - Nghiên cứu kết nối liên mạng: **VPC Peering** và **Transit Gateway** để kết nối nhiều VPC.<br>- Tìm hiểu **Elastic Load Balancing (ELB)** giúp phân phối tải và tăng tính sẵn sàng của hệ thống. | 30/04/2026 | 30/04/2026 | AWS Study Group |
-| 6 | - Thực hành cấu hình **EC2 Instance Connect Endpoint** để quản trị máy chủ từ xa mà không cần Bastion Host.<br>- Thiết lập và kiểm thử kết nối an toàn vào EC2 trong Private Subnet. | 01/05/2026 | 01/05/2026 | AWS Workshop |
-| 7 | - Bước đầu tìm hiểu **AWS CloudFormation**: Khái niệm IaC và cách sử dụng Template để khởi tạo tài nguyên tự động.<br>- Tạo **Key Pair** và thực hành kết nối SSH bảo mật vào EC2 Instance. | 02/05/2026 | 02/05/2026 | AWS CloudFormation Guide |
+| 2 | - Tìm hiểu Amazon VPC, CIDR và Subnet<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Xác định dải CIDR cho VPC<br>&nbsp;&nbsp;+ Chia Public Subnet và Private Subnet<br>&nbsp;&nbsp;+ Cấu hình Route Table cho các Subnet | 27/04/2026 | 27/04/2026 | AWS Networking Guide |
+| 3 | - Tìm hiểu Internet Gateway và NAT Gateway<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Gắn Internet Gateway cho Public Subnet<br>&nbsp;&nbsp;+ Tạo NAT Gateway cho Private Subnet<br>&nbsp;&nbsp;+ Kiểm tra kết nối Internet từ tài nguyên private | 28/04/2026 | 28/04/2026 | AWS Documentation |
+| 4 | - Tìm hiểu Security Group và Network ACL<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Cấu hình Security Group<br>&nbsp;&nbsp;+ Cấu hình Network ACL<br>&nbsp;&nbsp;+ Kiểm thử allow/deny traffic<br>&nbsp;&nbsp;+ Phân biệt Stateful và Stateless | 29/04/2026 | 29/04/2026 | Security Essentials |
+| 5 | - Tìm hiểu VPC Peering, Transit Gateway và Elastic Load Balancing (ELB)<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Phân tích mô hình kết nối nhiều VPC<br>&nbsp;&nbsp;+ So sánh Peering và Transit Gateway<br>&nbsp;&nbsp;+ Ghi chú vai trò ELB trong kiến trúc High Availability | 30/04/2026 | 30/04/2026 | AWS Study Group |
+| 6 | - Tìm hiểu EC2 Instance Connect Endpoint<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Cấu hình EC2 Instance Connect Endpoint<br>&nbsp;&nbsp;+ Kết nối an toàn vào EC2 trong Private Subnet<br>&nbsp;&nbsp;+ Kiểm tra kết nối không cần Bastion Host | 01/05/2026 | 01/05/2026 | AWS Workshop |
+| 7 | - Tìm hiểu AWS CloudFormation và Key Pair<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Đọc cấu trúc CloudFormation Template<br>&nbsp;&nbsp;+ Tạo Key Pair<br>&nbsp;&nbsp;+ Kết nối SSH bảo mật vào EC2 Instance | 02/05/2026 | 02/05/2026 | AWS CloudFormation Guide |
 
 ### Kết quả đạt được tuần 3:
 
@@ -39,3 +39,9 @@ pre: " <b> 1.3. </b> "
 {{% notice success %}}
 **Tóm tắt:** Làm chủ VPC là bước đệm quan trọng, tạo nền tảng vững chắc để triển khai các dịch vụ khác như EC2, RDS một cách an toàn, có kiểm soát và tối ưu nhất trong các tuần tiếp theo.
 {{% /notice %}}
+
+### Hình ảnh thực hành tuần 3:
+
+![Tạo Security Group](/images/worklog/Tao_SecurityGroup.jpg)
+
+![Tạo Gateway](/images/worklog/Tao_Gateway.jpg)

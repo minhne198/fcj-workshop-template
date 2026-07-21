@@ -17,12 +17,12 @@ pre: " <b> 1.6. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2 | - Khởi tạo **S3 Bucket**, cấu hình **Static Website Hosting** và tích hợp phân phối nội dung qua **CloudFront**.<br>- Thiết lập **Bucket Policy** để quản lý quyền truy cập công khai an toàn và hiệu quả. | 18/05/2026 | 18/05/2026 | Lab S3 (000057) |
-| 3 | - Kích hoạt **Bucket Versioning** để theo dõi lịch sử thay đổi đối tượng và khôi phục về phiên bản cũ khi cần.<br>- Cấu hình **Cross-Region Replication (CRR)** để nhân bản dữ liệu sang Region khác đảm bảo tính sẵn sàng cao. | 19/05/2026 | 19/05/2026 | Lab S3 (000057) |
-| 4 | - Cấu hình **S3 Gateway Endpoint** và **Interface Endpoint (PrivateLink)** để truy cập S3 từ bên trong VPC mà không qua internet.<br>- Kiểm thử và xác nhận lưu lượng S3 đi qua đường kết nối nội bộ. | 20/05/2026 | 20/05/2026 | Lab VPC (000013-14) |
-| 5 | - Kiểm soát lưu lượng mạng chi tiết qua các tầng bảo mật **NACLs** và **Security Groups** trong VPC.<br>- Thực hành phân quyền truy cập S3 theo nguyên tắc Least Privilege thông qua IAM Policy và S3 Bucket Policy. | 21/05/2026 | 21/05/2026 | AWS Study Group |
-| 6 | - Thiết lập kế hoạch sao lưu tập trung với **AWS Backup**: Cấu hình Backup Plan, Backup Vault và kiểm thử khôi phục dữ liệu.<br>- Nghiên cứu các chỉ số **RTO** và **RPO** trong chiến lược khắc phục thảm họa. | 22/05/2026 | 22/05/2026 | AWS Study Group |
-| 7 | - Khám phá **Amazon FSx for Windows File Server**: Kiến trúc Multi-AZ, cấu hình SMB và tính năng Data Deduplication.<br>- Tổng hợp hình ảnh thực hành và hoàn thiện báo cáo Tuần 6. | 23/05/2026 | 23/05/2026 | Cá nhân |
+| 2 | - Tìm hiểu Amazon S3, Static Website Hosting và CloudFront<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo S3 Bucket<br>&nbsp;&nbsp;+ Bật Static Website Hosting<br>&nbsp;&nbsp;+ Cấu hình Bucket Policy<br>&nbsp;&nbsp;+ Tích hợp CloudFront để phân phối nội dung | 18/05/2026 | 18/05/2026 | Lab S3 (000057) |
+| 3 | - Tìm hiểu Bucket Versioning và Cross-Region Replication (CRR)<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Kích hoạt Bucket Versioning<br>&nbsp;&nbsp;+ Khôi phục object về phiên bản cũ<br>&nbsp;&nbsp;+ Cấu hình CRR để nhân bản dữ liệu sang Region khác | 19/05/2026 | 19/05/2026 | Lab S3 (000057) |
+| 4 | - Tìm hiểu S3 Gateway Endpoint và Interface Endpoint (PrivateLink)<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Cấu hình S3 Gateway Endpoint<br>&nbsp;&nbsp;+ Cấu hình Interface Endpoint<br>&nbsp;&nbsp;+ Kiểm thử traffic S3 đi qua kết nối nội bộ | 20/05/2026 | 20/05/2026 | Lab VPC (000013-14) |
+| 5 | - Tìm hiểu NACL, Security Group và phân quyền truy cập S3<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Kiểm soát lưu lượng mạng bằng NACL<br>&nbsp;&nbsp;+ Kiểm soát lưu lượng bằng Security Group<br>&nbsp;&nbsp;+ Phân quyền S3 bằng IAM Policy và S3 Bucket Policy | 21/05/2026 | 21/05/2026 | AWS Study Group |
+| 6 | - Tìm hiểu AWS Backup, RTO và RPO<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo Backup Plan<br>&nbsp;&nbsp;+ Tạo Backup Vault<br>&nbsp;&nbsp;+ Kiểm thử khôi phục dữ liệu<br>&nbsp;&nbsp;+ Ghi chú chiến lược Disaster Recovery | 22/05/2026 | 22/05/2026 | AWS Study Group |
+| 7 | - Tìm hiểu Amazon FSx for Windows File Server<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tìm hiểu kiến trúc Multi-AZ<br>&nbsp;&nbsp;+ Cấu hình SMB<br>&nbsp;&nbsp;+ Tìm hiểu Data Deduplication<br>&nbsp;&nbsp;+ Tổng hợp hình ảnh thực hành tuần 6 | 23/05/2026 | 23/05/2026 | Cá nhân |
 
 ### Kết quả đạt được tuần 6:
 
@@ -41,3 +41,7 @@ pre: " <b> 1.6. </b> "
 {{% notice info %}}
 **Tóm tắt:** Tuần 6 giúp hoàn thiện tư duy Cloud Engineer trong việc kết hợp lưu trữ không giới hạn của S3, bảo mật của VPC Endpoints và khả năng phục hồi của AWS Backup — nền tảng để xây dựng ứng dụng có độ tin cậy cao trên AWS.
 {{% /notice %}}
+
+### Hình ảnh thực hành tuần 6:
+
+![Thực hành tuần 6 - 541](/images/541.jpg)

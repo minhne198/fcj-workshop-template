@@ -17,12 +17,12 @@ pre: " <b> 1.2. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| Mon | - Prepare personal information and international payment card required for account creation.<br>- Complete the entire AWS Free Tier account registration process following official guidelines. | 20/04/2026 | 20/04/2026 | AWS Documentation |
-| Tue | - Activate Multi-Factor Authentication (**MFA**) for both the Root account and IAM Users.<br>- Analyze common security risks when login credentials are leaked or accounts are compromised. | 21/04/2026 | 21/04/2026 | AWS Security Blog |
-| Wed | - Create an **Admin Group** and **IAM User** with the minimum necessary permissions.<br>- Apply the Least Privilege principle when assigning permissions to avoid over-granting access. | 22/04/2026 | 22/04/2026 | AWS Study Group |
-| Thu | - Create and configure **Access Keys** for accessing AWS services through the AWS CLI.<br>- Practice creating and managing IAM Policies following an enterprise model. | 23/04/2026 | 23/04/2026 | AWS Workshop |
-| Fri | - Review and audit all IAM security configurations set up during the week.<br>- Begin exploring **Amazon VPC** at a high level: What it is, its architecture, and why a private virtual network is needed. | 24/04/2026 | 24/04/2026 | AWS Networking Guide |
-| Sat | - Deep-dive into AWS Support Plans and practice IP address subdivision using **CIDR** notation. | 25/04/2026 | 25/04/2026 | Personal |
+| Mon | - Learn about the AWS Free Tier account registration process<br>- **Practice:**<br>&nbsp;&nbsp;+ Prepare personal information and payment card<br>&nbsp;&nbsp;+ Register an AWS Free Tier account<br>&nbsp;&nbsp;+ Verify identity and payment method | 20/04/2026 | 20/04/2026 | AWS Documentation |
+| Tue | - Learn about Multi-Factor Authentication (MFA)<br>- **Practice:**<br>&nbsp;&nbsp;+ Enable MFA for the Root Account<br>&nbsp;&nbsp;+ Enable MFA for IAM User<br>&nbsp;&nbsp;+ Review risks when credentials are exposed | 21/04/2026 | 21/04/2026 | AWS Security Blog |
+| Wed | - Learn about the Least Privilege principle in IAM<br>- **Practice:**<br>&nbsp;&nbsp;+ Create Admin Group<br>&nbsp;&nbsp;+ Create IAM User<br>&nbsp;&nbsp;+ Attach minimum required permissions to user/group | 22/04/2026 | 22/04/2026 | AWS Study Group |
+| Thu | - Learn about Access Keys and IAM Policy<br>- **Practice:**<br>&nbsp;&nbsp;+ Create Access Key for AWS CLI<br>&nbsp;&nbsp;+ Configure AWS CLI account access<br>&nbsp;&nbsp;+ Create and test IAM Policy following an enterprise model | 23/04/2026 | 23/04/2026 | AWS Workshop |
+| Fri | - Learn about Amazon Virtual Private Cloud (VPC)<br>- **Practice:**<br>&nbsp;&nbsp;+ Review IAM security configurations<br>&nbsp;&nbsp;+ Identify VPC's role in cloud architecture<br>&nbsp;&nbsp;+ Learn the basic components of a private virtual network | 24/04/2026 | 24/04/2026 | AWS Networking Guide |
+| Sat | - Learn about AWS Support Plans and CIDR<br>- **Practice:**<br>&nbsp;&nbsp;+ Compare Basic, Developer, Business, and Enterprise Support<br>&nbsp;&nbsp;+ Divide IP address ranges using CIDR<br>&nbsp;&nbsp;+ Note how to choose a suitable support plan | 25/04/2026 | 25/04/2026 | Personal |
 
 ### Week 2 Achievements:
 
@@ -53,3 +53,9 @@ pre: " <b> 1.2. </b> "
 {{% notice warning %}}
 **Important Note:** Always store Access Keys and MFA recovery codes in a secure location. Never upload this sensitive information to public repositories like GitHub or GitLab.
 {{% /notice %}}
+
+### Week 2 practice screenshots:
+
+![Enable MFA for AWS account](/images/worklog/MFA.jpg)
+
+![Complete Week 2 practice](/images/worklog/2.jpg)

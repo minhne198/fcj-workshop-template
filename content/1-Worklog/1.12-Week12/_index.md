@@ -17,12 +17,12 @@ pre: " <b> 1.12. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| Mon | - Complete the Backend API: `HotelsController.cs` (search + details), `BookingsController.cs` (book/cancel/history), `AdminController.cs` (management).<br>- Integrate **Redis Cache** into SearchService: Cache HIT < 5ms, Cache MISS queries RDS then stores result in Redis (TTL=5 mins). | 29/06/2026 | 29/06/2026 | Visual Studio 2022 |
-| Tue | - **Phase 4 - Compute Configuration:** Create an EC2 Launch Template with a User Data script to auto-install .NET 8 and start the API service.<br>- Create an **Application Load Balancer (ALB)** in the Public Subnet, configure a Target Group with a `/health` Health Check. | 30/06/2026 | 30/06/2026 | AWS Console |
-| Wed | - Create the **Auto Scaling Group (ASG)**: Min=1, Max=4, Target CPU=70%.<br>- Configure a **CloudWatch Alarm** for CPU > 70% to trigger ASG Scale Out; set up **SNS** to send alert emails to the Admin. | 01/07/2026 | 01/07/2026 | AWS Console |
-| Thu | - **Phase 5 - Frontend & CDN:** Upload all static files (HTML, CSS, JS) to **Amazon S3**, enable Static Website Hosting.<br>- Create a **CloudFront Distribution**: Origin S3 (using OAC), forward `/api/*` to ALB. Attach **AWS WAF** to CloudFront to block SQL Injection and XSS attacks. | 02/07/2026 | 02/07/2026 | AWS Console |
-| Fri | - **High Availability Test:** Deliberately terminate 1 EC2 in the ASG → verify ALB automatically routes all traffic to the remaining EC2 → website continues to operate without interruption.<br>- **Load Test with Locust:** Simulate 300 concurrent users → observe ASG automatically scaling from 1 to 2-3 EC2 instances. | 03/07/2026 | 03/07/2026 | Locust |
-| Sat | - Measure and compare performance: Response time **without Cache** (~100-200ms) vs **with Cache** (<5ms).<br>- Finalize report, prepare presentation slides and demo script. Practice full demo run 3 times with a timer. | 04/07/2026 | 04/07/2026 | Personal |
+| Mon | - Learn about Backend API completion and Redis Cache<br>- **Practice:**<br>&nbsp;&nbsp;+ Complete `HotelsController.cs`<br>&nbsp;&nbsp;+ Complete `BookingsController.cs`<br>&nbsp;&nbsp;+ Complete `AdminController.cs`<br>&nbsp;&nbsp;+ Integrate Redis Cache into SearchService<br>&nbsp;&nbsp;+ Verify Cache HIT under 5ms and 5-minute TTL | 29/06/2026 | 29/06/2026 | Visual Studio 2022 |
+| Tue | - Phase 4 - Learn about Compute layer with EC2, ALB, and Target Group<br>- **Practice:**<br>&nbsp;&nbsp;+ Create EC2 Launch Template<br>&nbsp;&nbsp;+ Write User Data script to install .NET 8 automatically<br>&nbsp;&nbsp;+ Create Application Load Balancer<br>&nbsp;&nbsp;+ Create Target Group and `/health` Health Check | 30/06/2026 | 30/06/2026 | AWS Console |
+| Wed | - Learn about Auto Scaling Group, CloudWatch Alarm, and SNS<br>- **Practice:**<br>&nbsp;&nbsp;+ Create Auto Scaling Group Min=1, Max=4<br>&nbsp;&nbsp;+ Configure Target CPU=70%<br>&nbsp;&nbsp;+ Create CloudWatch Alarm when CPU > 70%<br>&nbsp;&nbsp;+ Configure SNS email alert for Admin | 01/07/2026 | 01/07/2026 | AWS Console |
+| Thu | - Phase 5 - Learn about frontend hosting, CDN, and WAF<br>- **Practice:**<br>&nbsp;&nbsp;+ Upload HTML, CSS, JS to Amazon S3<br>&nbsp;&nbsp;+ Enable Static Website Hosting<br>&nbsp;&nbsp;+ Create CloudFront Distribution using OAC<br>&nbsp;&nbsp;+ Forward `/api/*` to ALB<br>&nbsp;&nbsp;+ Attach AWS WAF to block SQL Injection and XSS | 02/07/2026 | 02/07/2026 | AWS Console |
+| Fri | - Learn about High Availability testing and Load Testing<br>- **Practice:**<br>&nbsp;&nbsp;+ Terminate 1 EC2 instance in ASG<br>&nbsp;&nbsp;+ Verify ALB routes traffic to the remaining EC2<br>&nbsp;&nbsp;+ Run Locust test with 300 concurrent users<br>&nbsp;&nbsp;+ Observe ASG scaling to 2-3 EC2 instances | 03/07/2026 | 03/07/2026 | Locust |
+| Sat | - Learn about performance measurement and demo preparation<br>- **Practice:**<br>&nbsp;&nbsp;+ Compare response time without cache and with Redis cache<br>&nbsp;&nbsp;+ Finalize report<br>&nbsp;&nbsp;+ Prepare presentation slides<br>&nbsp;&nbsp;+ Practice demo 3 times with a timer | 04/07/2026 | 04/07/2026 | Personal |
 
 ### Week 12 Achievements:
 
@@ -47,3 +47,13 @@ pre: " <b> 1.12. </b> "
 {{% notice success %}}
 **Summary:** Week 12 marks the completion of the capstone project **High-Availability Hotel Booking System on AWS**. The project successfully demonstrated 3 core cloud computing properties (High Availability, Auto Scaling, Caching) through real-world test scenarios with concrete, measurable results — a strong foundation for a high-scoring presentation.
 {{% /notice %}}
+
+### Week 12 practice screenshots:
+
+![Week 12 practice - 3](/images/worklog/3.jpg)
+
+![Week 12 practice - 4](/images/worklog/4.jpg)
+
+![Week 12 practice - 591](/images/591.jpg)
+
+![Week 12 practice - 592](/images/592.jpg)

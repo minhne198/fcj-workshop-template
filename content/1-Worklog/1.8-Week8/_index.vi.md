@@ -17,12 +17,12 @@ pre: " <b> 1.8. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2 | - Triển khai **Tối ưu chi phí EC2 (Lab 000022)**: Tạo IAM Role cho Lambda, xây dựng Function tự động tắt EC2 ngoài giờ làm việc.<br>- Cấu hình **CloudWatch Event Rule** theo lịch cron để kích hoạt Lambda tự động. | 01/06/2026 | 01/06/2026 | Lab 000022 |
-| 3 | - Hoàn thiện Lambda Function tự động **khởi động lại EC2** vào đầu giờ làm việc buổi sáng.<br>- Kiểm thử cơ chế tự động hóa, xem log qua CloudWatch Logs và xử lý các lỗi runtime nếu có. | 02/06/2026 | 02/06/2026 | Lab 000022 |
-| 4 | - Thực hành **Resource Tags (Lab 000027)**: Gắn thẻ phân loại cho EC2, S3, VPC theo môi trường (dev/staging/prod).<br>- Tạo **Resource Groups** để nhóm và giám sát tài nguyên theo tiêu chí thẻ. | 03/06/2026 | 03/06/2026 | Lab 000027 |
-| 5 | - Thực hành **IAM Policy kết hợp Tags (Lab 000028)**: Xây dựng Policy chỉ cho phép quản lý EC2 khi Instance có đúng Tag quy định.<br>- Kiểm thử phân quyền theo kịch bản thực tế và xác nhận hoạt động đúng Least Privilege. | 04/06/2026 | 04/06/2026 | Lab 000028 |
-| 6 | - Triển khai **IAM Permission Boundary (Lab 000030)**: Tạo Policy giới hạn quyền EC2 chỉ trong Region được chỉ định.<br>- Áp dụng Permission Boundary cho IAM User và kiểm thử khả năng truy cập tại các Region khác nhau. | 05/06/2026 | 05/06/2026 | Lab 000030 |
-| 7 | - Bắt đầu tìm hiểu **AWS KMS**: Tạo Customer Managed Key và thực hành cấu hình mã hóa đối tượng trên S3.<br>- Phân quyền truy cập KMS Key bằng IAM Policy theo mô hình Key Policy + IAM Policy. | 06/06/2026 | 06/06/2026 | Lab 000033 |
+| 2 | - Tìm hiểu tối ưu chi phí EC2 bằng AWS Lambda<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo IAM Role cho Lambda<br>&nbsp;&nbsp;+ Viết Lambda Function tự động tắt EC2 ngoài giờ làm việc<br>&nbsp;&nbsp;+ Cấu hình CloudWatch Event Rule theo cron schedule | 01/06/2026 | 01/06/2026 | Lab 000022 |
+| 3 | - Tìm hiểu cơ chế tự động hóa vận hành EC2<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Hoàn thiện Lambda Function tự động khởi động EC2<br>&nbsp;&nbsp;+ Kiểm thử cơ chế stop/start EC2<br>&nbsp;&nbsp;+ Xem CloudWatch Logs và xử lý lỗi runtime | 02/06/2026 | 02/06/2026 | Lab 000022 |
+| 4 | - Tìm hiểu Resource Tags và Resource Groups<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Gắn tag cho EC2<br>&nbsp;&nbsp;+ Gắn tag cho S3<br>&nbsp;&nbsp;+ Gắn tag cho VPC<br>&nbsp;&nbsp;+ Tạo Resource Groups theo tiêu chí tag | 03/06/2026 | 03/06/2026 | Lab 000027 |
+| 5 | - Tìm hiểu IAM Policy kết hợp Tags<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Xây dựng Policy quản lý EC2 theo tag quy định<br>&nbsp;&nbsp;+ Kiểm thử kịch bản được phép/từ chối truy cập<br>&nbsp;&nbsp;+ Xác nhận hoạt động theo nguyên tắc Least Privilege | 04/06/2026 | 04/06/2026 | Lab 000028 |
+| 6 | - Tìm hiểu IAM Permission Boundary<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo Policy giới hạn quyền EC2 theo Region<br>&nbsp;&nbsp;+ Áp dụng Permission Boundary cho IAM User<br>&nbsp;&nbsp;+ Kiểm thử truy cập ở các Region khác nhau | 05/06/2026 | 05/06/2026 | Lab 000030 |
+| 7 | - Tìm hiểu AWS Key Management Service (KMS)<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Tạo Customer Managed Key<br>&nbsp;&nbsp;+ Cấu hình mã hóa Server-Side Encryption cho S3<br>&nbsp;&nbsp;+ Phân quyền KMS bằng Key Policy và IAM Policy | 06/06/2026 | 06/06/2026 | Lab 000033 |
 
 ### Kết quả đạt được tuần 8:
 

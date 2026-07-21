@@ -17,12 +17,12 @@ pre: " <b> 1.9. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| Mon | - Complete **AWS KMS (Lab 000033)**: Create a CMK, configure Server-Side Encryption (SSE-KMS) for an S3 Bucket.<br>- Authorize access to the encryption key via IAM Policy combined with Key Policy. | 08/06/2026 | 08/06/2026 | Lab 000033 |
-| Tue | - Configure **AWS CloudTrail** to record all API activity in the account to an S3 Bucket.<br>- Query logs using **Amazon Athena** and verify the ability to detect anomalous resource access behavior. | 09/06/2026 | 09/06/2026 | Lab 000033 |
-| Wed | - Study database fundamentals: Primary Keys, Foreign Keys, Indexes, and the difference between **SQL (RDBMS)** and **NoSQL** models.<br>- Analyze the **OLTP** (transactional) and **OLAP** (analytical) data processing models in enterprise systems. | 10/06/2026 | 10/06/2026 | AWS Database Overview |
-| Thu | - Practice with **Amazon RDS**: Create a DB Instance, configure Multi-AZ Deployment, and test Automated Backup.<br>- Explore **Amazon Aurora** and its advantages over standard RDS MySQL/PostgreSQL (performance, scalability). | 11/06/2026 | 11/06/2026 | AWS RDS & Aurora |
-| Fri | - Practice **Advanced IAM (Lab 000044)**: Create Users, Groups, IAM Roles, and set up Switch Role for flexible permission switching.<br>- Deploy **IAM Roles for EC2 (Lab 000048)** to access S3 without storing Access Keys in the application. | 12/06/2026 | 12/06/2026 | Lab 000044 & 000048 |
-| Sat | - Explore **Data Lake architecture on AWS**: S3 as the central storage foundation for both structured and unstructured data.<br>- Study the role of each layer in a Data Lake architecture: Ingestion → Storage → Catalog → Analytics. | 13/06/2026 | 13/06/2026 | AWS Analytics Docs |
+| Mon | - Learn about AWS KMS and Server-Side Encryption (SSE-KMS)<br>- **Practice:**<br>&nbsp;&nbsp;+ Create Customer Managed Key (CMK)<br>&nbsp;&nbsp;+ Configure SSE-KMS for S3 Bucket<br>&nbsp;&nbsp;+ Authorize access with IAM Policy and Key Policy | 08/06/2026 | 08/06/2026 | Lab 000033 |
+| Tue | - Learn about AWS CloudTrail and Amazon Athena<br>- **Practice:**<br>&nbsp;&nbsp;+ Configure CloudTrail to deliver API logs to S3 Bucket<br>&nbsp;&nbsp;+ Create Athena table to query logs<br>&nbsp;&nbsp;+ Check anomalous access behavior | 09/06/2026 | 09/06/2026 | Lab 000033 |
+| Wed | - Learn database fundamentals<br>&nbsp;&nbsp;+ Primary Key<br>&nbsp;&nbsp;+ Foreign Key<br>&nbsp;&nbsp;+ Index<br>&nbsp;&nbsp;+ SQL (RDBMS) and NoSQL<br>- Learn OLTP and OLAP data processing models | 10/06/2026 | 10/06/2026 | AWS Database Overview |
+| Thu | - Learn about Amazon RDS and Amazon Aurora<br>- **Practice:**<br>&nbsp;&nbsp;+ Create RDS DB Instance<br>&nbsp;&nbsp;+ Configure Multi-AZ Deployment<br>&nbsp;&nbsp;+ Test Automated Backup<br>&nbsp;&nbsp;+ Compare Aurora with RDS MySQL/PostgreSQL | 11/06/2026 | 11/06/2026 | AWS RDS & Aurora |
+| Fri | - Learn about advanced IAM and IAM Role for EC2<br>- **Practice:**<br>&nbsp;&nbsp;+ Create IAM User<br>&nbsp;&nbsp;+ Create IAM Group<br>&nbsp;&nbsp;+ Create IAM Role<br>&nbsp;&nbsp;+ Configure Switch Role<br>&nbsp;&nbsp;+ Attach IAM Role to EC2 so it can access S3 without Access Keys | 12/06/2026 | 12/06/2026 | Lab 000044 & 000048 |
+| Sat | - Learn Data Lake architecture on AWS<br>&nbsp;&nbsp;+ Ingestion<br>&nbsp;&nbsp;+ Storage<br>&nbsp;&nbsp;+ Catalog<br>&nbsp;&nbsp;+ Analytics<br>- Note S3's role in storing structured and unstructured data | 13/06/2026 | 13/06/2026 | AWS Analytics Docs |
 
 ### Week 9 Achievements:
 

@@ -17,12 +17,12 @@ pre: " <b> 1.6. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| Mon | - Create an **S3 Bucket**, configure **Static Website Hosting**, and integrate content delivery via **CloudFront**.<br>- Set up a **Bucket Policy** to manage public access permissions securely and effectively. | 18/05/2026 | 18/05/2026 | Lab S3 (000057) |
-| Tue | - Enable **Bucket Versioning** to track the history of object changes and restore previous versions when needed.<br>- Configure **Cross-Region Replication (CRR)** to replicate data to another Region for high availability. | 19/05/2026 | 19/05/2026 | Lab S3 (000057) |
-| Wed | - Configure an **S3 Gateway Endpoint** and **Interface Endpoint (PrivateLink)** to access S3 from within the VPC without going through the internet.<br>- Test and confirm S3 traffic routes through the internal private connection. | 20/05/2026 | 20/05/2026 | Lab VPC (000013-14) |
-| Thu | - Granularly control network traffic through **NACLs** and **Security Groups** security layers within the VPC.<br>- Practice restricting S3 access by applying Least Privilege via IAM Policy and S3 Bucket Policy. | 21/05/2026 | 21/05/2026 | AWS Study Group |
-| Fri | - Set up centralized backup with **AWS Backup**: Configure Backup Plans, Backup Vaults, and test data restoration procedures.<br>- Study the **RTO** and **RPO** metrics in Disaster Recovery strategy planning. | 22/05/2026 | 22/05/2026 | AWS Study Group |
-| Sat | - Explore **Amazon FSx for Windows File Server**: Multi-AZ architecture, SMB configuration, and Data Deduplication features.<br>- Consolidate lab screenshots and complete the Week 6 report. | 23/05/2026 | 23/05/2026 | Personal |
+| Mon | - Learn about Amazon S3, Static Website Hosting, and CloudFront<br>- **Practice:**<br>&nbsp;&nbsp;+ Create S3 Bucket<br>&nbsp;&nbsp;+ Enable Static Website Hosting<br>&nbsp;&nbsp;+ Configure Bucket Policy<br>&nbsp;&nbsp;+ Integrate CloudFront for content delivery | 18/05/2026 | 18/05/2026 | Lab S3 (000057) |
+| Tue | - Learn about Bucket Versioning and Cross-Region Replication (CRR)<br>- **Practice:**<br>&nbsp;&nbsp;+ Enable Bucket Versioning<br>&nbsp;&nbsp;+ Restore object to a previous version<br>&nbsp;&nbsp;+ Configure CRR to replicate data to another Region | 19/05/2026 | 19/05/2026 | Lab S3 (000057) |
+| Wed | - Learn about S3 Gateway Endpoint and Interface Endpoint (PrivateLink)<br>- **Practice:**<br>&nbsp;&nbsp;+ Configure S3 Gateway Endpoint<br>&nbsp;&nbsp;+ Configure Interface Endpoint<br>&nbsp;&nbsp;+ Test S3 traffic through private connectivity | 20/05/2026 | 20/05/2026 | Lab VPC (000013-14) |
+| Thu | - Learn about NACLs, Security Groups, and S3 access control<br>- **Practice:**<br>&nbsp;&nbsp;+ Control network traffic with NACLs<br>&nbsp;&nbsp;+ Control traffic with Security Groups<br>&nbsp;&nbsp;+ Restrict S3 access with IAM Policy and S3 Bucket Policy | 21/05/2026 | 21/05/2026 | AWS Study Group |
+| Fri | - Learn about AWS Backup, RTO, and RPO<br>- **Practice:**<br>&nbsp;&nbsp;+ Create Backup Plan<br>&nbsp;&nbsp;+ Create Backup Vault<br>&nbsp;&nbsp;+ Test data restoration<br>&nbsp;&nbsp;+ Note Disaster Recovery strategy | 22/05/2026 | 22/05/2026 | AWS Study Group |
+| Sat | - Learn about Amazon FSx for Windows File Server<br>- **Practice:**<br>&nbsp;&nbsp;+ Explore Multi-AZ architecture<br>&nbsp;&nbsp;+ Configure SMB<br>&nbsp;&nbsp;+ Learn about Data Deduplication<br>&nbsp;&nbsp;+ Consolidate Week 6 lab screenshots | 23/05/2026 | 23/05/2026 | Personal |
 
 ### Week 6 Achievements:
 
@@ -41,3 +41,7 @@ pre: " <b> 1.6. </b> "
 {{% notice info %}}
 **Summary:** Week 6 completes the Cloud Engineer's mindset on combining S3's limitless storage, VPC Endpoints' security, and AWS Backup's resilience — the foundation for building highly reliable applications on AWS.
 {{% /notice %}}
+
+### Week 6 practice screenshots:
+
+![Week 6 practice - 541](/images/541.jpg)

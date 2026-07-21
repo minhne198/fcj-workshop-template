@@ -17,12 +17,12 @@ pre: " <b> 1.10. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| Mon | - Study the **Data Lake overview (Lab 000035)**: Centralized storage architecture and S3's role in large-scale data systems.<br>- Create an **AWS Glue Database** and configure a Crawler to automatically catalog data schemas. | 15/06/2026 | 15/06/2026 | Lab 000035 |
-| Tue | - Practice the full **ETL pipeline with AWS Glue**: Create a Glue Job, cleanse data, and store processed output to S3.<br>- Explore Glue Studio to design ETL pipelines visually without writing code. | 16/06/2026 | 16/06/2026 | Lab 000035 & 000060 |
-| Wed | - Query data directly on S3 using **Amazon Athena** with standard SQL, without a dedicated database server.<br>- Visualize analytical results with **Amazon QuickSight**: Create Datasets, charts, and reporting Dashboards. | 17/06/2026 | 17/06/2026 | Lab 000035 |
-| Thu | - Practice **IAM Role & Conditions (Lab 000043)**: Configure access conditions based on IP Address and login time.<br>- Test **Switch Role** and evaluate the effectiveness of a dynamic access control model in an enterprise environment. | 18/06/2026 | 18/06/2026 | Lab 000043 |
-| Fri | - Explore **Generative AI integration (Lab 000039)**: Configure **DynamoDB Zero-ETL Integration** to synchronize data to OpenSearch.<br>- Learn about Vector Embeddings and Semantic Search with **Amazon Bedrock** and the potential of AI in enterprise applications. | 19/06/2026 | 19/06/2026 | Lab 000039 |
-| Sat | - Practice **AWS Glue DataBrew (Lab 000072)**: Cleanse data, handle Missing Values, and build Recipes for automated transformation.<br>- Explore **Amazon Redshift** architecture (Data Warehouse): Create a Cluster, load data, and run analytical SQL queries. | 20/06/2026 | 20/06/2026 | Lab 000072 & 000073 |
+| Mon | - Learn about Data Lake and S3's role in large-scale data systems<br>- **Practice:**<br>&nbsp;&nbsp;+ Create AWS Glue Database<br>&nbsp;&nbsp;+ Configure Glue Crawler<br>&nbsp;&nbsp;+ Automatically catalog data | 15/06/2026 | 15/06/2026 | Lab 000035 |
+| Tue | - Learn about ETL pipeline with AWS Glue<br>- **Practice:**<br>&nbsp;&nbsp;+ Create Glue Job<br>&nbsp;&nbsp;+ Cleanse data<br>&nbsp;&nbsp;+ Store output data in S3<br>&nbsp;&nbsp;+ Design ETL pipeline with Glue Studio | 16/06/2026 | 16/06/2026 | Lab 000035 & 000060 |
+| Wed | - Learn about Amazon Athena and Amazon QuickSight<br>- **Practice:**<br>&nbsp;&nbsp;+ Query S3 data with Athena<br>&nbsp;&nbsp;+ Create QuickSight Dataset<br>&nbsp;&nbsp;+ Create analytical charts<br>&nbsp;&nbsp;+ Create reporting Dashboard | 17/06/2026 | 17/06/2026 | Lab 000035 |
+| Thu | - Learn about IAM Role, IAM Conditions, and Switch Role<br>- **Practice:**<br>&nbsp;&nbsp;+ Configure access condition by IP Address<br>&nbsp;&nbsp;+ Configure condition by login time<br>&nbsp;&nbsp;+ Test Switch Role<br>&nbsp;&nbsp;+ Evaluate dynamic access-control model | 18/06/2026 | 18/06/2026 | Lab 000043 |
+| Fri | - Learn about Generative AI integration, Vector Embeddings, and Semantic Search<br>- **Practice:**<br>&nbsp;&nbsp;+ Configure DynamoDB Zero-ETL Integration to OpenSearch<br>&nbsp;&nbsp;+ Learn about Amazon Bedrock<br>&nbsp;&nbsp;+ Note AI application potential in enterprise systems | 19/06/2026 | 19/06/2026 | Lab 000039 |
+| Sat | - Learn about AWS Glue DataBrew and Amazon Redshift<br>- **Practice:**<br>&nbsp;&nbsp;+ Cleanse data with DataBrew<br>&nbsp;&nbsp;+ Handle Missing Values<br>&nbsp;&nbsp;+ Build automated Recipe<br>&nbsp;&nbsp;+ Create Redshift Cluster<br>&nbsp;&nbsp;+ Load data and run analytical SQL queries | 20/06/2026 | 20/06/2026 | Lab 000072 & 000073 |
 
 ### Week 10 Achievements:
 

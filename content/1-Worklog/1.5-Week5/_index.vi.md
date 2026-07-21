@@ -17,12 +17,12 @@ pre: " <b> 1.5. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2 | - Sử dụng CloudFormation khởi tạo 4 VPC và các máy chủ mẫu trong từng VPC.<br>- Thiết lập **AWS Transit Gateway**, tạo Attachments và lên kế hoạch bảng định tuyến TGW. | 11/05/2026 | 11/05/2026 | AWS Module 02 |
-| 3 | - Cấu hình định tuyến trong từng VPC để chỉ về TGW.<br>- Sử dụng **Reachability Analyzer** để kiểm tra kết nối và phân tích luồng gói tin giữa các Private Subnet. | 12/05/2026 | 12/05/2026 | AWS Module 02 |
-| 4 | - Nghiên cứu EC2 Instance Types, lợi ích của chip ARM **Graviton** so với Intel/AMD và hệ thống ảo hóa **Nitro**.<br>- Phân biệt cơ chế sao lưu Snapshot (Full vs Incremental) và ứng dụng trong thực tế. | 13/05/2026 | 13/05/2026 | AWS Module 03 |
-| 5 | - Thực hành cấu hình **User Data** để tự động cài đặt Web Server (Apache/Nginx) khi EC2 khởi động lần đầu.<br>- Thử nghiệm truy vấn **Instance Metadata** qua địa chỉ IP nội bộ `169.254.169.254`. | 14/05/2026 | 14/05/2026 | AWS Module 03 |
-| 6 | - Tìm hiểu cơ chế **Auto Scaling Group**: Điều kiện scale out/in theo CPU metric.<br>- Khởi tạo **Amazon S3 Bucket** đầu tiên và thực hành upload/download đối tượng cơ bản. | 15/05/2026 | 15/05/2026 | AWS Module 03 |
-| 7 | - So sánh hiệu năng và độ bền giữa **EBS** và **Instance Store**; chọn đúng loại theo workload.<br>- Dọn dẹp tài nguyên: Xóa TGW Attachments → TGW → CloudFormation Stack theo đúng thứ tự để tránh phí. | 16/05/2026 | 16/05/2026 | Cá nhân |
+| 2 | - Tìm hiểu mô hình Hub-and-Spoke với AWS Transit Gateway<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Dùng CloudFormation khởi tạo 4 VPC<br>&nbsp;&nbsp;+ Tạo các máy chủ mẫu trong từng VPC<br>&nbsp;&nbsp;+ Tạo Transit Gateway Attachments<br>&nbsp;&nbsp;+ Lên kế hoạch bảng định tuyến TGW | 11/05/2026 | 11/05/2026 | AWS Module 02 |
+| 3 | - Tìm hiểu định tuyến qua Transit Gateway<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Cấu hình Route Table trong từng VPC trỏ về TGW<br>&nbsp;&nbsp;+ Dùng Reachability Analyzer kiểm tra kết nối<br>&nbsp;&nbsp;+ Phân tích luồng gói tin giữa các Private Subnet | 12/05/2026 | 12/05/2026 | AWS Module 02 |
+| 4 | - Tìm hiểu Amazon EC2 Instance Types, Graviton, Nitro và Snapshot<br>- **Thực hành:**<br>&nbsp;&nbsp;+ So sánh Intel, AMD và ARM Graviton<br>&nbsp;&nbsp;+ Phân biệt Full Snapshot và Incremental Snapshot<br>&nbsp;&nbsp;+ Ghi chú tình huống chọn Instance Type phù hợp | 13/05/2026 | 13/05/2026 | AWS Module 03 |
+| 5 | - Tìm hiểu User Data và Instance Metadata<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Cấu hình User Data tự động cài Web Server<br>&nbsp;&nbsp;+ Kiểm tra Apache/Nginx sau khi EC2 khởi động<br>&nbsp;&nbsp;+ Truy vấn Instance Metadata qua `169.254.169.254` | 14/05/2026 | 14/05/2026 | AWS Module 03 |
+| 6 | - Tìm hiểu Auto Scaling Group và Amazon S3<br>- **Thực hành:**<br>&nbsp;&nbsp;+ Phân tích điều kiện scale out/in theo CPU metric<br>&nbsp;&nbsp;+ Tạo Amazon S3 Bucket<br>&nbsp;&nbsp;+ Upload và download object cơ bản | 15/05/2026 | 15/05/2026 | AWS Module 03 |
+| 7 | - Tìm hiểu EBS, Instance Store và quy trình dọn dẹp tài nguyên<br>- **Thực hành:**<br>&nbsp;&nbsp;+ So sánh độ bền dữ liệu giữa EBS và Instance Store<br>&nbsp;&nbsp;+ Xóa TGW Attachments<br>&nbsp;&nbsp;+ Xóa Transit Gateway<br>&nbsp;&nbsp;+ Xóa CloudFormation Stack theo đúng thứ tự | 16/05/2026 | 16/05/2026 | Cá nhân |
 
 ### Kết quả đạt được tuần 5:
 
@@ -39,3 +39,9 @@ pre: " <b> 1.5. </b> "
 {{% notice warning %}}
 **Lưu ý quan trọng:** Transit Gateway tính phí theo giờ cho mỗi Attachment đang hoạt động. Khi xóa phải đúng thứ tự: **TGW Attachments → Transit Gateway → CloudFormation Stack** để tránh sót tài nguyên gây tốn phí.
 {{% /notice %}}
+
+### Hình ảnh thực hành tuần 5:
+
+![Thực hành tuần 5 - 522](/images/522.jpg)
+
+![Thực hành tuần 5 - 532](/images/532.jpg)

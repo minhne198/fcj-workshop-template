@@ -17,11 +17,11 @@ pre: " <b> 1.1. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| Mon | - Learn an overview of AWS: Global infrastructure architecture, concepts of Regions, Availability Zones (AZs), Edge Locations.<br>- Study AWS operational philosophy and draw a learning roadmap to become a Cloud Engineer. | 17/04/2026 | 17/04/2026 | AWS Study Group |
-| Tue | - Install and set up a professional working environment with **Visual Studio Code**, integrating useful extensions.<br>- Learn **Markdown** syntax from basic to advanced to apply in writing content and documentation for the Workshop. | 18/04/2026 | 18/04/2026 | Hugo/Markdown Guide |
-| Wed | - Practice drawing cloud system architecture diagrams using the **Draw.io** tool with standard AWS icons.<br>- Learn Cost Optimization principles during the process of designing systems on AWS. | 19/04/2026 | 19/04/2026 | Draw.io AWS Icons |
-| Thu | - Create an AWS Free Tier account and practice security operations, managing basic services.<br>- Apply optimal system design standards (AWS Well-Architected Framework) in practical labs. | 20/04/2026 | 20/04/2026 | AWS Workshop |
-| Fri | - Deploy and complete the first personal project.<br>- Write a summary report and publish it on the personal documentation website using the Hugo framework. | 24/04/2026 | 24/04/2026 | Personal |
+| Mon | - Get acquainted with FCAJ members<br>- Read and note the rules and regulations at the internship organization | 17/04/2026 | 17/04/2026 | AWS Study Group |
+| Tue | - Learn about AWS and its service categories<br>&nbsp;&nbsp;+ Compute<br>&nbsp;&nbsp;+ Storage<br>&nbsp;&nbsp;+ Networking<br>&nbsp;&nbsp;+ Database | 18/04/2026 | 18/04/2026 | Hugo/Markdown Guide |
+| Wed | - Create an AWS Free Tier account<br>- Learn about AWS Budgets & Support | 19/04/2026 | 19/04/2026 | Draw.io AWS Icons |
+| Thu | - Learn about AWS Identity and Access Management (IAM)<br>- **Practice:**<br>&nbsp;&nbsp;+ Create IAM User<br>&nbsp;&nbsp;+ Create IAM Group<br>&nbsp;&nbsp;+ Create IAM Role | 20/04/2026 | 20/04/2026 | AWS Workshop |
+| Fri | - **Practice:**<br>&nbsp;&nbsp;+ Create 4 Budget types:<br>&nbsp;&nbsp;&nbsp;&nbsp;_ Cost Budget<br>&nbsp;&nbsp;&nbsp;&nbsp;_ Usage Budget<br>&nbsp;&nbsp;&nbsp;&nbsp;_ RI Budget<br>&nbsp;&nbsp;&nbsp;&nbsp;_ Savings Plans Budget<br>&nbsp;&nbsp;+ Complete 5 tasks to receive 200 credits | 24/04/2026 | 24/04/2026 | Personal |
 
 ### Week 1 Achievements:
 
@@ -39,3 +39,11 @@ pre: " <b> 1.1. </b> "
 {{% notice success %}}
 **Summary:** Week 1 is an important stepping stone that helps transform purely theoretical knowledge into in-depth execution skills, creating a solid foundation and clear direction to become a professional Cloud Engineer in the future.
 {{% /notice %}}
+
+### Week 1 practice screenshots:
+
+![Create IAM User, Group, and Role](/images/worklog/GroupUser.png)
+
+![Complete credit tasks](/images/worklog/1.jpg)
+
+![Week 1 practice - 523](/images/523.jpg)

@@ -17,12 +17,12 @@ pre: " <b> 1.8. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| Mon | - Deploy **EC2 Cost Optimization (Lab 000022)**: Create an IAM Role for Lambda, build a Function to automatically stop EC2 instances outside of business hours.<br>- Configure a **CloudWatch Event Rule** with a cron schedule to trigger Lambda automatically. | 01/06/2026 | 01/06/2026 | Lab 000022 |
-| Tue | - Complete the Lambda Function to automatically **restart EC2** at the beginning of the business day.<br>- Test the automation mechanism, review logs in CloudWatch Logs, and resolve any runtime errors. | 02/06/2026 | 02/06/2026 | Lab 000022 |
-| Wed | - Practice **Resource Tags (Lab 000027)**: Apply classification tags to EC2, S3, VPC resources by environment (dev/staging/prod).<br>- Create **Resource Groups** to group and monitor resources based on tag criteria. | 03/06/2026 | 03/06/2026 | Lab 000027 |
-| Thu | - Practice **IAM Policy with Tags (Lab 000028)**: Build a Policy that only allows EC2 management when the Instance has a specific required Tag.<br>- Test permission enforcement against real-world scenarios and confirm Least Privilege is working correctly. | 04/06/2026 | 04/06/2026 | Lab 000028 |
-| Fri | - Deploy **IAM Permission Boundary (Lab 000030)**: Create a Policy limiting EC2 permissions to a specific designated Region.<br>- Apply the Permission Boundary to an IAM User and test access capabilities across different Regions. | 05/06/2026 | 05/06/2026 | Lab 000030 |
-| Sat | - Begin exploring **AWS KMS**: Create a Customer Managed Key and practice configuring server-side encryption for S3 objects.<br>- Learn the two-layer KMS authorization model: Key Policy (who manages the key) + IAM Policy (who uses the key). | 06/06/2026 | 06/06/2026 | Lab 000033 |
+| Mon | - Learn about EC2 cost optimization with AWS Lambda<br>- **Practice:**<br>&nbsp;&nbsp;+ Create IAM Role for Lambda<br>&nbsp;&nbsp;+ Write Lambda Function to stop EC2 outside business hours<br>&nbsp;&nbsp;+ Configure CloudWatch Event Rule with cron schedule | 01/06/2026 | 01/06/2026 | Lab 000022 |
+| Tue | - Learn about EC2 operational automation<br>- **Practice:**<br>&nbsp;&nbsp;+ Complete Lambda Function to start EC2 automatically<br>&nbsp;&nbsp;+ Test EC2 stop/start automation<br>&nbsp;&nbsp;+ Review CloudWatch Logs and fix runtime errors | 02/06/2026 | 02/06/2026 | Lab 000022 |
+| Wed | - Learn about Resource Tags and Resource Groups<br>- **Practice:**<br>&nbsp;&nbsp;+ Tag EC2 resources<br>&nbsp;&nbsp;+ Tag S3 resources<br>&nbsp;&nbsp;+ Tag VPC resources<br>&nbsp;&nbsp;+ Create Resource Groups using tag criteria | 03/06/2026 | 03/06/2026 | Lab 000027 |
+| Thu | - Learn about IAM Policy with Tags<br>- **Practice:**<br>&nbsp;&nbsp;+ Build Policy to manage EC2 by required tag<br>&nbsp;&nbsp;+ Test allowed/denied access scenarios<br>&nbsp;&nbsp;+ Confirm Least Privilege behavior | 04/06/2026 | 04/06/2026 | Lab 000028 |
+| Fri | - Learn about IAM Permission Boundary<br>- **Practice:**<br>&nbsp;&nbsp;+ Create Policy limiting EC2 permissions by Region<br>&nbsp;&nbsp;+ Apply Permission Boundary to IAM User<br>&nbsp;&nbsp;+ Test access across different Regions | 05/06/2026 | 05/06/2026 | Lab 000030 |
+| Sat | - Learn about AWS Key Management Service (KMS)<br>- **Practice:**<br>&nbsp;&nbsp;+ Create Customer Managed Key<br>&nbsp;&nbsp;+ Configure Server-Side Encryption for S3<br>&nbsp;&nbsp;+ Authorize KMS access with Key Policy and IAM Policy | 06/06/2026 | 06/06/2026 | Lab 000033 |
 
 ### Week 8 Achievements:
 
